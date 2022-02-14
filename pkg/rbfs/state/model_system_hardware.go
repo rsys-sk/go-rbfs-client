@@ -9,14 +9,10 @@
  */
 package state
 
-// IS-IS neighbor informations.
-type IsisNeighborNeighbor struct {
-	// IS-IS neighbor system ID.
-	SystemId string `json:"system_id,omitempty"`
-	// ISIS neighbor host name.
-	HostName string `json:"host_name,omitempty"`
-	// IS-IS neighbor IPv4 address.
-	Ipv4Address string `json:"ipv4_address,omitempty"`
-	// IS-IS neigbor IPv6 address.
-	Ipv6Address string `json:"ipv6_address,omitempty"`
+// System hardware inventory.
+type SystemHardware struct {
+	Chassis *Chassis      `json:"chassis,omitempty"`
+	Psus    []Psu         `json:"psus,omitempty"`
+	Fans    []Fan         `json:"fans,omitempty"`
+	Optics  []OpticModule `json:"optics,omitempty"`
 }

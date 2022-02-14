@@ -19,7 +19,8 @@ type IsisInterface struct {
 	IsisIflType string `json:"isis_ifl_type,omitempty"`
 	// Whether the interface is passive or not.
 	Passive bool `json:"passive,omitempty"`
-	// The interface metric value.
-	Metric     int32                    `json:"metric,omitempty"`
-	Statistics *IsisInterfaceStatistics `json:"statistics,omitempty"`
+	// Segment routing settings of this interface.
+	SegmentRouting *AllOfIsisInterfaceSegmentRouting `json:"segment_routing,omitempty"`
+	Level1         *IsisInterfaceLevel               `json:"level_1,omitempty"`
+	Level2         *IsisInterfaceLevel               `json:"level_2,omitempty"`
 }

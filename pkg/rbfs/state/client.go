@@ -70,6 +70,8 @@ type APIClient struct {
 	StreamsApi *StreamsApiService
 
 	SubscriberApi *SubscriberApiService
+
+	SystemApi *SystemApiService
 }
 
 type service struct {
@@ -101,6 +103,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.PIMApi = (*PIMApiService)(&c.common)
 	c.StreamsApi = (*StreamsApiService)(&c.common)
 	c.SubscriberApi = (*SubscriberApiService)(&c.common)
+	c.SystemApi = (*SystemApiService)(&c.common)
 
 	return c
 }

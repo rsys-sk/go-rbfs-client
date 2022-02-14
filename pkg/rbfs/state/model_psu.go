@@ -9,14 +9,12 @@
  */
 package state
 
-// IS-IS neighbor informations.
-type IsisNeighborNeighbor struct {
-	// IS-IS neighbor system ID.
-	SystemId string `json:"system_id,omitempty"`
-	// ISIS neighbor host name.
-	HostName string `json:"host_name,omitempty"`
-	// IS-IS neighbor IPv4 address.
-	Ipv4Address string `json:"ipv4_address,omitempty"`
-	// IS-IS neigbor IPv6 address.
-	Ipv6Address string `json:"ipv6_address,omitempty"`
+// The power supply units.
+type Psu struct {
+	// The name of the PSU.
+	PsuName string `json:"psu_name,omitempty"`
+	// The PSU model.
+	Model string `json:"model,omitempty"`
+	// The presense and operational state of the PSU.
+	Status []string `json:"status,omitempty"`
 }

@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: BSD-3-Clause
 #
 
-wget https://documents.rtbrick.com/21_8_1/api/api/swagger_opsd.yaml -O opsd-openapi.yaml
+curl https://documents.rtbrick.com/21_11_1/api/api/swagger_opsd.yaml --output opsd-openapi.yaml
 
 # Generate code from scratch to avoid preserving previsouly generated code the recent API specification does not generate anymore
 rm -r ./pkg/rbfs/state

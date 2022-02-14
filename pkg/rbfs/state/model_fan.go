@@ -9,9 +9,14 @@
  */
 package state
 
-type IsisInterfaceStatisticsIngress struct {
-	LspCount    int32 `json:"lsp_count,omitempty"`
-	CsnpCount   int32 `json:"csnp_count,omitempty"`
-	PsnpCount   int32 `json:"psnp_count,omitempty"`
-	P2pIihCount int32 `json:"p2p_iih_count,omitempty"`
+// The fan module.
+type Fan struct {
+	// The name of the fan.
+	FanName string `json:"fan_name,omitempty"`
+	// The module on which the fan resides.
+	Location string `json:"location,omitempty"`
+	// The fan model.
+	Model string `json:"model,omitempty"`
+	// The presense and operational state of the fan.
+	Status []string `json:"status,omitempty"`
 }

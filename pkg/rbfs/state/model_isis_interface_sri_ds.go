@@ -9,14 +9,14 @@
  */
 package state
 
-// IS-IS neighbor informations.
-type IsisNeighborNeighbor struct {
-	// IS-IS neighbor system ID.
-	SystemId string `json:"system_id,omitempty"`
-	// ISIS neighbor host name.
-	HostName string `json:"host_name,omitempty"`
-	// IS-IS neighbor IPv4 address.
-	Ipv4Address string `json:"ipv4_address,omitempty"`
-	// IS-IS neigbor IPv6 address.
-	Ipv6Address string `json:"ipv6_address,omitempty"`
+// Segment routing indexes of an ISIS interface.
+type IsisInterfaceSriDs struct {
+	// IPv4 SR index
+	Ipv4Sid int32 `json:"ipv4_sid,omitempty"`
+	// IPv6 SR index
+	Ipv6Sid int32 `json:"ipv6_sid,omitempty"`
+	// IPv4 SR anycast index
+	Ipv4AnycastSid int32 `json:"ipv4_anycast_sid,omitempty"`
+	// IPv6 SR anycast index
+	Ipv6AnycastSid int32 `json:"ipv6_anycast_sid,omitempty"`
 }

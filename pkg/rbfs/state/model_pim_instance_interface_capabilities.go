@@ -11,20 +11,12 @@ package state
 
 // PIM interface capabilities
 type PimInstanceInterfaceCapabilities struct {
-	// Disable join/suppress flag
-	DisableJoinSuppress bool `json:"disable_join_suppress,omitempty"`
-	// Use DR priority flag.
+	// Flag that indicates whether Join suppression is disabled (true) or not (false)
+	DisableJoinSuppression bool `json:"disable_join_suppression,omitempty"`
+	// A flag that indicates whether the designated router (DR) election uses the DR priority.
 	UseDesignatedRouterPriority bool `json:"use_designated_router_priority,omitempty"`
-	// Use prune delay flag.
-	UseLanPruneDelay bool `json:"use_lan_prune_delay,omitempty"`
-	// Use override interval flag.
-	UseOverrideInterval int32 `json:"use_override_interval,omitempty"`
-	// Prune delay interval in seconds.
-	PruneDelayInterval int32 `json:"prune_delay_interval,omitempty"`
-	// LAN prune interval in seconds.
-	LanPruneInterval int32 `json:"lan_prune_interval,omitempty"`
-	// LAN override interval in seconds.
-	LanOverrideInterval int32 `json:"lan_override_interval,omitempty"`
-	// Join/prune interval in seconds.
-	JoinPruneInterval int32 `json:"join_prune_interval,omitempty"`
+	// The effective prune delay interval in milliseconds.
+	EffectivePruneDelayInterval int32 `json:"effective_prune_delay_interval,omitempty"`
+	// The effective override interval in milliseconds.
+	EffectiveOverrideInterval int32 `json:"effective_override_interval,omitempty"`
 }

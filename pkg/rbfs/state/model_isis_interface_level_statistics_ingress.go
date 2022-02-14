@@ -9,14 +9,9 @@
  */
 package state
 
-// IS-IS neighbor informations.
-type IsisNeighborNeighbor struct {
-	// IS-IS neighbor system ID.
-	SystemId string `json:"system_id,omitempty"`
-	// ISIS neighbor host name.
-	HostName string `json:"host_name,omitempty"`
-	// IS-IS neighbor IPv4 address.
-	Ipv4Address string `json:"ipv4_address,omitempty"`
-	// IS-IS neigbor IPv6 address.
-	Ipv6Address string `json:"ipv6_address,omitempty"`
+type IsisInterfaceLevelStatisticsIngress struct {
+	LspCount    int32 `json:"lsp_count,omitempty"`
+	CsnpCount   int32 `json:"csnp_count,omitempty"`
+	PsnpCount   int32 `json:"psnp_count,omitempty"`
+	P2pIihCount int32 `json:"p2p_iih_count,omitempty"`
 }

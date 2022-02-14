@@ -19,7 +19,7 @@ type IsisInstanceInterface struct {
 	// IS-IS areas seen by this switch.
 	Areas []string `json:"areas,omitempty"`
 	// Status of the IS-IS overload flag. The value is true if the overload flag is set and the switch runs out of resources and might not compute the LSP in time.
-	Overload       bool                        `json:"overload,omitempty"`
-	SegmentRouting *IsisInstanceSegmentRouting `json:"segment_routing,omitempty"`
-	Interface_     *IsisInterface              `json:"interface,omitempty"`
+	Overload       bool                                 `json:"overload,omitempty"`
+	SegmentRouting *IsisInstanceInterfaceSegmentRouting `json:"segment_routing,omitempty"`
+	Interface_     *IsisInterface                       `json:"interface,omitempty"`
 }

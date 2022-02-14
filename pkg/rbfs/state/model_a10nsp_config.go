@@ -12,9 +12,11 @@ package state
 // The ephemeral configuration of a A10-NSP L2X service. This configuration is lost if the switch reboots.
 type A10nspConfig struct {
 	LagInterfaceName string `json:"lag_interface_name,omitempty"`
-	// The S VLAN ID.
+	// The S-VLAN ID.
 	SVlan int32 `json:"s_vlan,omitempty"`
-	// The ANP VLAN ID.
+	// The S-VLAN ethertype, which is either 802.1q (0x8100) or 802.1ad (0x88A8).
+	SVlanEthertype string `json:"s_vlan_ethertype,omitempty"`
+	// The ANP-VLAN ID.
 	AnpVlan int32      `json:"anp_vlan,omitempty"`
 	L2x     *L2xConfig `json:"l2x,omitempty"`
 }

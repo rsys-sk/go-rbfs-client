@@ -9,14 +9,10 @@
  */
 package state
 
-// IS-IS neighbor informations.
-type IsisNeighborNeighbor struct {
-	// IS-IS neighbor system ID.
-	SystemId string `json:"system_id,omitempty"`
-	// ISIS neighbor host name.
-	HostName string `json:"host_name,omitempty"`
-	// IS-IS neighbor IPv4 address.
-	Ipv4Address string `json:"ipv4_address,omitempty"`
-	// IS-IS neigbor IPv6 address.
-	Ipv6Address string `json:"ipv6_address,omitempty"`
+// Segment routing global block settings.
+type Srgb struct {
+	// SRGB start value.
+	SrgbBase int32 `json:"srgb_base,omitempty"`
+	// SRGB length.
+	SrgbRange int32 `json:"srgb_range,omitempty"`
 }

@@ -23,11 +23,10 @@ type PimInstanceNeighbor struct {
 	// The PIM interface generation ID.
 	GenerationId int32 `json:"generation_id,omitempty"`
 	// The priority of this interface in the designated router election.
-	DesignatedRouterPriority int32                `json:"designated_router_priority,omitempty"`
-	DesignatedRouter         *PimDesignatedRouter `json:"designated_router,omitempty"`
-	// The configured hold down interval in seconds.
-	HoldDownTime int32 `json:"hold_down_time,omitempty"`
-	// The hold down timer value in seconds.
-	HoldDownTimer int32                        `json:"hold_down_timer,omitempty"`
-	Neighbor      *PimInstanceNeighborNeighbor `json:"neighbor,omitempty"`
+	DesignatedRouterPriority int32 `json:"designated_router_priority,omitempty"`
+	// DR elections count
+	DesignatedRouterElections int32                        `json:"designated_router_elections,omitempty"`
+	DesignatedRouter          *PimDesignatedRouter         `json:"designated_router,omitempty"`
+	Timers                    *PimInstanceNeighborTimers   `json:"timers,omitempty"`
+	Neighbor                  *PimInstanceNeighborNeighbor `json:"neighbor,omitempty"`
 }

@@ -10,7 +10,10 @@
 package state
 
 type IsisInterfaceSrConfig struct {
-	IflName string `json:"ifl_name,omitempty"`
+	// SRGB start value.
+	SrgbBase int32 `json:"srgb_base,omitempty"`
+	// SRGB length.
+	SrgbRange int32 `json:"srgb_range,omitempty"`
 	// IPv4 SR index
 	Ipv4Sid int32 `json:"ipv4_sid,omitempty"`
 	// IPv6 SR index

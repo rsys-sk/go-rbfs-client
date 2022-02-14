@@ -17,4 +17,20 @@ type LaneRx struct {
 	PowerMw float64 `json:"power_mw,omitempty"`
 	// The laser power in dbm.
 	PowerDbm float64 `json:"power_dbm,omitempty"`
+	// The power high alarm threshold in milliwatts.
+	PowerHighAlarmThresholdMw float64 `json:"power_high_alarm_threshold_mw,omitempty"`
+	// The power high alarm threshold in dBm.
+	PowerHighAlarmThresholdDbm float64 `json:"power_high_alarm_threshold_dbm,omitempty"`
+	// The power warning threshold in milliwatts.
+	PowerHighWarnThresholdMw float64 `json:"power_high_warn_threshold_mw,omitempty"`
+	// The power high warning threshold in dBm.
+	PowerHighWarnThresholdDbm float64 `json:"power_high_warn_threshold_dbm,omitempty"`
+	// The power low alarm threshold in milliwatts.
+	PowerLowAlarmThresholdMw float64 `json:"power_low_alarm_threshold_mw,omitempty"`
+	// The power low alarm threshold in dBm.
+	PowerLowAlarmThresholdDbm float64 `json:"power_low_alarm_threshold_dbm,omitempty"`
+	// The power low warning threshold in milliwatts.
+	PowerLowWarnThresholdMw float64 `json:"power_low_warn_threshold_mw,omitempty"`
+	// The power low warning threshold in dBm.
+	PowerLowWarnThresholdDbm float64 `json:"power_low_warn_threshold_dbm,omitempty"`
 }

@@ -9,14 +9,16 @@
  */
 package state
 
-// IS-IS neighbor informations.
-type IsisNeighborNeighbor struct {
-	// IS-IS neighbor system ID.
-	SystemId string `json:"system_id,omitempty"`
-	// ISIS neighbor host name.
-	HostName string `json:"host_name,omitempty"`
-	// IS-IS neighbor IPv4 address.
-	Ipv4Address string `json:"ipv4_address,omitempty"`
-	// IS-IS neigbor IPv6 address.
-	Ipv6Address string `json:"ipv6_address,omitempty"`
+// Configured timer values.
+type PimInstanceInterfaceTimers struct {
+	// The hello timer interval in seconds.
+	HelloInterval int32 `json:"hello_interval,omitempty"`
+	// The hold down interval in seconds.
+	HoldDownInterval int32 `json:"hold_down_interval,omitempty"`
+	// The Join/Prune interval in seconds.
+	JoinPruneInterval int32 `json:"join_prune_interval,omitempty"`
+	// The override interval in milliseconds.
+	OverrideInterval int32 `json:"override_interval,omitempty"`
+	// The prune delay interval in milliseconds.
+	PruneDelayInterval int32 `json:"prune_delay_interval,omitempty"`
 }

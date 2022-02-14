@@ -15,4 +15,6 @@ type PimDesignatedRouter struct {
 	Ipv4Address string `json:"ipv4_address,omitempty"`
 	// DR IPv6 address.
 	Ipv6Address string `json:"ipv6_address,omitempty"`
+	// The DR election priority of the selected designated router.
+	Priority int32 `json:"priority,omitempty"`
 }

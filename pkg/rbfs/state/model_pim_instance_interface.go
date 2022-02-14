@@ -22,8 +22,11 @@ type PimInstanceInterface struct {
 	// Total number of PIM neighbors on this interface.
 	Neighbors int32 `json:"neighbors,omitempty"`
 	// The priority of this interface in the designated router election.
-	DesignatedRouterPriority int32                             `json:"designated_router_priority,omitempty"`
-	DesignatedRouter         *PimDesignatedRouter              `json:"designated_router,omitempty"`
-	Statistics               *PimInstanceInterfaceStatistics   `json:"statistics,omitempty"`
-	Capabilities             *PimInstanceInterfaceCapabilities `json:"capabilities,omitempty"`
+	DesignatedRouterPriority int32 `json:"designated_router_priority,omitempty"`
+	// Number of designated router elections being executed.
+	DesignatedRouterElections int32                             `json:"designated_router_elections,omitempty"`
+	DesignatedRouter          *PimDesignatedRouter              `json:"designated_router,omitempty"`
+	Statistics                *PimInstanceInterfaceStatistics   `json:"statistics,omitempty"`
+	Timers                    *PimInstanceInterfaceTimers       `json:"timers,omitempty"`
+	Capabilities              *PimInstanceInterfaceCapabilities `json:"capabilities,omitempty"`
 }

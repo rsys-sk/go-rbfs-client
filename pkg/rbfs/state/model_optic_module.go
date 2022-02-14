@@ -9,7 +9,8 @@
  */
 package state
 
-type Optic struct {
+// Optical module details.
+type OpticModule struct {
 	IfpName string `json:"ifp_name,omitempty"`
 	// The optics serial number.
 	SerialNumber string `json:"serial_number,omitempty"`
@@ -31,5 +32,4 @@ type Optic struct {
 	PowerClassState string `json:"power_class_state,omitempty"`
 	// The optics manufacturing date.
 	DateManufactured string `json:"date_manufactured,omitempty"`
-	Lanes            []Lane `json:"lanes,omitempty"`
 }
