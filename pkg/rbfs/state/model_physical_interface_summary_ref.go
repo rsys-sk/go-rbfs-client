@@ -9,6 +9,10 @@
  */
 package state
 
+import (
+	"time"
+)
+
 // A physical interface summary.  The physical interface summary includes the physical interface state and the logical interfaces defined on the physical interface with their respective operational state.
 type PhysicalInterfaceSummaryRef struct {
 	IfpName string `json:"ifp_name,omitempty"`
@@ -31,6 +35,6 @@ type PhysicalInterfaceSummaryRef struct {
 	// The administrative interface state.
 	AdministrativeState string `json:"administrative_state,omitempty"`
 	// Timestamp since when this interface is UP.
-	UpTime   string                               `json:"up_time,omitempty"`
+	UpTime   time.Time                            `json:"up_time,omitempty"`
 	Logicals *PhysicalInterfaceSummaryRefLogicals `json:"logicals,omitempty"`
 }

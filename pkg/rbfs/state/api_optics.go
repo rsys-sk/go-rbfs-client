@@ -32,7 +32,7 @@ Disables the laser of the optic attached to the given physical port. Be aware th
  * @param ifpName The physical interface (&#x3D;port) name.
 
 */
-func (a *OpticsApiService) DisableLase(ctx context.Context, ifpName string) (*http.Response, error) {
+func (a *OpticsApiService) DisableLaser(ctx context.Context, ifpName string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}

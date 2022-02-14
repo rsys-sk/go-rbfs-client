@@ -18,7 +18,7 @@ type BgpPeer struct {
 	// The peer router ID.
 	RouterId string `json:"router_id,omitempty"`
 	// The peer AS number.
-	Asn int32 `json:"asn,omitempty"`
+	Asn int64 `json:"asn,omitempty"`
 	// The peer host name.
 	HostName string `json:"host_name,omitempty"`
 	// The peer domain name.

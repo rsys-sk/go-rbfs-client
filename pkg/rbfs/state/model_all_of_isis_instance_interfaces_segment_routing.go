@@ -9,17 +9,12 @@
  */
 package state
 
-type IsisInterfaceSrConfig struct {
+// Segment routing settings.
+type AllOfIsisInstanceInterfacesSegmentRouting struct {
 	// SRGB start value.
 	SrgbBase int32 `json:"srgb_base,omitempty"`
 	// SRGB length.
 	SrgbRange int32 `json:"srgb_range,omitempty"`
-	// IPv4 SR index
-	Ipv4Sid int32 `json:"ipv4_sid,omitempty"`
-	// IPv6 SR index
-	Ipv6Sid int32 `json:"ipv6_sid,omitempty"`
-	// IPv4 SR anycast index
-	Ipv4AnycastSid int32 `json:"ipv4_anycast_sid,omitempty"`
-	// IPv6 SR anycast index
-	Ipv6AnycastSid int32 `json:"ipv6_anycast_sid,omitempty"`
+	// SR indices.
+	SrIds []interface{} `json:"sr_ids,omitempty"`
 }

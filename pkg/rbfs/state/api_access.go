@@ -29,9 +29,9 @@ type AccessApiService service
 AccessApiService Adds a VLAN profile.
 Injects a single VLAN profile object into the global VLAN profile BDS table.  A VLAN profile has a composite key of up to 5 parameters, which are modelled as query parameters because of the many valid combinations. The keys specified in the VLAN profile must match the query parameters. Otherwise the request gets rejected.  This endpoint creates a VLAN profile object from the specified keys when no VLAN profile is specified.  This is a convenience function to simplify creation of VLAN profiles that consists of key attributes only.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param body
  * @param ifpName The physical interface.
  * @param optional nil or *AccessApiAddVLANProfileOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of VlanProfile) -
      * @param "OuterVlanMin" (optional.Int32) -  The outer VLAN range minimum value.
      * @param "OuterVlanMax" (optional.Int32) -  The outer VLAN range maximum value.
      * @param "InnerVlanMin" (optional.Int32) -  The inner VLAN range minimum value.
@@ -40,14 +40,13 @@ Injects a single VLAN profile object into the global VLAN profile BDS table.  A 
 */
 
 type AccessApiAddVLANProfileOpts struct {
-	Body         optional.Interface
 	OuterVlanMin optional.Int32
 	OuterVlanMax optional.Int32
 	InnerVlanMin optional.Int32
 	InnerVlanMax optional.Int32
 }
 
-func (a *AccessApiService) AddVLANProfile(ctx context.Context, ifpName string, localVarOptionals *AccessApiAddVLANProfileOpts) (*http.Response, error) {
+func (a *AccessApiService) AddVLANProfile(ctx context.Context, body VlanProfile, ifpName string, localVarOptionals *AccessApiAddVLANProfileOpts) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
@@ -93,11 +92,7 @@ func (a *AccessApiService) AddVLANProfile(ctx context.Context, ifpName string, l
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
 	// body params
-	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-
-		localVarOptionalBody := localVarOptionals.Body.Value()
-		localVarPostBody = &localVarOptionalBody
-	}
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return nil, err

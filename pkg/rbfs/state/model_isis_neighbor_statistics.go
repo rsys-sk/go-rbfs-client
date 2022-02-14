@@ -9,6 +9,10 @@
  */
 package state
 
+import (
+	"time"
+)
+
 // Collection of IS-IS error counters maintained for this neighbor adjacency.
 type IsisNeighborStatistics struct {
 	// Total number of state transitions.
@@ -16,7 +20,7 @@ type IsisNeighborStatistics struct {
 	// Information why the adjacency was down last time.
 	LastDownReason string `json:"last_down_reason,omitempty"`
 	// Since when this adjacency is UP.
-	UpTime string `json:"up_time,omitempty"`
+	UpTime time.Time `json:"up_time,omitempty"`
 	// Count of adjacency down due to level mismatch
 	LevelMismatchErrorCount int32 `json:"level_mismatch_error_count,omitempty"`
 	// Count of adjacency down due to area mismatch.

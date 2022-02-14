@@ -112,7 +112,7 @@ func (a *ActionsApiService) Ping(ctx context.Context, localVarOptionals *Actions
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/josn"}
+	localVarHttpHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
@@ -246,7 +246,7 @@ func (a *ActionsApiService) Traceroute(ctx context.Context, localVarOptionals *A
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/josn"}
+	localVarHttpHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)

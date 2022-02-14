@@ -9,12 +9,11 @@
  */
 package state
 
-// Segment routing global block (SRGB).
-type IsisInstanceSegmentRouting struct {
-	// SRGB start value.
-	SrgbBase int32 `json:"srgb_base,omitempty"`
-	// SRGB length.
-	SrgbRange int32 `json:"srgb_range,omitempty"`
-	// SR indices.
-	SrIds []IsisInterfaceSrConfig `json:"sr_ids,omitempty"`
+type IsisInstanceInterfacesInterfaces struct {
+	// Number of active level 1 ISIS interfaces.
+	Level1ActiveCount int32 `json:"level_1_active_count,omitempty"`
+	// Number of active level 2 ISIS interfaces.
+	Level2ActiveCount int32 `json:"level_2_active_count,omitempty"`
+	// List of ISIS interfaces.
+	Interfaces []IsisInterface `json:"interfaces,omitempty"`
 }

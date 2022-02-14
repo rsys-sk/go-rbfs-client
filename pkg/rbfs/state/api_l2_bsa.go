@@ -12,7 +12,6 @@ package state
 import (
 	"context"
 	"fmt"
-	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -363,17 +362,11 @@ func (a *L2BSAApiService) RemoveL2BSAServicesForANP(ctx context.Context, ifpName
 L2BSAApiService Updates all L2BSA services on the given physical interface
 Updates all L2BSA services provisioned on the given physical interface of this switch by  - adding new L2BSA services,  - updating existing L2BSA services and  - removing L2BSA services not included in the request entity.  An empty request removes all L2BSA services from the given physical interface.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param body
  * @param ifpName The physical interface name.
- * @param optional nil or *L2BSAApiStoreL2BSAServiceOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of []L2bsaServiceConfig) -
 @return []L2bsaServiceConfig
 */
-
-type L2BSAApiStoreL2BSAServiceOpts struct {
-	Body optional.Interface
-}
-
-func (a *L2BSAApiService) StoreL2BSAService(ctx context.Context, ifpName string, localVarOptionals *L2BSAApiStoreL2BSAServiceOpts) ([]L2bsaServiceConfig, *http.Response, error) {
+func (a *L2BSAApiService) StoreL2BSAService(ctx context.Context, body []L2bsaServiceConfig, ifpName string) ([]L2bsaServiceConfig, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}
@@ -408,11 +401,7 @@ func (a *L2BSAApiService) StoreL2BSAService(ctx context.Context, ifpName string,
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
 	// body params
-	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-
-		localVarOptionalBody := localVarOptionals.Body.Value()
-		localVarPostBody = &localVarOptionalBody
-	}
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -462,16 +451,10 @@ func (a *L2BSAApiService) StoreL2BSAService(ctx context.Context, ifpName string,
 L2BSAApiService Updates all L2BSA services.
 Updates all L2BSA services provisioned on this switch by  - adding new L2BSA services,  - updating existing L2BSA services and  - removing L2BSA services not included in the request entity.  An empty request removes all L2BSA services from this switch.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *L2BSAApiStoreL2BSAServicesOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of []L2bsaServiceConfig) -
+ * @param body
 @return []L2bsaServiceConfig
 */
-
-type L2BSAApiStoreL2BSAServicesOpts struct {
-	Body optional.Interface
-}
-
-func (a *L2BSAApiService) StoreL2BSAServices(ctx context.Context, localVarOptionals *L2BSAApiStoreL2BSAServicesOpts) ([]L2bsaServiceConfig, *http.Response, error) {
+func (a *L2BSAApiService) StoreL2BSAServices(ctx context.Context, body []L2bsaServiceConfig) ([]L2bsaServiceConfig, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}
@@ -505,11 +488,7 @@ func (a *L2BSAApiService) StoreL2BSAServices(ctx context.Context, localVarOption
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
 	// body params
-	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-
-		localVarOptionalBody := localVarOptionals.Body.Value()
-		localVarPostBody = &localVarOptionalBody
-	}
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -559,18 +538,12 @@ func (a *L2BSAApiService) StoreL2BSAServices(ctx context.Context, localVarOption
 L2BSAApiService Stores a L2BSA service configuration.
 Stores the L2BSA service configuration.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param body
  * @param ifpName The physical interface name.
  * @param anp The ANP VLAN ID.
- * @param optional nil or *L2BSAApiStoreL2BSAServicesForANPOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of L2bsaServiceConfig) -
 
 */
-
-type L2BSAApiStoreL2BSAServicesForANPOpts struct {
-	Body optional.Interface
-}
-
-func (a *L2BSAApiService) StoreL2BSAServicesForANP(ctx context.Context, ifpName string, anp int32, localVarOptionals *L2BSAApiStoreL2BSAServicesForANPOpts) (*http.Response, error) {
+func (a *L2BSAApiService) StoreL2BSAServicesForANP(ctx context.Context, body L2bsaServiceConfig, ifpName string, anp int32) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
 		localVarPostBody   interface{}
@@ -611,11 +584,7 @@ func (a *L2BSAApiService) StoreL2BSAServicesForANP(ctx context.Context, ifpName 
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
 	// body params
-	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-
-		localVarOptionalBody := localVarOptionals.Body.Value()
-		localVarPostBody = &localVarOptionalBody
-	}
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return nil, err

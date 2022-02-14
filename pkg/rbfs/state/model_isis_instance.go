@@ -19,9 +19,10 @@ type IsisInstance struct {
 	// IS-IS areas seen by this switch.
 	Areas []string `json:"areas,omitempty"`
 	// Status of the IS-IS overload flag. The value is true if the overload flag is set and the switch runs out of resources and cannot compute the SFP in time.
-	Overload       bool                        `json:"overload,omitempty"`
-	SegmentRouting *IsisInstanceSegmentRouting `json:"segment_routing,omitempty"`
-	Neighbors      *IsisInstanceNeighbors      `json:"neighbors,omitempty"`
+	Overload bool `json:"overload,omitempty"`
+	// Segment routing settings.
+	SegmentRouting *AllOfIsisInstanceSegmentRouting `json:"segment_routing,omitempty"`
+	Neighbors      *IsisInstanceNeighbors           `json:"neighbors,omitempty"`
 	// Overview of IS-IS interfaces
 	Interfaces []IsisInterface     `json:"interfaces,omitempty"`
 	Timers     *IsisInstanceTimers `json:"timers,omitempty"`

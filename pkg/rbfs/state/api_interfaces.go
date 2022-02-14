@@ -518,16 +518,9 @@ func (a *InterfacesApiService) GetInterface(ctx context.Context, ifpName Physica
 InterfacesApiService Lists all physical interfaces and their logical interfaces.
 Lists all physical interfaces and their logical interfaces including their administrative state,  operational state, configured bandwidth, MAC address and neighbor information. Subscriber interfaces are not included in the response.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *InterfacesApiGetInterfacesOpts - Optional Parameters:
-     * @param "Optics" (optional.Bool) -  Include optic information in the response.
 @return []PhysicalInterfaceSummaryRef
 */
-
-type InterfacesApiGetInterfacesOpts struct {
-	Optics optional.Bool
-}
-
-func (a *InterfacesApiService) GetInterfaces(ctx context.Context, localVarOptionals *InterfacesApiGetInterfacesOpts) ([]PhysicalInterfaceSummaryRef, *http.Response, error) {
+func (a *InterfacesApiService) GetInterfaces(ctx context.Context) ([]PhysicalInterfaceSummaryRef, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -543,9 +536,6 @@ func (a *InterfacesApiService) GetInterfaces(ctx context.Context, localVarOption
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if localVarOptionals != nil && localVarOptionals.Optics.IsSet() {
-		localVarQueryParams.Add("optics", parameterToString(localVarOptionals.Optics.Value(), ""))
-	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 

@@ -9,17 +9,21 @@
  */
 package state
 
+import (
+	"time"
+)
+
 // A reference to a BGP peering. This information can be used to obtain the more detailed BGPPeering object.
 type BgpPeeringRef struct {
 	// The administrative peering state.
 	AdministrativeState string    `json:"administrative_state,omitempty"`
 	BgpState            *BgpState `json:"bgp_state,omitempty"`
 	// Last BGP state transition.
-	LastStateTransition string `json:"last_state_transition,omitempty"`
+	LastStateTransition time.Time `json:"last_state_transition,omitempty"`
 	// Last session reset reason.
 	LastResetReason string `json:"last_reset_reason,omitempty"`
 	// The local AS number.
-	Asn int32 `json:"asn,omitempty"`
+	Asn int64 `json:"asn,omitempty"`
 	// Number of BGP session flaps.
 	BgpSessionFlaps int32  `json:"bgp_session_flaps,omitempty"`
 	IflName         string `json:"ifl_name,omitempty"`

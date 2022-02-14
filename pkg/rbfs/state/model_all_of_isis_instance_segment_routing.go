@@ -9,12 +9,12 @@
  */
 package state
 
-// Segment routing global block (SRGB). This attribute will be removed with 21.11.1. Please use segment_routing attribute of the interface object instead.
-type IsisInstanceInterfaceSegmentRouting struct {
+// Segment routing settings.
+type AllOfIsisInstanceSegmentRouting struct {
 	// SRGB start value.
 	SrgbBase int32 `json:"srgb_base,omitempty"`
 	// SRGB length.
 	SrgbRange int32 `json:"srgb_range,omitempty"`
 	// SR indices.
-	SrIds []IsisInterfaceSrConfig `json:"sr_ids,omitempty"`
+	SrIds []interface{} `json:"sr_ids,omitempty"`
 }

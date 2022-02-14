@@ -21,6 +21,6 @@ type IsisInstanceRef struct {
 	Neighbors  *IsisInstanceRefNeighbors  `json:"neighbors,omitempty"`
 	Interfaces *IsisInstanceRefInterfaces `json:"interfaces,omitempty"`
 	// List of IS-IS areas.
-	Areas          []string                       `json:"areas,omitempty"`
-	SegmentRouting *IsisInstanceRefSegmentRouting `json:"segment_routing,omitempty"`
+	Areas          []string `json:"areas,omitempty"`
+	SegmentRouting *Srgb    `json:"segment_routing,omitempty"`
 }

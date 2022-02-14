@@ -13,7 +13,7 @@ package state
 type BgpInstanceRef struct {
 	InstanceName string `json:"instance_name,omitempty"`
 	// The AS number.
-	Asn int32 `json:"asn,omitempty"`
+	Asn int64 `json:"asn,omitempty"`
 	// Unique router ID.
 	RouterId string `json:"router_id,omitempty"`
 }

@@ -14,7 +14,7 @@ type BgpInstancePeerings struct {
 	// BGP instance name
 	InstanceName string `json:"instance_name,omitempty"`
 	// The local AS number.
-	Asn int32 `json:"asn,omitempty"`
+	Asn int64 `json:"asn,omitempty"`
 	// The local router identifier.
 	RouterId string `json:"router_id,omitempty"`
 	// The BGP host name.
