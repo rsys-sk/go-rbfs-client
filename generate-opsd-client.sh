@@ -12,7 +12,11 @@ rm -r ./pkg/rbfs/state
 
 # Generate OPSD client from OPSD OpenAPI specification
 docker run --rm -v ${PWD}:/local swaggerapi/swagger-codegen-cli-v3 generate \
-    -l go -c "/local/opsd-config.json" -o "/local/pkg/rbfs/state" -i "/local/opsd-openapi.yaml"
+    --type-mappings  integer=int  \
+    -l go                         \
+    -c "/local/opsd-config.json"  \
+    -o "/local/pkg/rbfs/state"    \
+    -i "/local/opsd-openapi.yaml"
 
 # Remove unneeded resources
 rm ./pkg/rbfs/state/.travis.yml
