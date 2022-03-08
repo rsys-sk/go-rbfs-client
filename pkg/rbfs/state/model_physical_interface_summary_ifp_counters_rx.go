@@ -12,11 +12,11 @@ package state
 // Received data counters.
 type PhysicalInterfaceSummaryIfpCountersRx struct {
 	// Total number of received bytes.
-	BytesReceived int32 `json:"bytes_received,omitempty"`
+	BytesReceived int `json:"bytes_received,omitempty"`
 	// Total number of received packets.
-	PacketsReceived int32 `json:"packets_received,omitempty"`
+	PacketsReceived int `json:"packets_received,omitempty"`
 	// Total number of dropped bytes.
-	BytesDropped int32 `json:"bytes_dropped,omitempty"`
+	BytesDropped int `json:"bytes_dropped,omitempty"`
 	// Total number of dropped packets.
-	PacketsDropped int32 `json:"packets_dropped,omitempty"`
+	PacketsDropped int `json:"packets_dropped,omitempty"`
 }

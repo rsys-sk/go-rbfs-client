@@ -14,13 +14,13 @@ type VlanProfile struct {
 	// Physical interface.
 	IfpName string `json:"ifp_name"`
 	// Outer VLAN range minimum value.
-	OuterVlanMin int32 `json:"outer_vlan_min,omitempty"`
+	OuterVlanMin int `json:"outer_vlan_min,omitempty"`
 	// Outer VLAN range maximum value.
-	OuterVlanMax int32 `json:"outer_vlan_max,omitempty"`
+	OuterVlanMax int `json:"outer_vlan_max,omitempty"`
 	// Inner VLAN range minimum value.
-	InnerVlanMin int32 `json:"inner_vlan_min,omitempty"`
+	InnerVlanMin int `json:"inner_vlan_min,omitempty"`
 	// Inner VLAN range maximum value.
-	InnerVlanMax int32 `json:"inner_vlan_max,omitempty"`
+	InnerVlanMax int `json:"inner_vlan_max,omitempty"`
 	// Name of the access profile.
 	AccessProfileName string `json:"access_profile_name,omitempty"`
 	// Name of the AAA profile.

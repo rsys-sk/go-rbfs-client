@@ -12,7 +12,7 @@ package state
 // Test subscriber
 type TestAaaObject struct {
 	// Subscriber ID.
-	SubscriberId int32 `json:"subscriber_id"`
+	SubscriberId int `json:"subscriber_id"`
 	// Name of the access profile.
 	AccessProfileName string `json:"access_profile_name"`
 	// Name of the AAA profile.
@@ -30,9 +30,9 @@ type TestAaaObject struct {
 	// The Agent-Circuit-ID (ACI).
 	AgentCircuitId string `json:"agent_circuit_id,omitempty"`
 	// Outer VLAN value.
-	OuterVlan int32 `json:"outer_vlan,omitempty"`
+	OuterVlan int `json:"outer_vlan,omitempty"`
 	// Inner VLAN value.
-	InnerVlan int32 `json:"inner_vlan,omitempty"`
+	InnerVlan int `json:"inner_vlan,omitempty"`
 	// MAC address of the subscriber.
 	ClientMac string `json:"client_mac,omitempty"`
 }

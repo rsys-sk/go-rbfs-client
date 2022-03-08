@@ -9,12 +9,10 @@
  */
 package state
 
-// Segment routing settings.
-type AllOfIsisInstanceInterfacesSegmentRouting struct {
-	// SRGB start value.
-	SrgbBase int `json:"srgb_base,omitempty"`
-	// SRGB length.
-	SrgbRange int `json:"srgb_range,omitempty"`
-	// SR indices.
-	SrIds []interface{} `json:"sr_ids,omitempty"`
+// Contains the VLAN profiles to be added or removed within a single batch operation.
+type VlanProfileBatch struct {
+	// VLAN profiles to be removed
+	Remove []VlanProfile `json:"remove,omitempty"`
+	// VLAN profiles to be stored
+	Store []VlanProfile `json:"store,omitempty"`
 }

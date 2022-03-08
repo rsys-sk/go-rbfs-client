@@ -12,13 +12,13 @@ package state
 // Configured timer values.
 type PimInstanceInterfaceTimers struct {
 	// The hello timer interval in seconds.
-	HelloInterval int32 `json:"hello_interval,omitempty"`
+	HelloInterval int `json:"hello_interval,omitempty"`
 	// The hold down interval in seconds.
-	HoldDownInterval int32 `json:"hold_down_interval,omitempty"`
+	HoldDownInterval int `json:"hold_down_interval,omitempty"`
 	// The Join/Prune interval in seconds.
-	JoinPruneInterval int32 `json:"join_prune_interval,omitempty"`
+	JoinPruneInterval int `json:"join_prune_interval,omitempty"`
 	// The override interval in milliseconds.
-	OverrideInterval int32 `json:"override_interval,omitempty"`
+	OverrideInterval int `json:"override_interval,omitempty"`
 	// The prune delay interval in milliseconds.
-	PruneDelayInterval int32 `json:"prune_delay_interval,omitempty"`
+	PruneDelayInterval int `json:"prune_delay_interval,omitempty"`
 }

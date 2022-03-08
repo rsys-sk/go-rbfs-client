@@ -12,7 +12,7 @@ package state
 // Counter of sent/received PIM messages.
 type PimMessageStatistics struct {
 	// Sent messages count.
-	Sent int32 `json:"sent,omitempty"`
+	Sent int `json:"sent,omitempty"`
 	// Received messages count.
-	Received int32 `json:"received,omitempty"`
+	Received int `json:"received,omitempty"`
 }

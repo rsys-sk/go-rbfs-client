@@ -12,5 +12,5 @@ package state
 // PPPoE specific settings.
 type SubscriberSessionPppoe struct {
 	// The PPPoE session ID.
-	PppoeSessionId int32 `json:"pppoe_session_id,omitempty"`
+	PppoeSessionId int `json:"pppoe_session_id,omitempty"`
 }

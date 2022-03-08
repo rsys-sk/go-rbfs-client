@@ -102,7 +102,7 @@ Trigger the asynchronous subscribers termination.
  * @param anp The ANP VLAN ID.
 
 */
-func (a *SubscriberApiService) ClearL2BSASubscriber(ctx context.Context, ifpName string, anp int32) (*http.Response, error) {
+func (a *SubscriberApiService) ClearL2BSASubscriber(ctx context.Context, ifpName string, anp int) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -183,7 +183,7 @@ type SubscriberApiClearSubscriberOpts struct {
 	Force optional.Bool
 }
 
-func (a *SubscriberApiService) ClearSubscriber(ctx context.Context, subscriberId int32, localVarOptionals *SubscriberApiClearSubscriberOpts) (*http.Response, error) {
+func (a *SubscriberApiService) ClearSubscriber(ctx context.Context, subscriberId int, localVarOptionals *SubscriberApiClearSubscriberOpts) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -253,10 +253,10 @@ Terminates all matching active subscriber sessions.
  * @param optional nil or *SubscriberApiClearSubscribersOpts - Optional Parameters:
      * @param "IfpName" (optional.String) -  The physical interface name.
      * @param "IflName" (optional.String) -  The name of the subscriber&#x27;s logical interface.
-     * @param "OuterVlan" (optional.Int32) -  Outer VLAN tag.
-     * @param "AnpVlan" (optional.Int32) -  ANP VLAN tag (for L2BSA subscribers).
-     * @param "InnerVlan" (optional.Int32) -  Inner VLAN tag.
-     * @param "SubscriberId" (optional.Interface of int32) -  A unique subscriber ID
+     * @param "OuterVlan" (optional.Int) -  Outer VLAN tag.
+     * @param "AnpVlan" (optional.Int) -  ANP VLAN tag (for L2BSA subscribers).
+     * @param "InnerVlan" (optional.Int) -  Inner VLAN tag.
+     * @param "SubscriberId" (optional.Interface of int) -  A unique subscriber ID
      * @param "AccountingSessionId" (optional.String) -  The accounting session ID of the subscriber session.
      * @param "SubscriberUserName" (optional.String) -  The subscriber user name of the subscriber session.
      * @param "SubscriberUserNameMatches" (optional.String) -  Regular expression the subscriber user name must match.
@@ -271,9 +271,9 @@ Terminates all matching active subscriber sessions.
 type SubscriberApiClearSubscribersOpts struct {
 	IfpName                   optional.String
 	IflName                   optional.String
-	OuterVlan                 optional.Int32
-	AnpVlan                   optional.Int32
-	InnerVlan                 optional.Int32
+	OuterVlan                 optional.Int
+	AnpVlan                   optional.Int
+	InnerVlan                 optional.Int
 	SubscriberId              optional.Interface
 	AccountingSessionId       optional.String
 	SubscriberUserName        optional.String
@@ -394,7 +394,7 @@ Disables lawful interception (LI) for the specified subscriber  with the specifi
  * @param id The LI request ID.
 
 */
-func (a *SubscriberApiService) DisableLawfulInterception(ctx context.Context, subscriberId int32, id int32) (*http.Response, error) {
+func (a *SubscriberApiService) DisableLawfulInterception(ctx context.Context, subscriberId int, id int) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
@@ -473,7 +473,7 @@ Enables lawful interception (LI) for the specified subscriber  with the specifie
  * @param medInstance Meditation device routing instance name.
 
 */
-func (a *SubscriberApiService) EnableLawfulInterception(ctx context.Context, subscriberId int32, id int32, direction string, medIp string, medPort int32, medInstance string) (*http.Response, error) {
+func (a *SubscriberApiService) EnableLawfulInterception(ctx context.Context, subscriberId int, id int, direction string, medIp string, medPort int, medInstance string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
@@ -557,7 +557,7 @@ Returns the access line information for the given subscriber.
  * @param subscriberId The subscriber ID.
 @return AccessLineInfo
 */
-func (a *SubscriberApiService) GetAccessLineInfo(ctx context.Context, subscriberId int32) (AccessLineInfo, *http.Response, error) {
+func (a *SubscriberApiService) GetAccessLineInfo(ctx context.Context, subscriberId int) (AccessLineInfo, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -643,7 +643,7 @@ Computes the adjusted accounting counter values for a given subscriber.
  * @param subscriberId The subscriber ID.
 @return SubscriberAdjustedAccounting
 */
-func (a *SubscriberApiService) GetAjdustedAccountingValues(ctx context.Context, subscriberId int32) (SubscriberAdjustedAccounting, *http.Response, error) {
+func (a *SubscriberApiService) GetAjdustedAccountingValues(ctx context.Context, subscriberId int) (SubscriberAdjustedAccounting, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -730,7 +730,7 @@ Provides L2BSA subscriber details including accounting information,  logical int
  * @param anp The ANP VLAN ID.
 @return SubscriberSession
 */
-func (a *SubscriberApiService) GetL2BSASubscriber(ctx context.Context, ifpName string, anp int32) (SubscriberSession, *http.Response, error) {
+func (a *SubscriberApiService) GetL2BSASubscriber(ctx context.Context, ifpName string, anp int) (SubscriberSession, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -824,7 +824,7 @@ Computes the adjusted accounting counter values for a given L2BSA subscriber.  T
  * @param anp The ANP VLAN ID.
 @return SubscriberAdjustedAccounting
 */
-func (a *SubscriberApiService) GetL2BSASubscriberAdjustedAccountingValues(ctx context.Context, ifpName string, anp int32) (SubscriberAdjustedAccounting, *http.Response, error) {
+func (a *SubscriberApiService) GetL2BSASubscriberAdjustedAccountingValues(ctx context.Context, ifpName string, anp int) (SubscriberAdjustedAccounting, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -917,7 +917,7 @@ Provides subscriber session details including accounting information,  logical i
  * @param subscriberId The subscriber ID.
 @return SubscriberSession
 */
-func (a *SubscriberApiService) GetSubscriber(ctx context.Context, subscriberId int32) (SubscriberSession, *http.Response, error) {
+func (a *SubscriberApiService) GetSubscriber(ctx context.Context, subscriberId int) (SubscriberSession, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -1004,8 +1004,8 @@ Lists the subscriber history to examine why subscribers got disconnected in the 
      * @param "SubscriberUserName" (optional.String) -  Filter for subscribers with the given user name.
      * @param "SubscriberUserNameMatches" (optional.String) -  Filter for subsribers matching the given user name pattern.
      * @param "IfpName" (optional.String) -  Filter for subscribers terminated on the specified physical interface.
-     * @param "InnerVlan" (optional.Int32) -  Filter for subscribers with the specified inner VLAN.
-     * @param "OuterVlan" (optional.Int32) -  Filter for subscribers terminated with the specified outer VLAN.
+     * @param "InnerVlan" (optional.Int) -  Filter for subscribers with the specified inner VLAN.
+     * @param "OuterVlan" (optional.Int) -  Filter for subscribers terminated with the specified outer VLAN.
      * @param "SubscriberId" (optional.Float64) -  Filter for subscriber with the specified subscriber ID.
      * @param "AccessType" (optional.String) -  Filter for subscribers with the specified access type.
      * @param "AccessRemoteId" (optional.String) -  Filter for subscribers with the specified agent remote ID.
@@ -1019,8 +1019,8 @@ type SubscriberApiGetSubscriberHistoryOpts struct {
 	SubscriberUserName        optional.String
 	SubscriberUserNameMatches optional.String
 	IfpName                   optional.String
-	InnerVlan                 optional.Int32
-	OuterVlan                 optional.Int32
+	InnerVlan                 optional.Int
+	OuterVlan                 optional.Int
 	SubscriberId              optional.Float64
 	AccessType                optional.String
 	AccessRemoteId            optional.String
@@ -1147,10 +1147,10 @@ Lists all matching active subscriber sessions.
  * @param optional nil or *SubscriberApiGetSubscribersOpts - Optional Parameters:
      * @param "IfpName" (optional.String) -  The physical interface name.
      * @param "IflName" (optional.String) -  The name of the subscriber&#x27;s logical interface.
-     * @param "OuterVlan" (optional.Int32) -  Outer VLAN tag.
-     * @param "AnpVlan" (optional.Int32) -  ANP VLAN tag (for L2BSA subscribers).
-     * @param "InnerVlan" (optional.Int32) -  Inner VLAN tag.
-     * @param "SubscriberId" (optional.Interface of int32) -  A unique subscriber ID
+     * @param "OuterVlan" (optional.Int) -  Outer VLAN tag.
+     * @param "AnpVlan" (optional.Int) -  ANP VLAN tag (for L2BSA subscribers).
+     * @param "InnerVlan" (optional.Int) -  Inner VLAN tag.
+     * @param "SubscriberId" (optional.Interface of int) -  A unique subscriber ID
      * @param "AccountingSessionId" (optional.String) -  The accounting session ID of the subscriber session.
      * @param "SubscriberUserName" (optional.String) -  The subscriber user name of the subscriber session.
      * @param "SubscriberUserNameMatches" (optional.String) -  Regular expression the subscriber user name must match.
@@ -1165,9 +1165,9 @@ Lists all matching active subscriber sessions.
 type SubscriberApiGetSubscribersOpts struct {
 	IfpName                   optional.String
 	IflName                   optional.String
-	OuterVlan                 optional.Int32
-	AnpVlan                   optional.Int32
-	InnerVlan                 optional.Int32
+	OuterVlan                 optional.Int
+	AnpVlan                   optional.Int
+	InnerVlan                 optional.Int
 	SubscriberId              optional.Interface
 	AccountingSessionId       optional.String
 	SubscriberUserName        optional.String
@@ -1390,7 +1390,7 @@ Removes a test subscriber from the Test AAA request table.
  * @param subscriberId The subscriber ID.
 
 */
-func (a *SubscriberApiService) RemoveTestSubscriber(ctx context.Context, subscriberId int32) (*http.Response, error) {
+func (a *SubscriberApiService) RemoveTestSubscriber(ctx context.Context, subscriberId int) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -1458,7 +1458,7 @@ Injects a test subscriber into the Test AAA request table.
  * @param subscriberId The subscriber ID.
 
 */
-func (a *SubscriberApiService) StoreTestSubscriber(ctx context.Context, body TestAaaObject, subscriberId int32) (*http.Response, error) {
+func (a *SubscriberApiService) StoreTestSubscriber(ctx context.Context, body TestAaaObject, subscriberId int) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
 		localVarPostBody   interface{}

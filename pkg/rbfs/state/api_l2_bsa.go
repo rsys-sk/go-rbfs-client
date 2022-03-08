@@ -203,7 +203,7 @@ Shows the L2BSA service on the given interface with the given ANP VLAN.
  * @param anp The ANP VLAN ID.
 @return L2bsaServiceConfig
 */
-func (a *L2BSAApiService) GetL2BSAServicesOfANP(ctx context.Context, ifpName string, anp int32) (L2bsaServiceConfig, *http.Response, error) {
+func (a *L2BSAApiService) GetL2BSAServicesOfANP(ctx context.Context, ifpName string, anp int) (L2bsaServiceConfig, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -290,6 +290,74 @@ func (a *L2BSAApiService) GetL2BSAServicesOfANP(ctx context.Context, ifpName str
 }
 
 /*
+L2BSAApiService Runs L2BSA service configuration batch job.
+Stores or removes all L2BSA service configurations as specified in the batch instructions.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param body
+
+*/
+func (a *L2BSAApiService) ProcessL2BSAServiceBatch(ctx context.Context, body L2bsaServiceConfigBatch) (*http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/l2bsa/batch"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	// body params
+	localVarPostBody = &body
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		return localVarHttpResponse, newErr
+	}
+
+	return localVarHttpResponse, nil
+}
+
+/*
 L2BSAApiService Removes a L2BSA service.
 Removes the L2BSA service configuration and terminates the associated subscriber session.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -297,7 +365,7 @@ Removes the L2BSA service configuration and terminates the associated subscriber
  * @param anp The ANP VLAN ID.
 
 */
-func (a *L2BSAApiService) RemoveL2BSAServicesForANP(ctx context.Context, ifpName string, anp int32) (*http.Response, error) {
+func (a *L2BSAApiService) RemoveL2BSAServicesForANP(ctx context.Context, ifpName string, anp int) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -543,7 +611,7 @@ Stores the L2BSA service configuration.
  * @param anp The ANP VLAN ID.
 
 */
-func (a *L2BSAApiService) StoreL2BSAServicesForANP(ctx context.Context, body L2bsaServiceConfig, ifpName string, anp int32) (*http.Response, error) {
+func (a *L2BSAApiService) StoreL2BSAServicesForANP(ctx context.Context, body L2bsaServiceConfig, ifpName string, anp int) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
 		localVarPostBody   interface{}

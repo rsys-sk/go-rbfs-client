@@ -12,7 +12,7 @@ package state
 // Summary of IS-IS timers.
 type IsisNeighborTimers struct {
 	// The hold time in seconds. The neighbor is considered down if no hello message is received before the hold time expires.
-	HoldTime int32 `json:"hold_time,omitempty"`
+	HoldTime int `json:"hold_time,omitempty"`
 	// The hold timer value in seconds, i.e. the time until the hold time expires.
-	HoldTimer int32 `json:"hold_timer,omitempty"`
+	HoldTimer int `json:"hold_timer,omitempty"`
 }

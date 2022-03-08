@@ -12,7 +12,7 @@ package state
 // Summary of IS-IS interfaces.
 type IsisInstanceRefInterfaces struct {
 	// Number of active L1 interfaces.
-	Level1ActiveCount int32 `json:"level_1_active_count,omitempty"`
+	Level1ActiveCount int `json:"level_1_active_count,omitempty"`
 	// Number of active L2 interfaces.
-	Level2ActiveCount int32 `json:"level_2_active_count,omitempty"`
+	Level2ActiveCount int `json:"level_2_active_count,omitempty"`
 }

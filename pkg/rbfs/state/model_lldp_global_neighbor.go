@@ -18,8 +18,8 @@ type LldpGlobalNeighbor struct {
 	// An optional local LLDP system description.
 	SystemDescription string `json:"system_description,omitempty"`
 	// The local LLDP Tx interval.
-	TransmitInterval int32 `json:"transmit_interval,omitempty"`
+	TransmitInterval int `json:"transmit_interval,omitempty"`
 	// The local LLDP Tx holdtime.
-	TransmitHoldime int32         `json:"transmit_holdime,omitempty"`
+	TransmitHoldime int           `json:"transmit_holdime,omitempty"`
 	Neighbor        *LldpNeighbor `json:"neighbor,omitempty"`
 }

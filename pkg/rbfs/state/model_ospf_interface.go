@@ -18,25 +18,25 @@ type OspfInterface struct {
 	// The OSPF interface type.
 	OspfIflType string `json:"ospf_ifl_type,omitempty"`
 	// Number of neighbors on the OSPF interface.
-	FullNeighbors int32 `json:"full_neighbors,omitempty"`
+	FullNeighbors int `json:"full_neighbors,omitempty"`
 	// The interface OSPF metric value.
-	Metric int32 `json:"metric,omitempty"`
+	Metric int `json:"metric,omitempty"`
 	// The IPv4 address of the interface in CIDR notation.
 	Ipv4Prefix string `json:"ipv4_prefix,omitempty"`
 	// The OSPF protocol MTU.
-	Ipv4Mtu int32 `json:"ipv4_mtu,omitempty"`
+	Ipv4Mtu int `json:"ipv4_mtu,omitempty"`
 	// OSPF priority on the interface.
-	Priority int32 `json:"priority,omitempty"`
+	Priority int `json:"priority,omitempty"`
 	// The designated router on the interface.
 	DesignatedRouter string `json:"designated_router,omitempty"`
 	// The backup designated router on the interface.
 	BackupDesignatedRouter string `json:"backup_designated_router,omitempty"`
 	// OSPF hello interval on the interface.
-	HelloInterval int32 `json:"hello_interval,omitempty"`
+	HelloInterval int `json:"hello_interval,omitempty"`
 	// OSPF dead interval on the interface.
-	DeadInterval int32 `json:"dead_interval,omitempty"`
+	DeadInterval int `json:"dead_interval,omitempty"`
 	// The segment routing index on the interface.
-	SegmentRoutingIndex int32 `json:"segment_routing_index,omitempty"`
+	SegmentRoutingIndex int `json:"segment_routing_index,omitempty"`
 	// The authentication type on the interface.
 	AuthenticationType string `json:"authentication_type,omitempty"`
 }

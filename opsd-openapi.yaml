@@ -694,7 +694,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/ISISInstanceNeighbors"
+                  $ref: "#/components/schemas/ISISNeighbors"
         401:
           $ref: "#/components/responses/401"
         403:
@@ -2915,6 +2915,33 @@ paths:
           $ref: "#/components/responses/404"
         500:
           $ref: "#/components/responses/500"
+  /access/vlan-profiles/batch:
+    post:
+      summary: Runs a VLAN profile configuration batch job.
+      operationId: processVLANProfilesBatch
+      description: |
+        Stores and removes all VLAN profiles as specified in the batch.
+      tags:
+      - Access
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VLANProfileBatch"
+      responses:
+        204:
+          description: Batch successfully executed.
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        422: 
+          $ref: "#/components/responses/422"
+        500:
+          $ref: "#/components/responses/500"
   /access/vlan-profiles/flush:
     post:
       summary: Deletes VLAN profiles.
@@ -3003,6 +3030,33 @@ paths:
           $ref: "#/components/responses/404"
         500:
           $ref: "#/components/responses/500"
+  /l2bsa/batch:
+    post:
+      summary: Runs L2BSA service configuration batch job.
+      operationId: processL2BSAServiceBatch
+      description: |
+        Stores or removes all L2BSA service configurations as specified in the batch instructions.
+      tags:
+      - L2BSA
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/L2bsaServiceConfigBatch"
+      responses:
+        204:
+          description: Batch successfully executed.          
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        422:
+          $ref: "#/components/responses/422"
+        500:
+          $ref: "#/components/responses/500"     
   /l2bsa/{ifp_name}:
     get:
       summary: Lists all L2BSA services on a physical interface.
@@ -3239,6 +3293,33 @@ paths:
               type: array
               items:
                 $ref: "#/components/schemas/A10nspConfig" 
+      responses:  
+        204:
+          description: L2X endpoints successfully updated.
+        400:
+          $ref: "#/components/responses/400"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        422:
+          $ref: "#/components/responses/422"     
+        500:
+          $ref: "#/components/responses/500"
+  /a10nsp/l2x/batch:
+    post:
+      summary: Runs a A10NSP L2X configuration batch job.
+      operationId: processA10NSPL2XBatch
+      description: |
+        Adds and removes A10NSP L2X endpoints as specified in the batch job.
+      tags:
+        - A10NSP
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/A10nspConfigBatch"
       responses:  
         204:
           description: L2X endpoints successfully updated.
@@ -3632,6 +3713,137 @@ paths:
           $ref: "#/components/responses/404"
         500:
           $ref: "#/components/responses/500"
+  /routes/{instance_name}/{afi}/{safi}:
+    get:
+      summary: List route information for a prefix
+      operationId: getInstanceUnicastRoutes
+      description: |
+        List route table entries in an instance for a AFI/SAFI, and prefix or label.
+        - prefix4 query parameter mandatory for AFI IPv4
+        - prefix6 query parameter mandatory for AFI IPv6
+        - label query parameter mandatory for AFI MPLS
+      tags:
+      - Routes
+      parameters:
+        - in: path
+          name: instance_name
+          description: The routing instance name.
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: afi
+          description: The address family.
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: safi
+          description: The sub-address family.
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: prefix4
+          description: IPv4 prefix (address/mask)
+          schema:
+            type: string
+        - in: query
+          name: prefix6
+          description: IPv6 prefix (address/mask)
+          schema:
+            type: string
+        - in: query
+          name: label
+          description: MPLS label value
+          schema:
+            type: string
+      responses:
+        200:
+          description: The request has been successful and a response has been received.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstanceUnicastRoutes"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        422:
+          $ref: "#/components/responses/422"
+        500:
+          $ref: "#/components/responses/500"
+  /mroutes/{instance_name}/{afi}/{safi}:
+    get:
+      summary: List multicast route information for a group
+      operationId: getInstanceMulticastRoutes
+      description: |
+        List multicast route table entries in an instance for a AFI/SAFI and group.
+        - multicast_group4 query parameter mandatory for AFI IPv4
+        - multicast_group6 query parameter mandatory for AFI IPv6
+        - multicast_source4 query parameter optional for AFI IPv4
+        - multicast_source6 query parameter optional for AFI IPv6
+      tags:
+      - Routes
+      parameters:
+        - in: path
+          name: instance_name
+          description: The routing instance name.
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: afi
+          description: The address family.
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: safi
+          description: The sub-address family.
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: multicast_group4
+          description: IPv4 group (address/mask)
+          schema:
+            type: string
+        - in: query
+          name: multicast_group6
+          description: IPv6 group (address/mask)
+          schema:
+            type: string
+        - in: query
+          name: multicast_source4
+          description: IPv4 source prefix (address/mask)
+          schema:
+            type: string
+        - in: query
+          name: multicast_source6
+          description: IPv6 source prefix (address/mask)
+          schema:
+            type: string
+      responses:
+        200:
+          description: The request has been successful and a response has been received.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstanceMulticastRoutes"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        422:
+          $ref: "#/components/responses/422"
+        500:
+          $ref: "#/components/responses/500"
+
 components:
   responses:
     400:
@@ -5505,7 +5717,7 @@ components:
             type: string
         segment_routing:
           $ref: "#/components/schemas/SRGB"
-    ISISInstanceNeighbors:
+    ISISNeighbors:
       type: object
       description: IS-IS neighbors grouped by instance.
       properties:
@@ -6368,6 +6580,21 @@ components:
         service_profile_name:
           description: Name of the service profile.
           type: string
+    VLANProfileBatch:
+      type: object
+      description: |
+        Contains the VLAN profiles to be added or removed within a single batch operation.
+      properties:
+        remove:
+          description: VLAN profiles to be removed
+          type: array
+          items:
+            $ref: "#/components/schemas/VLANProfile"
+        store:
+          description: VLAN profiles to be stored
+          type: array
+          items:
+            $ref: "#/components/schemas/VLANProfile"
     L2bsaServiceConfig:
       type: object
       description: |
@@ -6411,6 +6638,20 @@ components:
               example: name=BestEffor,size=65000;name=Voice,size=20000
         access_line_info:
           $ref: "#/components/schemas/AccessLineInfo"
+    L2bsaServiceConfigBatch:
+      type: object
+      description: Contains the L2BSA service configurations to be added and removed with this batch.
+      properties:
+        remove:
+          description: The L2BSA service configurations to be removed.
+          type: array
+          items:
+            $ref: "#/components/schemas/L2bsaServiceConfig"
+        store:
+          description: The L2BSA service configurations to be stored.
+          type: array
+          items:
+            $ref: "#/components/schemas/L2bsaServiceConfig"
     L2xConfig:
       type: object
       description: L2X settings.
@@ -6619,6 +6860,20 @@ components:
           maximum: 4094
         l2x:
           $ref: "#/components/schemas/L2xConfig"
+    A10nspConfigBatch:
+      description: A10NSP endpoint configuration batch instructions.
+      type: object
+      properties:
+        remove:
+          description: A10NSP L2X endpoints to be removed.
+          type: array
+          items:
+            $ref: "#/components/schemas/A10nspConfig"
+        store:
+          description: A10NSP L2X endpoints to be stored.
+          type: array
+          items:
+            $ref: "#/components/schemas/A10nspConfig"
     PIMDesignatedRouter:
       description: Settings of the selected PIM designated router (DR).
       type: object
@@ -6940,3 +7195,157 @@ components:
           type: array
           items:
             type: string
+
+    InstanceUnicastRoutes:
+      type: object
+      description: Route information for an instance and AFI/SAFI.
+      properties:
+        instance_name:
+          description: The routing instance name.
+          type: string
+        afi:
+          description: The address family.
+          type: string
+        safi:
+          description: The sub-address family.
+          type: string
+        routes:
+          type: array
+          items:
+            $ref: "#/components/schemas/Routes"
+    Routes:
+      type: object
+      description: Route table entries for an IP prefix or MPLS label.
+      properties:
+        prefix4:
+          description: IPv4 address with mask. Applicable to AFI 'ipv4' only
+          type: string
+        prefix6:
+          description: IPv6 address with mask. Applicable to AFI 'ipv6' only.
+          type: string
+        label:
+          description: MPLS label value. Applicable to AFI 'mpls' only.
+          type: integer
+        route_distinguisher:
+          description: Route distingusher.
+          type: string
+        source:
+          description: Soure of the route.
+          type: string
+        preference:
+          description: Protocol preference.
+          type: integer
+        next_hops:
+          type: array
+          items:
+            $ref: "#/components/schemas/NextHops"
+    NextHops:
+      type: object
+      description: Next hop details.
+      properties:
+        nexthop_ip_address:
+          description: IP address of the next hop.
+          type: string 
+          format: ipv4
+        nexthop_mac_address:
+          description: MAC addess of the next hop.
+          type: string      
+        exit_ifl:
+          description: Logical exit interface.
+          type: string 
+        nexthop_type:
+          description: Type of the next hop.
+          type: string  
+        nexthop_action:
+          description: MLPS label operation.
+          type: string
+        mpls_label_stack:
+          description: MPLS labels for the next hop.
+          type: array
+          items:
+            type: string      
+        lookup_instance:
+          description: Routing instance in which the NH is resolved.
+          type: string 
+        lookup_afi:
+          description: Address family of the next hop.
+          type: string  
+        lookup_safi:
+          description: Sub-address family of the next hop.
+          type: string 
+    InstanceMulticastRoutes:
+      type: object
+      description: Multicast route information for an instance and AFI/SAFI.
+      properties:
+        instance_name:
+          description: The routing instance name.
+          type: string
+        afi:
+          description: The address family.
+          type: string
+        safi:
+          description: The sub-address family.
+          type: string
+        multicast_routes:
+          type: array
+          items:
+            $ref: "#/components/schemas/Mroutes"
+    Mroutes:
+      type: object
+      description: Multicast route table entries for a multicast group.
+      properties:
+        multicast_group4:
+          description: IPv4 group address with mask. Applicable to AFI 'ipv4' only
+          type: string
+        multicast_group6:
+          description: IPv6 group address with mask. Applicable to AFI 'ipv6' only.
+          type: string
+        multicast_source4:
+          description: IPv4 source address with mask. Applicable to AFI 'ipv4' only
+          type: string
+        multicast_source6:
+          description: IPv6 source address with mask. Applicable to AFI 'ipv6' only.
+          type: string
+        source:
+          description: Soure of the route.
+          type: string
+        preference:
+          description: Protocol preference.
+          type: integer
+        multicast_route_type:
+          description: Multicast route type.
+          type: string
+        next_hops:
+          type: array
+          items:
+            $ref: "#/components/schemas/MCNextHops"
+    MCNextHops:
+      type: object
+      description: Next hop details.
+      properties:
+        exit_ifl:
+          description: Logical exit interface.
+          type: string 
+        nexthop_mac_address:
+          description: MAC addess of the next hop.
+          type: string      
+        nexthop_type:
+          description: Type of the next hop.
+          type: string  
+        nexthop_action:
+          description: MLPS label operation.
+          type: string
+        mpls_label_stack:
+          description: MPLS labels for the next hop.
+          type: array
+          items:
+            type: string      
+        lookup_instance:
+          description: Routing instance in which the NH is resolved.
+          type: string 
+        lookup_afi:
+          description: Address family of the next hop.
+          type: string  
+        lookup_safi:
+          description: Sub-address family of the next hop.
+          type: string 

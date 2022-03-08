@@ -14,15 +14,15 @@ type OspfInstanceGlobal struct {
 	// The address family of the OSPF instance.
 	AddressFamily string `json:"address_family,omitempty"`
 	// The OSPF flood interval.
-	FloodInterval int32 `json:"flood_interval,omitempty"`
+	FloodInterval int `json:"flood_interval,omitempty"`
 	// The default value of the OSPF interface metrics.
-	DefaultMetric int32 `json:"default_metric,omitempty"`
+	DefaultMetric int `json:"default_metric,omitempty"`
 	// OSPF opaque capability.
 	OpaqueCapability bool `json:"opaque_capability,omitempty"`
 	// OSPF segment routing capability.
 	SegmentRouting bool `json:"segment_routing,omitempty"`
 	// The segment routing global block start value.
-	SrgbBase int32 `json:"srgb_base,omitempty"`
+	SrgbBase int `json:"srgb_base,omitempty"`
 	// The size of the segment routing global block.
-	SrgbRange int32 `json:"srgb_range,omitempty"`
+	SrgbRange int `json:"srgb_range,omitempty"`
 }

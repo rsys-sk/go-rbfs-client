@@ -12,7 +12,7 @@ package state
 // Segment routing global block settings.
 type Srgb struct {
 	// SRGB start value.
-	SrgbBase int32 `json:"srgb_base,omitempty"`
+	SrgbBase int `json:"srgb_base,omitempty"`
 	// SRGB length.
-	SrgbRange int32 `json:"srgb_range,omitempty"`
+	SrgbRange int `json:"srgb_range,omitempty"`
 }

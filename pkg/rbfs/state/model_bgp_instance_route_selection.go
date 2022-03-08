@@ -12,13 +12,13 @@ package state
 // BGP best-route selection flags and default values.
 type BgpInstanceRouteSelection struct {
 	// A constant BGP multi exit discriminator (MED) value shared as metric with all peers.  The metric is derived from the IGP if not specified.
-	Med int32 `json:"med,omitempty"`
+	Med int `json:"med,omitempty"`
 	// The AS-local preference value of this router. The router with the highest local preference  is preferred for routing traffic to an external AS if multiple paths exist.
-	LocalPreference int32 `json:"local_preference,omitempty"`
+	LocalPreference int `json:"local_preference,omitempty"`
 	// The preference value for IBGP routes,  i.e. routes learned from BGP peers in the same AS.
-	IbgpPreference int32 `json:"ibgp_preference,omitempty"`
+	IbgpPreference int `json:"ibgp_preference,omitempty"`
 	// The preference value for EBGP routes,  i.e. routes learned from BGP peers in an external AS.
-	EbgpPreference int32 `json:"ebgp_preference,omitempty"`
+	EbgpPreference int `json:"ebgp_preference,omitempty"`
 	// Ignore ASN when comparing MED values for route selection.
 	AlwaysCompareMed bool `json:"always_compare_med,omitempty"`
 	// Ignore AS path length for route selection.

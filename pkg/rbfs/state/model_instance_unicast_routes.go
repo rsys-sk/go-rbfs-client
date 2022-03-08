@@ -9,12 +9,13 @@
  */
 package state
 
-// Segment routing settings.
-type AllOfIsisInstanceInterfacesSegmentRouting struct {
-	// SRGB start value.
-	SrgbBase int `json:"srgb_base,omitempty"`
-	// SRGB length.
-	SrgbRange int `json:"srgb_range,omitempty"`
-	// SR indices.
-	SrIds []interface{} `json:"sr_ids,omitempty"`
+// Route information for an instance and AFI/SAFI.
+type InstanceUnicastRoutes struct {
+	// The routing instance name.
+	InstanceName string `json:"instance_name,omitempty"`
+	// The address family.
+	Afi string `json:"afi,omitempty"`
+	// The sub-address family.
+	Safi   string   `json:"safi,omitempty"`
+	Routes []Routes `json:"routes,omitempty"`
 }

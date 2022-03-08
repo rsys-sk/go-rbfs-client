@@ -12,27 +12,27 @@ package state
 // BGP timers and their current values.
 type BgpPeeringTimers struct {
 	// The keep alive timer value in seconds.
-	KeepAliveTimer int32 `json:"keep_alive_timer,omitempty"`
+	KeepAliveTimer int `json:"keep_alive_timer,omitempty"`
 	// The negotiated keep-alive time in seconds.
-	KeepAliveTime int32 `json:"keep_alive_time,omitempty"`
+	KeepAliveTime int `json:"keep_alive_time,omitempty"`
 	// The received keep alive time in seconds.
-	KeepAliveTimeReceived int32 `json:"keep_alive_time_received,omitempty"`
+	KeepAliveTimeReceived int `json:"keep_alive_time_received,omitempty"`
 	// The configured keep alive time seconds.
-	KeepAliveTimeSent int32 `json:"keep_alive_time_sent,omitempty"`
+	KeepAliveTimeSent int `json:"keep_alive_time_sent,omitempty"`
 	// The hold timer value in seconds.
-	HoldTimer int32 `json:"hold_timer,omitempty"`
+	HoldTimer int `json:"hold_timer,omitempty"`
 	// The negotiated hold time in seconds.
-	HoldTime int32 `json:"hold_time,omitempty"`
+	HoldTime int `json:"hold_time,omitempty"`
 	// The received hold time in seconds.
-	HoldTimeReceived int32 `json:"hold_time_received,omitempty"`
+	HoldTimeReceived int `json:"hold_time_received,omitempty"`
 	// The sent hold time in seconds.
-	HoldTimeSent int32 `json:"hold_time_sent,omitempty"`
+	HoldTimeSent int `json:"hold_time_sent,omitempty"`
 	// The connect timer value in seconds.
-	ConnectTimer int32 `json:"connect_timer,omitempty"`
+	ConnectTimer int `json:"connect_timer,omitempty"`
 	// The negotiated connect time in seconds.
-	ConnectTime int32 `json:"connect_time,omitempty"`
+	ConnectTime int `json:"connect_time,omitempty"`
 	// The sent connect time in seconds.
-	ConnectTimeSent int32 `json:"connect_time_sent,omitempty"`
+	ConnectTimeSent int `json:"connect_time_sent,omitempty"`
 	// The received connect time in seconds.
-	ConnectTimeReceived int32 `json:"connect_time_received,omitempty"`
+	ConnectTimeReceived int `json:"connect_time_received,omitempty"`
 }

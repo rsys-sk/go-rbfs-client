@@ -22,5 +22,5 @@ type PingArguments struct {
 	// The interval between two pings.
 	Interval float32 `json:"interval,omitempty"`
 	// The number of pings sent.
-	Count int32 `json:"count,omitempty"`
+	Count int `json:"count,omitempty"`
 }

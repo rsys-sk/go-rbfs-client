@@ -595,15 +595,15 @@ func (a *ISISApiService) GetISISNeighbor(ctx context.Context, instanceName strin
 ISISApiService Lists all IS-IS neighbors.
 Lists all IS-IS neighbors grouped by IS-IS instance.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return []IsisInstanceNeighbors
+@return []IsisNeighbors
 */
-func (a *ISISApiService) GetISISNeighbors(ctx context.Context) ([]IsisInstanceNeighbors, *http.Response, error) {
+func (a *ISISApiService) GetISISNeighbors(ctx context.Context) ([]IsisNeighbors, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue []IsisInstanceNeighbors
+		localVarReturnValue []IsisNeighbors
 	)
 
 	// create path and map variables
@@ -660,7 +660,7 @@ func (a *ISISApiService) GetISISNeighbors(ctx context.Context) ([]IsisInstanceNe
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v []IsisInstanceNeighbors
+			var v []IsisNeighbors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

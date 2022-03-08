@@ -12,11 +12,11 @@ package state
 // Subscriber QoS policer settings.
 type SubscriberQosPolicer struct {
 	// The committed information rate (CIR) in kbps.
-	CirKbps int32 `json:"cir_kbps,omitempty"`
+	CirKbps int `json:"cir_kbps,omitempty"`
 	// The comitted burst size (CBS) in kbps.
-	CbsKbps int32 `json:"cbs_kbps,omitempty"`
+	CbsKbps int `json:"cbs_kbps,omitempty"`
 	// The peak information rate (PIR) in kbps.
-	PirKbps int32 `json:"pir_kbps,omitempty"`
+	PirKbps int `json:"pir_kbps,omitempty"`
 	// The peak burst size (PBS) in kbps.
-	PbsKbps int32 `json:"pbs_kbps,omitempty"`
+	PbsKbps int `json:"pbs_kbps,omitempty"`
 }

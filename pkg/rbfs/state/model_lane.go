@@ -12,7 +12,7 @@ package state
 // The optical lane information.
 type Lane struct {
 	// The lane ID.
-	LaneId int32 `json:"lane_id,omitempty"`
+	LaneId int `json:"lane_id,omitempty"`
 	// The optic temperature in degree celsius.
 	TemperatureCelsius float64 `json:"temperature_celsius,omitempty"`
 	// Voltage in volts.

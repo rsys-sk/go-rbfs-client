@@ -11,13 +11,13 @@ package state
 
 type BgpStatisticsEgress struct {
 	// Number of sent open messages.
-	OpenCount int32 `json:"open_count,omitempty"`
+	OpenCount int `json:"open_count,omitempty"`
 	// Number of sent update messages.
-	UpdateCount int32 `json:"update_count,omitempty"`
+	UpdateCount int `json:"update_count,omitempty"`
 	// Number of sent keep-alive messages.
-	KeepAliveCount int32 `json:"keep_alive_count,omitempty"`
+	KeepAliveCount int `json:"keep_alive_count,omitempty"`
 	// Number of sent notify messages.
-	NotifyCount int32 `json:"notify_count,omitempty"`
+	NotifyCount int `json:"notify_count,omitempty"`
 	// Number of sent route-refresh messages.
-	RouteRefreshCount int32 `json:"route_refresh_count,omitempty"`
+	RouteRefreshCount int `json:"route_refresh_count,omitempty"`
 }

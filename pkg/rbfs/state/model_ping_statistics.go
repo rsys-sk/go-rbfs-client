@@ -12,10 +12,10 @@ package state
 // Ping counters.
 type PingStatistics struct {
 	// Number of pings sent.
-	Sent int32 `json:"sent,omitempty"`
+	Sent int `json:"sent,omitempty"`
 	// Number of pings received.
-	Received int32 `json:"received,omitempty"`
+	Received int `json:"received,omitempty"`
 	// Number of pings lost.
-	Lost int32              `json:"lost,omitempty"`
+	Lost int                `json:"lost,omitempty"`
 	Rtt  *PingStatisticsRtt `json:"rtt,omitempty"`
 }

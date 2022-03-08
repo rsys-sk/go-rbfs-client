@@ -29,22 +29,22 @@ type LogicalInterface struct {
 	// Whether IPv4 is enabled or disabled on this logical interface.
 	Ipv4State string `json:"ipv4_state,omitempty"`
 	// IPv4 maximum transfer unit (MTU) size in bytes.
-	Ipv4Mtu int32 `json:"ipv4_mtu,omitempty"`
+	Ipv4Mtu int `json:"ipv4_mtu,omitempty"`
 	// The assigned IPv6 address.
 	Ipv6Address string `json:"ipv6_address,omitempty"`
 	// Whether IPv6 is enabled or disabled on this logical interface.
 	Ipv6State string `json:"ipv6_state,omitempty"`
 	// IPv6 maximum transfer unit (MTU) size in bytes.
-	Ipv6Mtu int32 `json:"ipv6_mtu,omitempty"`
+	Ipv6Mtu int `json:"ipv6_mtu,omitempty"`
 	// MPLS maximum transfer unit (MTU) size in bytes.
-	MplsMtu int32 `json:"mpls_mtu,omitempty"`
+	MplsMtu int `json:"mpls_mtu,omitempty"`
 	// Whether MPLS is enabled or disabled on this logical interface.
 	MplsState string `json:"mpls_state,omitempty"`
 	// ISO maximum transfer unit (MTU) size.
-	IsoMtu int32 `json:"iso_mtu,omitempty"`
+	IsoMtu int `json:"iso_mtu,omitempty"`
 	// Whether ISO is enabled or disabled on this logical interface.
 	IsoState string `json:"iso_state,omitempty"`
 	// The assigned VLANs.  The array is filled beginning with the outermost VLANS:  - The array is _empty_ or _omitted_ for untagged interfaces.  - The array contains the VLAN-ID for single tagged interfaces.  - The array contains the outer VLAN-ID followed by the inner VLAN-ID for double tagged interfaces.
-	Vlans       []int32                      `json:"vlans,omitempty"`
+	Vlans       []int                        `json:"vlans,omitempty"`
 	IflCounters *LogicalInterfaceIflCounters `json:"ifl_counters,omitempty"`
 }

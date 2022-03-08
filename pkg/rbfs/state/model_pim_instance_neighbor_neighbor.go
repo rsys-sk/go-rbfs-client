@@ -12,11 +12,11 @@ package state
 // Discovered PIM neighbor settings.
 type PimInstanceNeighborNeighbor struct {
 	// The PIM generation identifier.
-	GenerationId int32 `json:"generation_id,omitempty"`
+	GenerationId int `json:"generation_id,omitempty"`
 	// The neighbor IPv4 address.
 	Ipv4Address string `json:"ipv4_address,omitempty"`
 	// The neighbor IPv6 address.
 	Ipv6Address string `json:"ipv6_address,omitempty"`
 	// The neighbor's priority in the designated router elecetion process.
-	DesignatedRouterPriority int32 `json:"designated_router_priority,omitempty"`
+	DesignatedRouterPriority int `json:"designated_router_priority,omitempty"`
 }

@@ -25,7 +25,7 @@ type BgpPeeringRef struct {
 	// The local AS number.
 	Asn int64 `json:"asn,omitempty"`
 	// Number of BGP session flaps.
-	BgpSessionFlaps int32  `json:"bgp_session_flaps,omitempty"`
+	BgpSessionFlaps int    `json:"bgp_session_flaps,omitempty"`
 	IflName         string `json:"ifl_name,omitempty"`
 	// The local IPv6 address.
 	Ipv6Address string `json:"ipv6_address,omitempty"`

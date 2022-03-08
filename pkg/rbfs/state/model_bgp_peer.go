@@ -24,5 +24,5 @@ type BgpPeer struct {
 	// The peer domain name.
 	DomainName string `json:"domain_name,omitempty"`
 	// The destination port to connect to this peer.
-	DestinationPort int32 `json:"destination_port,omitempty"`
+	DestinationPort int `json:"destination_port,omitempty"`
 }

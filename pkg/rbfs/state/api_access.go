@@ -32,18 +32,18 @@ Injects a single VLAN profile object into the global VLAN profile BDS table.  A 
  * @param body
  * @param ifpName The physical interface.
  * @param optional nil or *AccessApiAddVLANProfileOpts - Optional Parameters:
-     * @param "OuterVlanMin" (optional.Int32) -  The outer VLAN range minimum value.
-     * @param "OuterVlanMax" (optional.Int32) -  The outer VLAN range maximum value.
-     * @param "InnerVlanMin" (optional.Int32) -  The inner VLAN range minimum value.
-     * @param "InnerVlanMax" (optional.Int32) -  The inner VLAN range maximum value.
+     * @param "OuterVlanMin" (optional.Int) -  The outer VLAN range minimum value.
+     * @param "OuterVlanMax" (optional.Int) -  The outer VLAN range maximum value.
+     * @param "InnerVlanMin" (optional.Int) -  The inner VLAN range minimum value.
+     * @param "InnerVlanMax" (optional.Int) -  The inner VLAN range maximum value.
 
 */
 
 type AccessApiAddVLANProfileOpts struct {
-	OuterVlanMin optional.Int32
-	OuterVlanMax optional.Int32
-	InnerVlanMin optional.Int32
-	InnerVlanMax optional.Int32
+	OuterVlanMin optional.Int
+	OuterVlanMax optional.Int
+	InnerVlanMin optional.Int
+	InnerVlanMax optional.Int
 }
 
 func (a *AccessApiService) AddVLANProfile(ctx context.Context, body VlanProfile, ifpName string, localVarOptionals *AccessApiAddVLANProfileOpts) (*http.Response, error) {
@@ -126,18 +126,18 @@ Deletes a single VLAN profile object from the global VLAN profile BDS table. Per
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param ifpName The physical interface.
  * @param optional nil or *AccessApiDeleteVLANProfileOpts - Optional Parameters:
-     * @param "OuterVlanMin" (optional.Int32) -  The outer VLAN range minimum value.
-     * @param "OuterVlanMax" (optional.Int32) -  The outer VLAN range maximum value.
-     * @param "InnerVlanMin" (optional.Int32) -  The inner VLAN range minimum value.
-     * @param "InnerVlanMax" (optional.Int32) -  The inner VLAN range maximum value.
+     * @param "OuterVlanMin" (optional.Int) -  The outer VLAN range minimum value.
+     * @param "OuterVlanMax" (optional.Int) -  The outer VLAN range maximum value.
+     * @param "InnerVlanMin" (optional.Int) -  The inner VLAN range minimum value.
+     * @param "InnerVlanMax" (optional.Int) -  The inner VLAN range maximum value.
 
 */
 
 type AccessApiDeleteVLANProfileOpts struct {
-	OuterVlanMin optional.Int32
-	OuterVlanMax optional.Int32
-	InnerVlanMin optional.Int32
-	InnerVlanMax optional.Int32
+	OuterVlanMin optional.Int
+	OuterVlanMax optional.Int
+	InnerVlanMin optional.Int
+	InnerVlanMax optional.Int
 }
 
 func (a *AccessApiService) DeleteVLANProfile(ctx context.Context, ifpName string, localVarOptionals *AccessApiDeleteVLANProfileOpts) (*http.Response, error) {
@@ -379,6 +379,74 @@ func (a *AccessApiService) GetVLANProfiles(ctx context.Context, localVarOptional
 	}
 
 	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
+AccessApiService Runs a VLAN profile configuration batch job.
+Stores and removes all VLAN profiles as specified in the batch.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param body
+
+*/
+func (a *AccessApiService) ProcessVLANProfilesBatch(ctx context.Context, body VlanProfileBatch) (*http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/access/vlan-profiles/batch"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	// body params
+	localVarPostBody = &body
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		return localVarHttpResponse, newErr
+	}
+
+	return localVarHttpResponse, nil
 }
 
 /*

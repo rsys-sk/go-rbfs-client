@@ -9,12 +9,10 @@
  */
 package state
 
-// Segment routing settings.
-type AllOfIsisInstanceInterfacesSegmentRouting struct {
-	// SRGB start value.
-	SrgbBase int `json:"srgb_base,omitempty"`
-	// SRGB length.
-	SrgbRange int `json:"srgb_range,omitempty"`
-	// SR indices.
-	SrIds []interface{} `json:"sr_ids,omitempty"`
+// Contains the L2BSA service configurations to be added and removed with this batch.
+type L2bsaServiceConfigBatch struct {
+	// The L2BSA service configurations to be removed.
+	Remove []L2bsaServiceConfig `json:"remove,omitempty"`
+	// The L2BSA service configurations to be stored.
+	Store []L2bsaServiceConfig `json:"store,omitempty"`
 }

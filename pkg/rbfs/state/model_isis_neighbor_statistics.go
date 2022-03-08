@@ -16,33 +16,33 @@ import (
 // Collection of IS-IS error counters maintained for this neighbor adjacency.
 type IsisNeighborStatistics struct {
 	// Total number of state transitions.
-	StateTransitionCount int32 `json:"state_transition_count,omitempty"`
+	StateTransitionCount int `json:"state_transition_count,omitempty"`
 	// Information why the adjacency was down last time.
 	LastDownReason string `json:"last_down_reason,omitempty"`
 	// Since when this adjacency is UP.
 	UpTime time.Time `json:"up_time,omitempty"`
 	// Count of adjacency down due to level mismatch
-	LevelMismatchErrorCount int32 `json:"level_mismatch_error_count,omitempty"`
+	LevelMismatchErrorCount int `json:"level_mismatch_error_count,omitempty"`
 	// Count of adjacency down due to area mismatch.
-	AreaMismatchErrorCount int32 `json:"area_mismatch_error_count,omitempty"`
+	AreaMismatchErrorCount int `json:"area_mismatch_error_count,omitempty"`
 	// Count of adjacency down due to system ID mismatch.
-	SystemIdErrorCount int32 `json:"system_id_error_count,omitempty"`
+	SystemIdErrorCount int `json:"system_id_error_count,omitempty"`
 	// Count of adjacency down due to subnet mismatch.
-	SubnetMismatchErrorCount int32 `json:"subnet_mismatch_error_count,omitempty"`
+	SubnetMismatchErrorCount int `json:"subnet_mismatch_error_count,omitempty"`
 	// Count of adjacency down due to hold time expiry.
-	HoldTimeoutErrorCount int32 `json:"hold_timeout_error_count,omitempty"`
+	HoldTimeoutErrorCount int `json:"hold_timeout_error_count,omitempty"`
 	// Count of adjacency down due to neighbor down.
-	NeighborDownErrorCount int32 `json:"neighbor_down_error_count,omitempty"`
+	NeighborDownErrorCount int `json:"neighbor_down_error_count,omitempty"`
 	// Count of adjacency down due to interface down.
-	IflDownErrorCount int32 `json:"ifl_down_error_count,omitempty"`
+	IflDownErrorCount int `json:"ifl_down_error_count,omitempty"`
 	// Count of adjacency down due to interaface config.
-	IflConfigErrorCount int32 `json:"ifl_config_error_count,omitempty"`
+	IflConfigErrorCount int `json:"ifl_config_error_count,omitempty"`
 	// Count of adjacency down due to reset from CLI.
-	AdminResetCount int32 `json:"admin_reset_count,omitempty"`
+	AdminResetCount int `json:"admin_reset_count,omitempty"`
 	// Count of adjacency down due to area config.
-	AreaConfigErrorCount int32 `json:"area_config_error_count,omitempty"`
+	AreaConfigErrorCount int `json:"area_config_error_count,omitempty"`
 	// Count of adjacency down due to other errors.
-	OtherErrorCount int32 `json:"other_error_count,omitempty"`
+	OtherErrorCount int `json:"other_error_count,omitempty"`
 	// Count of received hello messages.
-	ReceivedKeepAliveCount int32 `json:"received_keep_alive_count,omitempty"`
+	ReceivedKeepAliveCount int `json:"received_keep_alive_count,omitempty"`
 }

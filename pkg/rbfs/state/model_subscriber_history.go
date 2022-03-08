@@ -11,7 +11,7 @@ package state
 
 // Provides details about a terminated subscriber session.
 type SubscriberHistory struct {
-	SubscriberId int32 `json:"subscriber_id,omitempty"`
+	SubscriberId int `json:"subscriber_id,omitempty"`
 	// String subscriber_id representation for I-JSON compliance.
 	SubscriberIdStr string `json:"subscriber_id_str,omitempty"`
 	// The subscriber's user name.
@@ -22,9 +22,9 @@ type SubscriberHistory struct {
 	AccountingSessionId string `json:"accounting_session_id,omitempty"`
 	IfpName             string `json:"ifp_name,omitempty"`
 	// The inner VLAN (C-tag) associated with the subscriber.
-	InnerVlan int32 `json:"inner_vlan,omitempty"`
+	InnerVlan int `json:"inner_vlan,omitempty"`
 	// The outer VLAN (S-tag) associated with the subscriber.
-	OuterVlan int32 `json:"outer_vlan,omitempty"`
+	OuterVlan int `json:"outer_vlan,omitempty"`
 	// The client MAC address.
 	ClientMac  string                `json:"client_mac,omitempty"`
 	AccessType *SubscriberAccessType `json:"access_type,omitempty"`

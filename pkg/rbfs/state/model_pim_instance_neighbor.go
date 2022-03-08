@@ -25,11 +25,11 @@ type PimInstanceNeighbor struct {
 	// The primary IPv6 address of the PIM interface.
 	Ipv6Address string `json:"ipv6_address,omitempty"`
 	// The PIM interface generation ID.
-	GenerationId int32 `json:"generation_id,omitempty"`
+	GenerationId int `json:"generation_id,omitempty"`
 	// The priority of this interface in the designated router election.
-	DesignatedRouterPriority int32 `json:"designated_router_priority,omitempty"`
+	DesignatedRouterPriority int `json:"designated_router_priority,omitempty"`
 	// DR elections count
-	DesignatedRouterElections int32                        `json:"designated_router_elections,omitempty"`
+	DesignatedRouterElections int                          `json:"designated_router_elections,omitempty"`
 	DesignatedRouter          *PimDesignatedRouter         `json:"designated_router,omitempty"`
 	Timers                    *PimInstanceNeighborTimers   `json:"timers,omitempty"`
 	Neighbor                  *PimInstanceNeighborNeighbor `json:"neighbor,omitempty"`

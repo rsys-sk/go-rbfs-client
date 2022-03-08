@@ -12,15 +12,15 @@ package state
 // The BGP timers.
 type BgpInstanceTimers struct {
 	// Graceful restart (GR) stale timer value in seconds.
-	GrStaleTime int32 `json:"gr_stale_time,omitempty"`
+	GrStaleTime int `json:"gr_stale_time,omitempty"`
 	// Graceful restart (GR) purge timer value in seconds.
-	GrPurgeTime int32 `json:"gr_purge_time,omitempty"`
+	GrPurgeTime int `json:"gr_purge_time,omitempty"`
 	// Graceful restart (GR) restart timer value in seconds.
-	GrRestartTime int32 `json:"gr_restart_time,omitempty"`
+	GrRestartTime int `json:"gr_restart_time,omitempty"`
 	// BGP hold timer value in seconds. A BGP peer is considered down if the hold timer expires before receiving keep-alive messages from the BGP peer.  Every received hello message resets the hold timer.
-	HoldTime int32 `json:"hold_time,omitempty"`
+	HoldTime int `json:"hold_time,omitempty"`
 	// BGP keep-alive timer value methods in seconds. The router sends a hello message to a peer when the keep-alive timer expires.
-	KeepAliveTime int32 `json:"keep_alive_time,omitempty"`
+	KeepAliveTime int `json:"keep_alive_time,omitempty"`
 	// BGP connect timer value in seconds. An active BGP peering tries to establish the peering every bgp_connect_time seconds.
-	ConnectTime int32 `json:"connect_time,omitempty"`
+	ConnectTime int `json:"connect_time,omitempty"`
 }

@@ -13,7 +13,7 @@ package state
 type L2bsaServiceConfig struct {
 	IfpName string `json:"ifp_name,omitempty"`
 	// The ANP VLAN ID.
-	AnpVlan int32 `json:"anp_vlan,omitempty"`
+	AnpVlan int `json:"anp_vlan,omitempty"`
 	// The AAA profile name.
 	AaaProfileName string                 `json:"aaa_profile_name,omitempty"`
 	L2x            *L2xConfig             `json:"l2x,omitempty"`

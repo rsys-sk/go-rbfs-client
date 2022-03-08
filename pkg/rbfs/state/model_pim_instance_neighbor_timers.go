@@ -12,7 +12,7 @@ package state
 // Timer associated with this PIM neighbor.
 type PimInstanceNeighborTimers struct {
 	// The configured hold down interval in seconds.
-	HoldDownInterval int32 `json:"hold_down_interval,omitempty"`
+	HoldDownInterval int `json:"hold_down_interval,omitempty"`
 	// The hold down timer value in seconds.
-	HoldDownTimer int32 `json:"hold_down_timer,omitempty"`
+	HoldDownTimer int `json:"hold_down_timer,omitempty"`
 }

@@ -20,9 +20,9 @@ type OspfNeighborNeighbor struct {
 	// OSPF neighbor IPv4 address.
 	Ipv4Address string `json:"ipv4_address,omitempty"`
 	// Priority of the OSPF neighbor.
-	Priority int32 `json:"priority,omitempty"`
+	Priority int `json:"priority,omitempty"`
 	// Time the OSPF neighbor is in Up state.
 	UpTime time.Time `json:"up_time,omitempty"`
 	// OSPF dead interval of the neighbor.
-	DeadInterval int32 `json:"dead_interval,omitempty"`
+	DeadInterval int `json:"dead_interval,omitempty"`
 }

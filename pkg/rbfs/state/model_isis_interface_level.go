@@ -12,6 +12,6 @@ package state
 // Contains the metric and statistics of an ISIS level.
 type IsisInterfaceLevel struct {
 	// The interface metric value.
-	Metric     int32                         `json:"metric,omitempty"`
+	Metric     int                           `json:"metric,omitempty"`
 	Statistics *IsisInterfaceLevelStatistics `json:"statistics,omitempty"`
 }

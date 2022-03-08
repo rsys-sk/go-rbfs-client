@@ -11,7 +11,7 @@ package state
 
 type TracerouteHop struct {
 	// The hop sequence number.
-	Seq int32 `json:"seq,omitempty"`
+	Seq int `json:"seq,omitempty"`
 	// The hop IPv4 or IPv6 addresses.
 	Hop string `json:"hop,omitempty"`
 	// Round-trip time (RTT) in seconds of the first packet sent by traceroute.

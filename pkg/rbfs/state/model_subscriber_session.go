@@ -21,16 +21,16 @@ type SubscriberSession struct {
 	LastStateTransition time.Time `json:"last_state_transition,omitempty"`
 	// Reason why the subscriber session got terminated.
 	SubscriberTerminationReason string `json:"subscriber_termination_reason,omitempty"`
-	SubscriberId                int32  `json:"subscriber_id,omitempty"`
+	SubscriberId                int    `json:"subscriber_id,omitempty"`
 	// String subscriber_id representation for I-JSON compliance.
 	SubscriberIdStr string `json:"subscriber_id_str,omitempty"`
 	IfpName         string `json:"ifp_name,omitempty"`
 	// The MAC address of the physical interface  the subscriber is connected to.
 	IfpMac string `json:"ifp_mac,omitempty"`
 	// The inner VLAN (C-tag) associated with the subscriber.
-	InnerVlan int32 `json:"inner_vlan,omitempty"`
+	InnerVlan int `json:"inner_vlan,omitempty"`
 	// The outer VLAN (S-tag) associated with the subscriber.
-	OuterVlan int32 `json:"outer_vlan,omitempty"`
+	OuterVlan int `json:"outer_vlan,omitempty"`
 	// The client MAC address.
 	ClientMac string `json:"client_mac,omitempty"`
 	// The subscriber's username.
@@ -45,7 +45,7 @@ type SubscriberSession struct {
 	Ipv4       *SubscriberSessionIpv4 `json:"ipv4,omitempty"`
 	Ipv6       *SubscriberSessionIpv6 `json:"ipv6,omitempty"`
 	// The MTU level assigned to the subscriber.
-	L3Mtu int32 `json:"l3_mtu,omitempty"`
+	L3Mtu int `json:"l3_mtu,omitempty"`
 	// The AAA profile name.
 	AaaProfileName string `json:"aaa_profile_name,omitempty"`
 	// The access profile name.

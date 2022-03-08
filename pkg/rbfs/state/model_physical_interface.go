@@ -29,7 +29,7 @@ type PhysicalInterface struct {
 	// The duplex mode.
 	DuplexMode string `json:"duplex_mode,omitempty"`
 	// The configured maximum transfer unit (MTU) size in bytes.
-	MtuSize int32 `json:"mtu_size,omitempty"`
+	MtuSize int `json:"mtu_size,omitempty"`
 	// The operational interface state.
 	OperationalState string `json:"operational_state,omitempty"`
 	// The administrative interface state.

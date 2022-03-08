@@ -36,10 +36,10 @@ Pings the given destination from the specified source IP or source IFL with the 
      * @param "SourceIp" (optional.String) -  Source IPv4 or IPv6 address
      * @param "SourceIfl" (optional.String) -  Source interface name.
      * @param "InstanceName" (optional.String) -  Routing instance name
-     * @param "Count" (optional.Int32) -  Number of pings.
+     * @param "Count" (optional.Int) -  Number of pings.
      * @param "Interval" (optional.Float32) -  Ping interval in seconds.
-     * @param "Size" (optional.Int32) -  Packet payload size in bytes.
-     * @param "Ttl" (optional.Int32) -  IP TTL value
+     * @param "Size" (optional.Int) -  Packet payload size in bytes.
+     * @param "Ttl" (optional.Int) -  IP TTL value
 @return string
 */
 
@@ -50,10 +50,10 @@ type StreamsApiStreamPingOpts struct {
 	SourceIp        optional.String
 	SourceIfl       optional.String
 	InstanceName    optional.String
-	Count           optional.Int32
+	Count           optional.Int
 	Interval        optional.Float32
-	Size            optional.Int32
-	Ttl             optional.Int32
+	Size            optional.Int
+	Ttl             optional.Int
 }
 
 func (a *StreamsApiService) StreamPing(ctx context.Context, localVarOptionals *StreamsApiStreamPingOpts) (string, *http.Response, error) {
@@ -175,8 +175,8 @@ Traces the route to the given destination from the specified source IP or source
      * @param "SourceIp" (optional.String) -  Source IPv4 or IPv6 address
      * @param "SourceIfl" (optional.String) -  Source interface name.
      * @param "InstanceName" (optional.String) -  Routing instance name
-     * @param "MaxHops" (optional.Int32) -  Maximum number of acceptable hops to reach the given destination.
-     * @param "Size" (optional.Int32) -  Packet payload size in bytes.
+     * @param "MaxHops" (optional.Int) -  Maximum number of acceptable hops to reach the given destination.
+     * @param "Size" (optional.Int) -  Packet payload size in bytes.
      * @param "Interval" (optional.Float32) -  Ping interval in seconds.
 @return string
 */
@@ -188,8 +188,8 @@ type StreamsApiStreamTracerouteOpts struct {
 	SourceIp        optional.String
 	SourceIfl       optional.String
 	InstanceName    optional.String
-	MaxHops         optional.Int32
-	Size            optional.Int32
+	MaxHops         optional.Int
+	Size            optional.Int
 	Interval        optional.Float32
 }
 

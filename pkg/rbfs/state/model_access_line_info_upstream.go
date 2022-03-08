@@ -12,31 +12,31 @@ package state
 // Upstream access line attributes.
 type AccessLineInfoUpstream struct {
 	// Actual upstream data rate.
-	ActualRate int32 `json:"actual_rate,omitempty"`
+	ActualRate int `json:"actual_rate,omitempty"`
 	// Minimum upstream data rate.
-	MinRate int32 `json:"min_rate,omitempty"`
+	MinRate int `json:"min_rate,omitempty"`
 	// Attainable upstream data rate.
-	AttainableRate int32 `json:"attainable_rate,omitempty"`
+	AttainableRate int `json:"attainable_rate,omitempty"`
 	// Maximum upstream data rate.
-	MaxRate int32 `json:"max_rate,omitempty"`
+	MaxRate int `json:"max_rate,omitempty"`
 	// Minimum upstream data rate in low power state.
-	MinRateLowPower int32 `json:"min_rate_low_power,omitempty"`
+	MinRateLowPower int `json:"min_rate_low_power,omitempty"`
 	// Maximum upstream interleaving delay.
-	MaxInterleaveDelay int32 `json:"max_interleave_delay,omitempty"`
+	MaxInterleaveDelay int `json:"max_interleave_delay,omitempty"`
 	// Actual upstream interleaving delay.
-	ActualInterleaveDelay int32 `json:"actual_interleave_delay,omitempty"`
+	ActualInterleaveDelay int `json:"actual_interleave_delay,omitempty"`
 	// Expected Throughput (ETR).
-	ExpectedThroughput int32 `json:"expected_throughput,omitempty"`
+	ExpectedThroughput int `json:"expected_throughput,omitempty"`
 	// Attainable Expected Throughput (ATTETR).
-	AttainableExpectedThroughput int32 `json:"attainable_expected_throughput,omitempty"`
+	AttainableExpectedThroughput int `json:"attainable_expected_throughput,omitempty"`
 	// Gamma Data Rate (GDR).
-	GammaDataRate int32 `json:"gamma_data_rate,omitempty"`
+	GammaDataRate int `json:"gamma_data_rate,omitempty"`
 	// Attainable Gamma Data Rate (ATTGDR).
-	AttainableGammaDataRate int32 `json:"attainable_gamma_data_rate,omitempty"`
+	AttainableGammaDataRate int `json:"attainable_gamma_data_rate,omitempty"`
 	// ONT/ONU upstream maximum data rate.
-	OntOnuMaxRate int32 `json:"ont_onu_max_rate,omitempty"`
+	OntOnuMaxRate int `json:"ont_onu_max_rate,omitempty"`
 	// ONT/ONU upstream assured data rate.
-	OntOnuAssuredRate int32 `json:"ont_onu_assured_rate,omitempty"`
+	OntOnuAssuredRate int `json:"ont_onu_assured_rate,omitempty"`
 	// PON tree upstream maximum data rate.
-	PonMaxRate int32 `json:"pon_max_rate,omitempty"`
+	PonMaxRate int `json:"pon_max_rate,omitempty"`
 }

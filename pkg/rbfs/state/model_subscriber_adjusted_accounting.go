@@ -14,67 +14,67 @@ type SubscriberAdjustedAccounting struct {
 	// A flag to indicate whether accounting is in progress (true) or  the final counter values have been read from the hardware (false).
 	AccountingActive bool `json:"accounting_active,omitempty"`
 	// Number of packets received in this session.
-	SessionIngressPackets int32 `json:"session_ingress_packets,omitempty"`
+	SessionIngressPackets int `json:"session_ingress_packets,omitempty"`
 	// Number of bytes received in this session.
-	SessionIngressBytes int32 `json:"session_ingress_bytes,omitempty"`
+	SessionIngressBytes int `json:"session_ingress_bytes,omitempty"`
 	// Number of packets sent in this session.
-	SessionEgressPackets int32 `json:"session_egress_packets,omitempty"`
+	SessionEgressPackets int `json:"session_egress_packets,omitempty"`
 	// Number of bytes sent in this session.
-	SessionEgressBytes int32 `json:"session_egress_bytes,omitempty"`
+	SessionEgressBytes int `json:"session_egress_bytes,omitempty"`
 	// Number of packets received on the subscriber interface.
-	IflIngressPackets int32 `json:"ifl_ingress_packets,omitempty"`
+	IflIngressPackets int `json:"ifl_ingress_packets,omitempty"`
 	// Number of bytes received on the subscriber interface.
-	IflIngressBytes int32 `json:"ifl_ingress_bytes,omitempty"`
+	IflIngressBytes int `json:"ifl_ingress_bytes,omitempty"`
 	// Number of packets sent over  the subscriber interface.
-	IflEgressPackets int32 `json:"ifl_egress_packets,omitempty"`
+	IflEgressPackets int `json:"ifl_egress_packets,omitempty"`
 	// Number of bytes sent over  the subscriber interface.
-	IflEgressBytes int32 `json:"ifl_egress_bytes,omitempty"`
+	IflEgressBytes int `json:"ifl_egress_bytes,omitempty"`
 	// Number of sent packets in class 0.
-	Class0EgressPackets int32 `json:"class_0_egress_packets,omitempty"`
+	Class0EgressPackets int `json:"class_0_egress_packets,omitempty"`
 	// Number of sent bytes in class 0.
-	Class0EgressBytes int32 `json:"class_0_egress_bytes,omitempty"`
+	Class0EgressBytes int `json:"class_0_egress_bytes,omitempty"`
 	// Number of sent packets in class 1.
-	Class1EgressPackets int32 `json:"class_1_egress_packets,omitempty"`
+	Class1EgressPackets int `json:"class_1_egress_packets,omitempty"`
 	// Number of sent bytes in class 1.
-	Class1EgressBytes int32 `json:"class_1_egress_bytes,omitempty"`
+	Class1EgressBytes int `json:"class_1_egress_bytes,omitempty"`
 	// Number of sent packets in class 2.
-	Class2EgressPackets int32 `json:"class_2_egress_packets,omitempty"`
+	Class2EgressPackets int `json:"class_2_egress_packets,omitempty"`
 	// Number of sent bytes in class 2.
-	Class2EgressBytes int32 `json:"class_2_egress_bytes,omitempty"`
+	Class2EgressBytes int `json:"class_2_egress_bytes,omitempty"`
 	// Number of sent packets in class 3.
-	Class3EgressPackets int32 `json:"class_3_egress_packets,omitempty"`
+	Class3EgressPackets int `json:"class_3_egress_packets,omitempty"`
 	// Number of sent bytes in class 3.
-	Class3EgressBytes int32 `json:"class_3_egress_bytes,omitempty"`
+	Class3EgressBytes int `json:"class_3_egress_bytes,omitempty"`
 	// Number of sent packets in class 4.
-	Class4EgressPackets int32 `json:"class_4_egress_packets,omitempty"`
+	Class4EgressPackets int `json:"class_4_egress_packets,omitempty"`
 	// Number of sent bytes in class 4.
-	Class4EgressBytes int32 `json:"class_4_egress_bytes,omitempty"`
+	Class4EgressBytes int `json:"class_4_egress_bytes,omitempty"`
 	// Number of sent packets in class 5.
-	Class5EgressPackets int32 `json:"class_5_egress_packets,omitempty"`
+	Class5EgressPackets int `json:"class_5_egress_packets,omitempty"`
 	// Number of sent bytes in class 5.
-	Class5EgressBytes int32 `json:"class_5_egress_bytes,omitempty"`
+	Class5EgressBytes int `json:"class_5_egress_bytes,omitempty"`
 	// Number of sent packets in class 6.
-	Class6EgressPackets int32 `json:"class_6_egress_packets,omitempty"`
+	Class6EgressPackets int `json:"class_6_egress_packets,omitempty"`
 	// Number of sent bytes in class 6.
-	Class6EgressBytes int32 `json:"class_6_egress_bytes,omitempty"`
+	Class6EgressBytes int `json:"class_6_egress_bytes,omitempty"`
 	// Number of sent packets in class 7.
-	Class7EgressPackets int32 `json:"class_7_egress_packets,omitempty"`
+	Class7EgressPackets int `json:"class_7_egress_packets,omitempty"`
 	// Number of sent bytes in class 7.
-	Class7EgressBytes int32 `json:"class_7_egress_bytes,omitempty"`
+	Class7EgressBytes int `json:"class_7_egress_bytes,omitempty"`
 	// Number of received packets in policer level 1.
-	PolicerL1IngressPackets int32 `json:"policer_l1_ingress_packets,omitempty"`
+	PolicerL1IngressPackets int `json:"policer_l1_ingress_packets,omitempty"`
 	// Number of received bytes in policer level 1.
-	PolicerL1IngressBytes int32 `json:"policer_l1_ingress_bytes,omitempty"`
+	PolicerL1IngressBytes int `json:"policer_l1_ingress_bytes,omitempty"`
 	// Number of received packets in policer level 2.
-	PolicerL2IngressPackets int32 `json:"policer_l2_ingress_packets,omitempty"`
+	PolicerL2IngressPackets int `json:"policer_l2_ingress_packets,omitempty"`
 	// Number of received bytes in policer level 2.
-	PolicerL2IngressBytes int32 `json:"policer_l2_ingress_bytes,omitempty"`
+	PolicerL2IngressBytes int `json:"policer_l2_ingress_bytes,omitempty"`
 	// Number of received packets in policer level 3.
-	PolicerL3IngressPackets int32 `json:"policer_l3_ingress_packets,omitempty"`
+	PolicerL3IngressPackets int `json:"policer_l3_ingress_packets,omitempty"`
 	// Number of received bytes in policer level 3.
-	PolicerL3IngressBytes int32 `json:"policer_l3_ingress_bytes,omitempty"`
+	PolicerL3IngressBytes int `json:"policer_l3_ingress_bytes,omitempty"`
 	// Number of received packets in policer level 4.
-	PolicerL4IngressPackets int32 `json:"policer_l4_ingress_packets,omitempty"`
+	PolicerL4IngressPackets int `json:"policer_l4_ingress_packets,omitempty"`
 	// Number of received bytes in policer level 4.
-	PolicerL4IngressBytes int32 `json:"policer_l4_ingress_bytes,omitempty"`
+	PolicerL4IngressBytes int `json:"policer_l4_ingress_bytes,omitempty"`
 }

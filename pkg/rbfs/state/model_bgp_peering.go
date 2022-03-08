@@ -31,7 +31,7 @@ type BgpPeering struct {
 	// The local IPv6 address.
 	Ipv6Address string `json:"ipv6_address,omitempty"`
 	// The peering source port.
-	SourcePort int32 `json:"source_port,omitempty"`
+	SourcePort int `json:"source_port,omitempty"`
 	// The local router ID
 	RouterId string `json:"router_id,omitempty"`
 	// The local BGP host name.

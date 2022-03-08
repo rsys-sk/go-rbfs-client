@@ -12,11 +12,11 @@ package state
 // Counters for transmitted data.
 type LogicalInterfaceIflCountersTx struct {
 	// Total number of packets sent.
-	PacketsSent int32 `json:"packets_sent,omitempty"`
+	PacketsSent int `json:"packets_sent,omitempty"`
 	// Total number packets dropped.
-	PacketsDropped int32 `json:"packets_dropped,omitempty"`
+	PacketsDropped int `json:"packets_dropped,omitempty"`
 	// Total number of bytes sent.
-	BytesSent int32 `json:"bytes_sent,omitempty"`
+	BytesSent int `json:"bytes_sent,omitempty"`
 	// Total number bytes dropped.
-	BytesDropped int32 `json:"bytes_dropped,omitempty"`
+	BytesDropped int `json:"bytes_dropped,omitempty"`
 }

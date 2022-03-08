@@ -11,9 +11,9 @@ package state
 
 type IsisInstanceInterfacesInterfaces struct {
 	// Number of active level 1 ISIS interfaces.
-	Level1ActiveCount int32 `json:"level_1_active_count,omitempty"`
+	Level1ActiveCount int `json:"level_1_active_count,omitempty"`
 	// Number of active level 2 ISIS interfaces.
-	Level2ActiveCount int32 `json:"level_2_active_count,omitempty"`
+	Level2ActiveCount int `json:"level_2_active_count,omitempty"`
 	// List of ISIS interfaces.
 	Interfaces []IsisInterface `json:"interfaces,omitempty"`
 }

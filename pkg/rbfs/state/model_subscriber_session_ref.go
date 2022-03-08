@@ -11,7 +11,7 @@ package state
 
 // A reference to an active subscriber session.
 type SubscriberSessionRef struct {
-	SubscriberId int32 `json:"subscriber_id,omitempty"`
+	SubscriberId int `json:"subscriber_id,omitempty"`
 	// String subscriber_id representation for I-JSON compliance.
 	SubscriberIdStr    string `json:"subscriber_id_str,omitempty"`
 	SubscriberUserName string `json:"subscriber_user_name,omitempty"`
@@ -19,8 +19,8 @@ type SubscriberSessionRef struct {
 	SubscriberState string                `json:"subscriber_state,omitempty"`
 	AccessType      *SubscriberAccessType `json:"access_type,omitempty"`
 	IfpName         string                `json:"ifp_name,omitempty"`
-	InnerVlan       int32                 `json:"inner_vlan,omitempty"`
-	OuterVlan       int32                 `json:"outer_vlan,omitempty"`
+	InnerVlan       int                   `json:"inner_vlan,omitempty"`
+	OuterVlan       int                   `json:"outer_vlan,omitempty"`
 	// Client MAC address.
 	ClientMac           string `json:"client_mac,omitempty"`
 	AccountingSessionId string `json:"accounting_session_id,omitempty"`

@@ -9,12 +9,17 @@
  */
 package state
 
-// Segment routing settings.
-type AllOfIsisInstanceInterfacesSegmentRouting struct {
-	// SRGB start value.
-	SrgbBase int `json:"srgb_base,omitempty"`
-	// SRGB length.
-	SrgbRange int `json:"srgb_range,omitempty"`
-	// SR indices.
-	SrIds []interface{} `json:"sr_ids,omitempty"`
+// IS-IS neighbors grouped by instance.
+type IsisNeighbors struct {
+	// The IS-IS instance name.
+	InstanceName string `json:"instance_name,omitempty"`
+	// The IS-IS host name.
+	HostName string `json:"host_name,omitempty"`
+	// The IS-IS system ID.
+	SystemId string `json:"system_id,omitempty"`
+	// IS-IS areas seen by this switch.
+	Areas []string `json:"areas,omitempty"`
+	// Status of the IS-IS overload flag. The value is true if the overload flag is set and the switch runs out of resources and might not compute the LSP in time.
+	Overload  bool           `json:"overload,omitempty"`
+	Neighbors []IsisNeighbor `json:"neighbors,omitempty"`
 }

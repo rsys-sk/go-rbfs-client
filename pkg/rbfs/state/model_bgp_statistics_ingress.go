@@ -11,13 +11,13 @@ package state
 
 type BgpStatisticsIngress struct {
 	// Number of received open messages.
-	OpenCount int32 `json:"open_count,omitempty"`
+	OpenCount int `json:"open_count,omitempty"`
 	// Number of received update messages.
-	UpdateCount int32 `json:"update_count,omitempty"`
+	UpdateCount int `json:"update_count,omitempty"`
 	// Number of received keep-alive messages.
-	KeepAliveCount int32 `json:"keep_alive_count,omitempty"`
+	KeepAliveCount int `json:"keep_alive_count,omitempty"`
 	// Number of received notify messages.
-	NotifyCount int32 `json:"notify_count,omitempty"`
+	NotifyCount int `json:"notify_count,omitempty"`
 	// Number of received route-refresh messages.
-	RouteRefreshCount int32 `json:"route_refresh_count,omitempty"`
+	RouteRefreshCount int `json:"route_refresh_count,omitempty"`
 }

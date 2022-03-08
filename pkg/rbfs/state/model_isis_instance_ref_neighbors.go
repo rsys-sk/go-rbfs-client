@@ -12,11 +12,11 @@ package state
 // Summary of IS-IS neighbors.
 type IsisInstanceRefNeighbors struct {
 	// Number of UP neighbors.
-	UpCount int32 `json:"up_count,omitempty"`
+	UpCount int `json:"up_count,omitempty"`
 	// Neighbor flap count.
-	FlapCount int32 `json:"flap_count,omitempty"`
+	FlapCount int `json:"flap_count,omitempty"`
 	// Number of L1 neighbors.
-	Level1Count int32 `json:"level_1_count,omitempty"`
+	Level1Count int `json:"level_1_count,omitempty"`
 	// Number of L2 neighbors.
-	Level2Count int32 `json:"level_2_count,omitempty"`
+	Level2Count int `json:"level_2_count,omitempty"`
 }

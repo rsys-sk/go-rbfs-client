@@ -16,7 +16,7 @@ type PimInstanceInterfaceCapabilities struct {
 	// A flag that indicates whether the designated router (DR) election uses the DR priority.
 	UseDesignatedRouterPriority bool `json:"use_designated_router_priority,omitempty"`
 	// The effective prune delay interval in milliseconds.
-	EffectivePruneDelayInterval int32 `json:"effective_prune_delay_interval,omitempty"`
+	EffectivePruneDelayInterval int `json:"effective_prune_delay_interval,omitempty"`
 	// The effective override interval in milliseconds.
-	EffectiveOverrideInterval int32 `json:"effective_override_interval,omitempty"`
+	EffectiveOverrideInterval int `json:"effective_override_interval,omitempty"`
 }

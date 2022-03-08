@@ -9,12 +9,10 @@
  */
 package state
 
-// Segment routing settings.
-type AllOfIsisInstanceInterfacesSegmentRouting struct {
-	// SRGB start value.
-	SrgbBase int `json:"srgb_base,omitempty"`
-	// SRGB length.
-	SrgbRange int `json:"srgb_range,omitempty"`
-	// SR indices.
-	SrIds []interface{} `json:"sr_ids,omitempty"`
+// A10NSP endpoint configuration batch instructions.
+type A10nspConfigBatch struct {
+	// A10NSP L2X endpoints to be removed.
+	Remove []A10nspConfig `json:"remove,omitempty"`
+	// A10NSP L2X endpoints to be stored.
+	Store []A10nspConfig `json:"store,omitempty"`
 }

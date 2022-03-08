@@ -9,12 +9,22 @@
  */
 package state
 
-// Segment routing settings.
-type AllOfIsisInstanceInterfacesSegmentRouting struct {
-	// SRGB start value.
-	SrgbBase int `json:"srgb_base,omitempty"`
-	// SRGB length.
-	SrgbRange int `json:"srgb_range,omitempty"`
-	// SR indices.
-	SrIds []interface{} `json:"sr_ids,omitempty"`
+// Next hop details.
+type McNextHops struct {
+	// Logical exit interface.
+	ExitIfl string `json:"exit_ifl,omitempty"`
+	// MAC addess of the next hop.
+	NexthopMacAddress string `json:"nexthop_mac_address,omitempty"`
+	// Type of the next hop.
+	NexthopType string `json:"nexthop_type,omitempty"`
+	// MLPS label operation.
+	NexthopAction string `json:"nexthop_action,omitempty"`
+	// MPLS labels for the next hop.
+	MplsLabelStack []string `json:"mpls_label_stack,omitempty"`
+	// Routing instance in which the NH is resolved.
+	LookupInstance string `json:"lookup_instance,omitempty"`
+	// Address family of the next hop.
+	LookupAfi string `json:"lookup_afi,omitempty"`
+	// Sub-address family of the next hop.
+	LookupSafi string `json:"lookup_safi,omitempty"`
 }

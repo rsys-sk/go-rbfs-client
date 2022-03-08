@@ -10,8 +10,8 @@
 package state
 
 type IsisInterfaceLevelStatisticsIngress struct {
-	LspCount    int32 `json:"lsp_count,omitempty"`
-	CsnpCount   int32 `json:"csnp_count,omitempty"`
-	PsnpCount   int32 `json:"psnp_count,omitempty"`
-	P2pIihCount int32 `json:"p2p_iih_count,omitempty"`
+	LspCount    int `json:"lsp_count,omitempty"`
+	CsnpCount   int `json:"csnp_count,omitempty"`
+	PsnpCount   int `json:"psnp_count,omitempty"`
+	P2pIihCount int `json:"p2p_iih_count,omitempty"`
 }

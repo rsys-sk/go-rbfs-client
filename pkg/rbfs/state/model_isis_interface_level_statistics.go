@@ -11,17 +11,17 @@ package state
 
 type IsisInterfaceLevelStatistics struct {
 	// Number of IS-IS neighbors.
-	NeighborCount       int32                                `json:"neighbor_count,omitempty"`
-	LspSuccessCount     int32                                `json:"lsp_success_count,omitempty"`
-	LspFailcount        int32                                `json:"lsp_fail:count,omitempty"`
-	LspPurgeCount       int32                                `json:"lsp_purge_count,omitempty"`
-	CsnpSuccessCount    int32                                `json:"csnp_success_count,omitempty"`
-	CsnpFailCount       int32                                `json:"csnp_fail_count,omitempty"`
-	PsnpSuccessCount    int32                                `json:"psnp_success_count,omitempty"`
-	PsnpFailCount       int32                                `json:"psnp_fail_count,omitempty"`
-	CsnpAuthFailCount   int32                                `json:"csnp_auth_fail_count,omitempty"`
-	PsnpAuthFailCount   int32                                `json:"psnp_auth_fail_count,omitempty"`
-	P2pIihAuthFailCount int32                                `json:"p2p_iih_auth_fail_count,omitempty"`
+	NeighborCount       int                                  `json:"neighbor_count,omitempty"`
+	LspSuccessCount     int                                  `json:"lsp_success_count,omitempty"`
+	LspFailcount        int                                  `json:"lsp_fail:count,omitempty"`
+	LspPurgeCount       int                                  `json:"lsp_purge_count,omitempty"`
+	CsnpSuccessCount    int                                  `json:"csnp_success_count,omitempty"`
+	CsnpFailCount       int                                  `json:"csnp_fail_count,omitempty"`
+	PsnpSuccessCount    int                                  `json:"psnp_success_count,omitempty"`
+	PsnpFailCount       int                                  `json:"psnp_fail_count,omitempty"`
+	CsnpAuthFailCount   int                                  `json:"csnp_auth_fail_count,omitempty"`
+	PsnpAuthFailCount   int                                  `json:"psnp_auth_fail_count,omitempty"`
+	P2pIihAuthFailCount int                                  `json:"p2p_iih_auth_fail_count,omitempty"`
 	Ingress             *IsisInterfaceLevelStatisticsIngress `json:"ingress,omitempty"`
 	Egress              *IsisInterfaceLevelStatisticsIngress `json:"egress,omitempty"`
 }

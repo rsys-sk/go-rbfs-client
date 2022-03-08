@@ -16,7 +16,7 @@ type L2xConfig struct {
 	// The routing instance of the nexthop address.
 	IngressLookupInstance string `json:"ingress_lookup_instance,omitempty"`
 	// The L2X service MPLS label for ingress traffic (sent label).
-	IngressServiceLabel int32 `json:"ingress_service_label,omitempty"`
+	IngressServiceLabel int `json:"ingress_service_label,omitempty"`
 	// The L2X service MPLS label for egress traffic (receive label).
-	EgressServiceLabel int32 `json:"egress_service_label,omitempty"`
+	EgressServiceLabel int `json:"egress_service_label,omitempty"`
 }

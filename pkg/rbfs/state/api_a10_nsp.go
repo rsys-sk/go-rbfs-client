@@ -33,7 +33,7 @@ Shows the configuration of the L2X endpoint configured on the specified LAG inte
  * @param sVlan The ANP VLAN ID.
 @return []A10nspConfig
 */
-func (a *A10NSPApiService) GetA10NSPL2XEndpoint(ctx context.Context, lagInterfaceName string, sVlan int32) ([]A10nspConfig, *http.Response, error) {
+func (a *A10NSPApiService) GetA10NSPL2XEndpoint(ctx context.Context, lagInterfaceName string, sVlan int) ([]A10nspConfig, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -284,6 +284,74 @@ func (a *A10NSPApiService) GetA10NSPL2XEndpointsOfLAGInterface(ctx context.Conte
 }
 
 /*
+A10NSPApiService Runs a A10NSP L2X configuration batch job.
+Adds and removes A10NSP L2X endpoints as specified in the batch job.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param body
+
+*/
+func (a *A10NSPApiService) ProcessA10NSPL2XBatch(ctx context.Context, body A10nspConfigBatch) (*http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/a10nsp/l2x/batch"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	// body params
+	localVarPostBody = &body
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		return localVarHttpResponse, newErr
+	}
+
+	return localVarHttpResponse, nil
+}
+
+/*
 A10NSPApiService Removes the L2X endpoint.
 Removes the L2X endpoints with the specified S-VLAN from the specified LAG interface.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -291,7 +359,7 @@ Removes the L2X endpoints with the specified S-VLAN from the specified LAG inter
  * @param sVlan The ANP VLAN ID.
 
 */
-func (a *A10NSPApiService) RemoveA10NSPL2XEndpoint(ctx context.Context, lagInterfaceName string, sVlan int32) (*http.Response, error) {
+func (a *A10NSPApiService) RemoveA10NSPL2XEndpoint(ctx context.Context, lagInterfaceName string, sVlan int) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -361,7 +429,7 @@ Stores a L2X endpoints by either  creating a new L2X endpoint on the specified L
  * @param sVlan The ANP VLAN ID.
 
 */
-func (a *A10NSPApiService) StoreA10NSPL2XEndpoint(ctx context.Context, body A10nspConfig, lagInterfaceName string, sVlan int32) (*http.Response, error) {
+func (a *A10NSPApiService) StoreA10NSPL2XEndpoint(ctx context.Context, body A10nspConfig, lagInterfaceName string, sVlan int) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Put")
 		localVarPostBody   interface{}

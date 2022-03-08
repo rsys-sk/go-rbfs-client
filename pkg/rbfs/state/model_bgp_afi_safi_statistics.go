@@ -17,7 +17,7 @@ type BgpAfiSafiStatistics struct {
 	// The subaddress family identifer.
 	SafiName string `json:"safi_name,omitempty"`
 	// The number of sent prefixes.
-	PrefixesSent int32 `json:"prefixes_sent,omitempty"`
+	PrefixesSent int `json:"prefixes_sent,omitempty"`
 	// The number of received prefixes.
-	PrefixesReceived int32 `json:"prefixes_received,omitempty"`
+	PrefixesReceived int `json:"prefixes_received,omitempty"`
 }

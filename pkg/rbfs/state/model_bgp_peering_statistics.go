@@ -12,7 +12,7 @@ package state
 // BGP peering summary statistics including received / sent prefixes per AFI/SAFI
 type BgpPeeringStatistics struct {
 	// Number of session flaps.
-	BgpSessionFlaps int32          `json:"bgp_session_flaps,omitempty"`
+	BgpSessionFlaps int            `json:"bgp_session_flaps,omitempty"`
 	BgpSession      *BgpStatistics `json:"bgp_session,omitempty"`
 	Total           *BgpStatistics `json:"total,omitempty"`
 	// Number of received and sent prefixed grouped by AFI/SAFI.
