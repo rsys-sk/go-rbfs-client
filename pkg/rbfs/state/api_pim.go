@@ -115,15 +115,15 @@ func (a *PIMApiService) GetPIMInstance(ctx context.Context, instanceName string)
 PIMApiService Lists all PIM instances.
 Lists all routing instances with PIM enabled.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return PimInstanceRef
+@return []PimInstanceRef
 */
-func (a *PIMApiService) GetPIMInstances(ctx context.Context) (PimInstanceRef, *http.Response, error) {
+func (a *PIMApiService) GetPIMInstances(ctx context.Context) ([]PimInstanceRef, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue PimInstanceRef
+		localVarReturnValue []PimInstanceRef
 	)
 
 	// create path and map variables
@@ -180,7 +180,7 @@ func (a *PIMApiService) GetPIMInstances(ctx context.Context) (PimInstanceRef, *h
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v PimInstanceRef
+			var v []PimInstanceRef
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -287,15 +287,15 @@ func (a *PIMApiService) GetPIMInterface(ctx context.Context, instanceName string
 PIMApiService Lists all PIM interfaces.
 Lists all logical interfaces with PIM enabled grouped by routing instances.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return PimInterfaces
+@return []PimInterfaces
 */
-func (a *PIMApiService) GetPIMInterfaces(ctx context.Context) (PimInterfaces, *http.Response, error) {
+func (a *PIMApiService) GetPIMInterfaces(ctx context.Context) ([]PimInterfaces, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue PimInterfaces
+		localVarReturnValue []PimInterfaces
 	)
 
 	// create path and map variables
@@ -352,7 +352,7 @@ func (a *PIMApiService) GetPIMInterfaces(ctx context.Context) (PimInterfaces, *h
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v PimInterfaces
+			var v []PimInterfaces
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -459,15 +459,15 @@ func (a *PIMApiService) GetPIMNeighbor(ctx context.Context, instanceName string,
 PIMApiService Lists all PIM neighbors.
 Lists all PIM neighbors grouped by routing instances.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return PimNeighbors
+@return []PimNeighbors
 */
-func (a *PIMApiService) GetPIMNeighbors(ctx context.Context) (PimNeighbors, *http.Response, error) {
+func (a *PIMApiService) GetPIMNeighbors(ctx context.Context) ([]PimNeighbors, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue PimNeighbors
+		localVarReturnValue []PimNeighbors
 	)
 
 	// create path and map variables
@@ -524,7 +524,7 @@ func (a *PIMApiService) GetPIMNeighbors(ctx context.Context) (PimNeighbors, *htt
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v PimNeighbors
+			var v []PimNeighbors
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

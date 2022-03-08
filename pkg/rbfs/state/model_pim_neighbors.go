@@ -9,7 +9,7 @@
  */
 package state
 
-// PIM Interfaces grouped by instances.
+// PIM neighbors grouped by instances.
 type PimNeighbors struct {
 	InstanceName string                `json:"instance_name,omitempty"`
 	Neighbors    []PimInstanceNeighbor `json:"neighbors,omitempty"`
