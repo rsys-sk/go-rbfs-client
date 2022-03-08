@@ -54,7 +54,7 @@ func (s *defaultService) Run(ctx commons.RbfsContext, ping *Ping) (state.PingSta
 		DestinationA:    commons.OptionalString(ping.destinationA),
 		SourceIp:        commons.OptionalIP(ping.sourceIP),
 		SourceIfl:       commons.OptionalString(ping.sourceInterface),
-		Count:           commons.OptionalInt32(ping.count),
+		Count:           commons.OptionalInt(ping.count),
 		Interval:        commons.OptionalFloat32(interval),
 		InstanceName:    commons.OptionalString(ping.instanceName),
 	}

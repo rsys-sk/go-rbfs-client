@@ -20,7 +20,7 @@ type (
 		sourceInterface string
 		sourceIP        net.IP
 		instanceName    string
-		count           int32
+		count           int
 		interval        time.Duration
 	}
 
@@ -109,7 +109,7 @@ func SourceInterface(name string) Option {
 }
 
 // Count sets the number of pings to be sent.
-func Count(count int32) Option {
+func Count(count int) Option {
 	return func(p *Ping) error {
 		if count <= 0 {
 			return fmt.Errorf("count value must be greater than 0")
@@ -159,7 +159,7 @@ func (p *Ping) SourceIP() net.IP {
 	return p.sourceIP
 }
 
-func (p *Ping) Count() int32 {
+func (p *Ping) Count() int {
 	return p.count
 }
 

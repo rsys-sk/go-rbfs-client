@@ -28,7 +28,7 @@ func expectedPing(hostname string) *state.ActionsApiPingOpts {
 		DestinationA:    commons.OptionalString(hostname),
 		SourceIp:        commons.OptionalIP(nil),
 		SourceIfl:       commons.OptionalString(""),
-		Count:           commons.OptionalInt32(5),
+		Count:           commons.OptionalInt(5),
 		Interval:        commons.OptionalFloat32(1.0),
 		InstanceName:    commons.OptionalString("default"),
 	}
