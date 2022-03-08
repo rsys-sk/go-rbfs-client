@@ -9,16 +9,17 @@
  */
 package state
 
-// Overview of IS-IS neighbors.
+// IS-IS neighbors grouped by instance.
 type IsisInstanceNeighbors struct {
-	// Total number of UP neighbors.
-	UpCount int `json:"up_count,omitempty"`
-	// Total count of flapped neighbors.
-	FlapCount int `json:"flap_count,omitempty"`
-	// Total numbers of level 1 neighbors.
-	Level1Count int `json:"level_1_count,omitempty"`
-	// Total numbers of level 2 neighbors.
-	Level2Count int `json:"level_2_count,omitempty"`
-	// List of neighbors.
+	// The IS-IS instance name.
+	InstanceName string `json:"instance_name,omitempty"`
+	// The IS-IS host name.
+	HostName string `json:"host_name,omitempty"`
+	// The IS-IS system ID.
+	SystemId string `json:"system_id,omitempty"`
+	// IS-IS areas seen by this switch.
+	Areas []string `json:"areas,omitempty"`
+	// Status of the IS-IS overload flag. The value is true if the overload flag is set and the switch runs out of resources and might not compute the LSP in time.
+	Overload  bool           `json:"overload,omitempty"`
 	Neighbors []IsisNeighbor `json:"neighbors,omitempty"`
 }

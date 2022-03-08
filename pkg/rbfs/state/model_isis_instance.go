@@ -22,7 +22,7 @@ type IsisInstance struct {
 	Overload bool `json:"overload,omitempty"`
 	// Segment routing settings.
 	SegmentRouting *AllOfIsisInstanceSegmentRouting `json:"segment_routing,omitempty"`
-	Neighbors      *IsisInstanceNeighbors           `json:"neighbors,omitempty"`
+	Neighbors      *IsisInstanceNeighborsSummary    `json:"neighbors,omitempty"`
 	// Overview of IS-IS interfaces
 	Interfaces []IsisInterface     `json:"interfaces,omitempty"`
 	Timers     *IsisInstanceTimers `json:"timers,omitempty"`
