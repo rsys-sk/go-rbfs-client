@@ -9,10 +9,6 @@
  */
 package state
 
-import (
-	"time"
-)
-
 // A physical interface with its optics and counters.
 type PhysicalInterfaceDetail struct {
 	IfpName string `json:"ifp_name,omitempty"`
@@ -35,7 +31,7 @@ type PhysicalInterfaceDetail struct {
 	// The administrative interface state.
 	AdministrativeState string `json:"administrative_state,omitempty"`
 	// Timestamp since when this interface is UP.
-	UpTime      time.Time                            `json:"up_time,omitempty"`
+	UpTime      string                               `json:"up_time,omitempty"`
 	Optics      *Optic                               `json:"optics,omitempty"`
 	IfpCounters *PhysicalInterfaceSummaryIfpCounters `json:"ifp_counters,omitempty"`
 }

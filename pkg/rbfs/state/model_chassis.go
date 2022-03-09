@@ -9,10 +9,6 @@
  */
 package state
 
-import (
-	"time"
-)
-
 // The hardware chassis.
 type Chassis struct {
 	// The product name.
@@ -22,7 +18,7 @@ type Chassis struct {
 	// The system MAC address.
 	Mac string `json:"mac,omitempty"`
 	// The date when the system has been manufactured.
-	ManufactureDate time.Time `json:"manufacture_date,omitempty"`
+	ManufactureDate string `json:"manufacture_date,omitempty"`
 	// The manufacturer name.
 	Manufacturer string `json:"manufacturer,omitempty"`
 	// The ONIE SW version.

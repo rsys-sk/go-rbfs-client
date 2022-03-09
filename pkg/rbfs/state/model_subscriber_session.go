@@ -9,16 +9,12 @@
  */
 package state
 
-import (
-	"time"
-)
-
 // An active subscriber session.
 type SubscriberSession struct {
 	// The current subscriber FSM state.
 	SubscriberState string `json:"subscriber_state,omitempty"`
 	// The timestamp of the last FSM state transition.
-	LastStateTransition time.Time `json:"last_state_transition,omitempty"`
+	LastStateTransition string `json:"last_state_transition,omitempty"`
 	// Reason why the subscriber session got terminated.
 	SubscriberTerminationReason string `json:"subscriber_termination_reason,omitempty"`
 	SubscriberId                int    `json:"subscriber_id,omitempty"`

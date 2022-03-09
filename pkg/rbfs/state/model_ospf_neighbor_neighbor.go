@@ -9,10 +9,6 @@
  */
 package state
 
-import (
-	"time"
-)
-
 // OSPF neighbor remote parameters.
 type OspfNeighborNeighbor struct {
 	// OSPF neighbor router ID.
@@ -22,7 +18,7 @@ type OspfNeighborNeighbor struct {
 	// Priority of the OSPF neighbor.
 	Priority int `json:"priority,omitempty"`
 	// Time the OSPF neighbor is in Up state.
-	UpTime time.Time `json:"up_time,omitempty"`
+	UpTime string `json:"up_time,omitempty"`
 	// OSPF dead interval of the neighbor.
 	DeadInterval int `json:"dead_interval,omitempty"`
 }
