@@ -20,6 +20,6 @@ type IsisInstanceNeighbors struct {
 	// IS-IS areas seen by this switch.
 	Areas []string `json:"areas,omitempty"`
 	// Status of the IS-IS overload flag. The value is true if the overload flag is set and the switch runs out of resources and might not compute the LSP in time.
-	Overload  bool           `json:"overload,omitempty"`
-	Neighbors []IsisNeighbor `json:"neighbors,omitempty"`
+	Overload  bool                          `json:"overload,omitempty"`
+	Neighbors *IsisInstanceNeighborsSummary `json:"neighbors,omitempty"`
 }
