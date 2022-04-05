@@ -17,6 +17,8 @@ type Fan struct {
 	Location string `json:"location,omitempty"`
 	// The fan model.
 	Model string `json:"model,omitempty"`
+	// The fan serial number.
+	SerialNumber string `json:"serial_number,omitempty"`
 	// The presense and operational state of the fan.
 	Status []string `json:"status,omitempty"`
 }

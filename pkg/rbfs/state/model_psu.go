@@ -15,6 +15,8 @@ type Psu struct {
 	PsuName string `json:"psu_name,omitempty"`
 	// The PSU model.
 	Model string `json:"model,omitempty"`
+	// The PSU serial number.
+	SerialNumber string `json:"serial_number,omitempty"`
 	// The presense and operational state of the PSU.
 	Status []string `json:"status,omitempty"`
 }
