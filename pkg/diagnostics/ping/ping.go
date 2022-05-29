@@ -22,6 +22,8 @@ type (
 		instanceName    string
 		count           int
 		interval        time.Duration
+		size            int
+		ttl             int
 	}
 
 	// Option applies a ping command argument
@@ -33,7 +35,9 @@ func NewPing(options ...Option) (*Ping, error) {
 	p := &Ping{
 		instanceName: "default",
 		count:        5,
-		interval:     time.Second,
+		interval:     1 * time.Second,
+		ttl:          64,
+		size:         56,
 	}
 
 	// Apply all given ping option
@@ -48,6 +52,29 @@ func NewPing(options ...Option) (*Ping, error) {
 	}
 
 	return p, nil
+}
+
+// Size sets the ping packet size in bytes.
+// The size must be between 8 and 32768 bytes.
+func Size(size int) Option {
+	return func(p *Ping) error {
+		if size < 8 || size > 32768 {
+			return fmt.Errorf("packet size must be between 8 and 32768 bytes")
+		}
+		p.size = size
+		return nil
+	}
+}
+
+// TTL sets the IP packet time-to-live value.
+func TTL(ttl int) Option {
+	return func(p *Ping) error {
+		if ttl < 1 || ttl > 255 {
+			return fmt.Errorf("packet TTL must be between 1 and 255 bytes")
+		}
+		p.ttl = ttl
+		return nil
+	}
 }
 
 // DestinationIP sets the ping destination IP address.
@@ -157,6 +184,14 @@ func (p *Ping) SourceInterface() string {
 
 func (p *Ping) SourceIP() net.IP {
 	return p.sourceIP
+}
+
+func (p *Ping) Size() int {
+	return p.size
+}
+
+func (p *Ping) TTL() int {
+	return p.ttl
 }
 
 func (p *Ping) Count() int {

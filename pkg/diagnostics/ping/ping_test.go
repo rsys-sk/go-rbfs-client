@@ -31,6 +31,8 @@ func TestNewPing(t *testing.T) {
 				instanceName: "default",
 				count:        5,
 				interval:     time.Second,
+				size:         56,
+				ttl:          64,
 			},
 		}, {
 			name: "options",
@@ -46,6 +48,8 @@ func TestNewPing(t *testing.T) {
 				instanceName:    "instance",
 				count:           8,
 				interval:        5 * time.Second,
+				size:            56,
+				ttl:             64,
 			},
 		}, {
 			name: "source interface",
@@ -59,6 +63,8 @@ func TestNewPing(t *testing.T) {
 				instanceName:    "default",
 				count:           5,
 				interval:        time.Second,
+				size:            56,
+				ttl:             64,
 			},
 		}, {
 			name: "source interface and source IP are mutual exclusive 1",
@@ -122,11 +128,6 @@ func TestNewPing(t *testing.T) {
 			}
 			require.NoError(t, err)
 			require.Equal(t, tt.want, got)
-			require.Equal(t, tt.want.SourceInterface(), got.SourceInterface())
-			require.Equal(t, tt.want.SourceIP(), got.SourceIP())
-			require.Equal(t, tt.want.Count(), got.Count())
-			require.Equal(t, tt.want.Interval(), got.Interval())
-			require.Equal(t, tt.want.DestinationIP(), got.DestinationIP())
 		})
 	}
 }

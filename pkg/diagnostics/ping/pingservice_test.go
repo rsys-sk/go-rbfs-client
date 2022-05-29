@@ -31,6 +31,8 @@ func expectedPing(hostname string) *state.ActionsApiPingOpts {
 		Count:           commons.OptionalInt(5),
 		Interval:        commons.OptionalFloat32(1.0),
 		InstanceName:    commons.OptionalString("default"),
+		Size:            commons.OptionalInt(56),
+		Ttl:             commons.OptionalInt(64),
 	}
 
 }

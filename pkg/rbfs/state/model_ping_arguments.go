@@ -23,4 +23,8 @@ type PingArguments struct {
 	Interval float32 `json:"interval,omitempty"`
 	// The number of pings sent.
 	Count int `json:"count,omitempty"`
+	// Packet size in bytes.
+	Size int `json:"size,omitempty"`
+	// IP packet time-to-live.
+	Ttl int `json:"ttl,omitempty"`
 }
