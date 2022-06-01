@@ -17,8 +17,10 @@ type BgpInstancePeerings struct {
 	Asn int64 `json:"asn,omitempty"`
 	// The local router identifier.
 	RouterId string `json:"router_id,omitempty"`
-	// The BGP host name.
+	// The BGP host name.  The host_name attribute has been deprecated. Use the hostname attribute instead.
 	HostName string `json:"host_name,omitempty"`
+	// The BGP hostname.
+	Hostname string `json:"hostname,omitempty"`
 	// The BGP domain name.
 	DomainName string `json:"domain_name,omitempty"`
 	// The BGP cluster ID.

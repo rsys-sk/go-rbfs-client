@@ -16,8 +16,10 @@ type IsisInstanceRef struct {
 	Overload bool `json:"overload,omitempty"`
 	// IS-IS system ID.
 	SystemId string `json:"system_id,omitempty"`
-	// The IS-IS host name.
-	HostName   string                     `json:"host_name,omitempty"`
+	// The IS-IS host name.  The host_name attribute has been deprecated. Use the hostname attribute instead.
+	HostName string `json:"host_name,omitempty"`
+	// The IS-IS hostname.
+	Hostname   string                     `json:"hostname,omitempty"`
 	Neighbors  *IsisInstanceRefNeighbors  `json:"neighbors,omitempty"`
 	Interfaces *IsisInstanceRefInterfaces `json:"interfaces,omitempty"`
 	// List of IS-IS areas.

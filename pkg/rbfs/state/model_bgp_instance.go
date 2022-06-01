@@ -18,8 +18,10 @@ type BgpInstance struct {
 	RouterId string `json:"router_id,omitempty"`
 	// The BGP cluster ID this router is member of.
 	ClusterId string `json:"cluster_id,omitempty"`
-	// The BGP host name.
+	// The BGP host name.  The host_name has been deprecated. Use the hostname attribute instead.
 	HostName string `json:"host_name,omitempty"`
+	// The BGP hostname.
+	Hostname string `json:"hostname,omitempty"`
 	// The BGP domain name.
 	DomainName string `json:"domain_name,omitempty"`
 	// BGP version.

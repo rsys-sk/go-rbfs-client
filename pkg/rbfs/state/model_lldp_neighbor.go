@@ -9,6 +9,10 @@
  */
 package state
 
+import (
+	"time"
+)
+
 // LLDP neighbor parameters.
 type LldpNeighbor struct {
 	// Local LLDP port ID.
@@ -16,8 +20,8 @@ type LldpNeighbor struct {
 	// The LLDP neighbor state.
 	Status string `json:"status,omitempty"`
 	// Time of last LLDP packet sent to neighbor.
-	LastSent string `json:"last_sent,omitempty"`
+	LastSent time.Time `json:"last_sent,omitempty"`
 	// Time of last LLDP packet received from neighbor.
-	LastReceived string                `json:"last_received,omitempty"`
+	LastReceived time.Time             `json:"last_received,omitempty"`
 	Neighbor     *LldpNeighborNeighbor `json:"neighbor,omitempty"`
 }

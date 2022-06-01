@@ -9,12 +9,16 @@
  */
 package state
 
+import (
+	"time"
+)
+
 // IS-IS neighbor details.
 type IsisNeighbor struct {
 	// The IS-IS adjacency state.
 	IsisAdjacencyState string `json:"isis_adjacency_state,omitempty"`
 	// Last state transition time.
-	LastStateTransition string `json:"last_state_transition,omitempty"`
+	LastStateTransition time.Time `json:"last_state_transition,omitempty"`
 	// The IS-IS adjacency type.
 	IsisAdjacencyType string `json:"isis_adjacency_type,omitempty"`
 	// The IS-IS level(s) the adjacency belongs too.

@@ -19,8 +19,10 @@ type BgpPeer struct {
 	RouterId string `json:"router_id,omitempty"`
 	// The peer AS number.
 	Asn int64 `json:"asn,omitempty"`
-	// The peer host name.
+	// The peer host name. The host_name attribute has been deprecated. Use the hostname attribute instead.
 	HostName string `json:"host_name,omitempty"`
+	// The peer hostname.
+	Hostname string `json:"hostname,omitempty"`
 	// The peer domain name.
 	DomainName string `json:"domain_name,omitempty"`
 	// The destination port to connect to this peer.

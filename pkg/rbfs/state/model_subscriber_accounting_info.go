@@ -9,11 +9,15 @@
  */
 package state
 
+import (
+	"time"
+)
+
 type SubscriberAccountingInfo struct {
 	// The accounting session ID.
 	AccountingSessionId string `json:"accounting_session_id,omitempty"`
 	// Timestamp when the accounting session has started.
-	AccountingStartTime string `json:"accounting_start_time,omitempty"`
+	AccountingStartTime time.Time `json:"accounting_start_time,omitempty"`
 	// Timestamp when the accounting session has stopped.
-	AccountingStopTime string `json:"accounting_stop_time,omitempty"`
+	AccountingStopTime time.Time `json:"accounting_stop_time,omitempty"`
 }

@@ -9,6 +9,10 @@
  */
 package state
 
+import (
+	"time"
+)
+
 // BGP peering details.
 type BgpPeering struct {
 	InstanceName string `json:"instance_name,omitempty"`
@@ -16,7 +20,7 @@ type BgpPeering struct {
 	AdministrativeState string    `json:"administrative_state,omitempty"`
 	BgpState            *BgpState `json:"bgp_state,omitempty"`
 	// Last BGP state transition.
-	LastStateTransition string `json:"last_state_transition,omitempty"`
+	LastStateTransition time.Time `json:"last_state_transition,omitempty"`
 	// The reason for the last BGP reset.
 	LastResetReason string `json:"last_reset_reason,omitempty"`
 	// The local AS number.
@@ -30,8 +34,10 @@ type BgpPeering struct {
 	SourcePort int `json:"source_port,omitempty"`
 	// The local router ID
 	RouterId string `json:"router_id,omitempty"`
-	// The local BGP host name.
+	// The local BGP host name.  The host_name attribute has been deprecated. Use the hostname attribute instead.
 	HostName string `json:"host_name,omitempty"`
+	// The local BGP hostname.
+	Hostname string `json:"hostname,omitempty"`
 	// The local BGP domain name.
 	DomainName string `json:"domain_name,omitempty"`
 	// The BGP peering type.

@@ -9,14 +9,15 @@
  */
 package state
 
-// Transmitted data counters.
-type PhysicalInterfaceSummaryIfpCountersTx struct {
-	// Total number of transmitted bytes.
-	BytesSent int `json:"bytes_sent,omitempty"`
-	// Total count ot transmitted packets.
-	PacketsSent int `json:"packets_sent,omitempty"`
-	// Total number of dropped bytes.
-	BytesDropped int `json:"bytes_dropped,omitempty"`
-	// Total number of dropped packets.
-	PacketsDropped int `json:"packets_dropped,omitempty"`
+// A member interface of a link aggregation group.
+type LinkAggregationGroupMember struct {
+	IfpName string `json:"ifp_name,omitempty"`
+	// The operational state of the member interface.
+	OperationalState string `json:"operational_state,omitempty"`
+	// The administrative state of the member interface
+	AdministrativeState string `json:"administrative_state,omitempty"`
+	// The configured speed limit. The maximum speed can be read from the bandwidth attribute.
+	Speed string `json:"speed,omitempty"`
+	// The maximum bandwidth available.
+	Bandwidth string `json:"bandwidth,omitempty"`
 }

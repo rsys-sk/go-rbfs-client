@@ -13,8 +13,10 @@ package state
 type IsisInstanceNeighbors struct {
 	// The IS-IS instance name.
 	InstanceName string `json:"instance_name,omitempty"`
-	// The IS-IS host name.
+	// The IS-IS host name.  The host_name attribute has been deprecated. Use the hostname attribute instead.
 	HostName string `json:"host_name,omitempty"`
+	// The IS-IS hostname.
+	Hostname string `json:"hostname,omitempty"`
 	// The IS-IS system ID.
 	SystemId string `json:"system_id,omitempty"`
 	// IS-IS areas seen by this switch.

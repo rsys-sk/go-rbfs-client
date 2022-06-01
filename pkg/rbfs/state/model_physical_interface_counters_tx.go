@@ -9,22 +9,10 @@
  */
 package state
 
-// The arguments of the executed ping command.
-type PingArguments struct {
-	// The pinged destination IP address.
-	DestinationIp string `json:"destination_ip,omitempty"`
-	// The source IP address.
-	SourceIp string `json:"source_ip,omitempty"`
-	// The egress interface name.
-	SourceIfl string `json:"source_ifl,omitempty"`
-	// The routing instance name.
-	InstanceName string `json:"instance_name,omitempty"`
-	// The interval between two pings.
-	Interval float32 `json:"interval,omitempty"`
-	// The number of pings sent.
-	Count int `json:"count,omitempty"`
-	// The ping packet size in bytes.
-	Size int `json:"size,omitempty"`
-	// The IP packet time-to-live value.
-	Ttl int `json:"ttl,omitempty"`
+// Transmitted data counters.
+type PhysicalInterfaceCountersTx struct {
+	// Total number of transmitted bytes.
+	BytesSent int `json:"bytes_sent,omitempty"`
+	// Total count ot transmitted packets.
+	PacketsSent int `json:"packets_sent,omitempty"`
 }

@@ -14,8 +14,10 @@ type IsisInstance struct {
 	InstanceName string `json:"instance_name,omitempty"`
 	// IS-IS system ID.
 	SystemId string `json:"system_id,omitempty"`
-	// IS-IS host name.
+	// IS-IS host name.  The host_name attribute has been deprecated. Use the hostname attribute instead.
 	HostName string `json:"host_name,omitempty"`
+	// The IS-IS hostname.
+	Hostname string `json:"hostname,omitempty"`
 	// IS-IS areas seen by this switch.
 	Areas []string `json:"areas,omitempty"`
 	// Status of the IS-IS overload flag. The value is true if the overload flag is set and the switch runs out of resources and cannot compute the SFP in time.

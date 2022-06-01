@@ -9,8 +9,10 @@
  */
 package state
 
-// Physical interface statistics.  Define a metric time-series for sampling counters to compute bit and packet rates. This counter values are only an indication whether data is transmitted or received. It can also be used to verify whether interface statistics have been reset after clearing the counters.
-type PhysicalInterfaceSummaryIfpCounters struct {
-	Tx *PhysicalInterfaceSummaryIfpCountersTx `json:"tx,omitempty"`
-	Rx *PhysicalInterfaceSummaryIfpCountersRx `json:"rx,omitempty"`
+// Link aggreation group (LAG) state.
+type LinkAggregationGroup struct {
+	// The LAG mode.
+	Mode string `json:"mode,omitempty"`
+	// The member interfaces.
+	Members []LinkAggregationGroupMember `json:"members,omitempty"`
 }

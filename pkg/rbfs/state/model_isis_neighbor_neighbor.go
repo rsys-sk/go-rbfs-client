@@ -9,12 +9,14 @@
  */
 package state
 
-// IS-IS neighbor informations.
+// The IS-IS neighbor informations.
 type IsisNeighborNeighbor struct {
-	// IS-IS neighbor system ID.
+	// The IS-IS neighbor system ID.
 	SystemId string `json:"system_id,omitempty"`
-	// ISIS neighbor host name.
+	// The ISIS neighbor host name.  The host_name attribute has been deprecated. Use the hostname attribute instead.
 	HostName string `json:"host_name,omitempty"`
+	// The IS-IS neighbor hostname.
+	Hostname string `json:"hostname,omitempty"`
 	// IS-IS neighbor IPv4 address.
 	Ipv4Address string `json:"ipv4_address,omitempty"`
 	// IS-IS neigbor IPv6 address.
