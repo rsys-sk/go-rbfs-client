@@ -9,22 +9,14 @@
  */
 package state
 
-// The arguments of the executed ping command.
-type PingArguments struct {
-	// The pinged destination IP address.
-	DestinationIp string `json:"destination_ip,omitempty"`
-	// The source IP address.
-	SourceIp string `json:"source_ip,omitempty"`
-	// The egress interface name.
-	SourceIfl string `json:"source_ifl,omitempty"`
-	// The routing instance name.
-	InstanceName string `json:"instance_name,omitempty"`
-	// The interval between two pings.
-	Interval float32 `json:"interval,omitempty"`
-	// The number of pings sent.
-	Count int `json:"count,omitempty"`
-	// The packet size in bytes.
-	Size int `json:"size,omitempty"`
-	// The IP TTL value.
-	Ttl int `json:"ttl,omitempty"`
+// Subscriber session counters.
+type SubscriberSessionStatistics struct {
+	Total *SubscriberSessionCounters `json:"total,omitempty"`
+	Ipoe  *SubscriberSessionCounters `json:"ipoe,omitempty"`
+	L2bsa *SubscriberSessionCounters `json:"l2bsa,omitempty"`
+	L2tp  *SubscriberSessionCounters `json:"l2tp,omitempty"`
+	Pppoe *SubscriberSessionCounters `json:"pppoe,omitempty"`
+	Test  *SubscriberSessionCounters `json:"test,omitempty"`
+	// Provides subscriber session counters per physical interface.
+	IfpStatistics map[string]IfpSubscriberSessionStatistics `json:"ifp_statistics,omitempty"`
 }

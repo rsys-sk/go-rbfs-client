@@ -1378,6 +1378,67 @@ paths:
           $ref: "#/components/responses/404"
         500:
           $ref: "#/components/responses/500"
+  /subscribers/statistics:
+    get:
+      summary: Returns the subscriber session summary statistics.
+      operationId: getSubscriberSessionStatistics
+      description: |
+        Returns the number of subscriber sessions grouped by the access type (IPoE, PPPoE, L2TP, L2BSA and test), 
+        the session state (setup, established, terminating) and the physical interface as well as aggregated counts.
+        The aggregated counts include the total number of sessions per physical interface and state as well as 
+        the number of sessions per access type and state, and the total session count per state for the entire switch.
+      tags:
+      - Subscriber
+      responses:
+        200:
+          description: The subscriber sessions statistic.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubscriberSessionStatistics"
+        400:
+          $ref: "#/components/responses/400"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        500:
+          $ref: "#/components/responses/500"
+  /subscribers/statistics/{ifp_name}:
+    get:
+      summary: Returns the subscriber session statistics for a physical interface.
+      operationId: getIfpSubscriberSessionStatistics
+      description: |
+        Returns the number of subscriber sessions grouped by access type (IPoE, PPPoE, L2TP, L2BSA and test), 
+        the session state (setup, established, terminating) as well as the total session count grouped by the session state.
+      tags:
+      - Subscriber
+      parameters:
+      - in: path
+        name: ifp_name
+        description: The physical interface name.
+        required: true
+        schema:
+          $ref: "#/components/schemas/IfpName"  
+      responses:
+        200:
+          description: The subscriber sessions statistic.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IfpSubscriberSessionStatistics"
+        400:
+          $ref: "#/components/responses/400"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        500:
+          $ref: "#/components/responses/500"
   /subscribers/terminate:
     post:
       summary: Terminates all matching subscriber sessions.
@@ -1659,7 +1720,7 @@ paths:
           $ref: "#/components/responses/500"
   /subscribers/{subscriber_id}/access-line-info:        
     get:
-      summary: Get access line information.
+      summary: Returns access line information.
       operationId: getAccessLineInfo
       description: |
         Returns the access line information for the given subscriber.
@@ -1689,7 +1750,7 @@ paths:
           $ref: "#/components/responses/500"
   /subscribers/{subscriber_id}/adjusted-accounting:        
     get:
-      summary: Get adjusted accounting counter values.
+      summary: Returns adjusted accounting counter values.
       operationId: getAjdustedAccountingValues
       description: |
         Computes the adjusted accounting counter values for a given subscriber.
@@ -3985,8 +4046,7 @@ components:
       description: Physical interface name.
     IfName:
       type: string
-      description: A logical or physical interface name.
-#     NOTE: Using oneOf in combination with string operations causes issues with the generated code, which is a dedicated scalar is defined.
+      description: A physical or logical interface name.
     InstanceName:
       type: string
       description: Routing instance name.
@@ -4045,10 +4105,10 @@ components:
           description: The number of pings sent.
         size:
           type: integer
-          description: The ping packet size in bytes.
+          description: The packet size in bytes.
         ttl:
           type: integer
-          description: The IP packet time-to-live value.
+          description: The IP TTL value.
     PingStatistics:
       type: object
       description: Ping counters.
@@ -5087,6 +5147,62 @@ components:
             pppoe_session_id:
               description: The PPPoE session ID.
               type: integer
+    SubscriberSessionStatistics:
+      type: object 
+      description: Subscriber session counters.
+      properties:
+        total:
+          $ref: "#/components/schemas/SubscriberSessionCounters"
+        ipoe:
+          $ref: "#/components/schemas/SubscriberSessionCounters"
+        l2bsa:
+          $ref: "#/components/schemas/SubscriberSessionCounters"
+        l2tp:
+          $ref: "#/components/schemas/SubscriberSessionCounters"
+        pppoe:
+          $ref: "#/components/schemas/SubscriberSessionCounters"
+        test:
+          $ref: "#/components/schemas/SubscriberSessionCounters"
+        ifp_statistics:
+          type: object
+          description: Provides subscriber session counters per physical interface.
+          additionalProperties:
+            $ref: "#/components/schemas/IfpSubscriberSessionStatistics"
+    IfpSubscriberSessionStatistics:
+      type: object
+      description: Holds the subscriber session counters of a single physical interface.
+      properties:
+        ifp_name:
+          $ref: "#/components/schemas/IfpName"
+        total:
+          $ref: "#/components/schemas/SubscriberSessionCounters"
+        ipoe:
+          $ref: "#/components/schemas/SubscriberSessionCounters"
+        l2bsa:
+          $ref: "#/components/schemas/SubscriberSessionCounters"
+        l2tp:
+          $ref: "#/components/schemas/SubscriberSessionCounters"
+        pppoe:
+          $ref: "#/components/schemas/SubscriberSessionCounters"
+        test:
+          $ref: "#/components/schemas/SubscriberSessionCounters"
+    SubscriberSessionCounters:
+      type: object
+      description: Session counters by session state.
+      properties:
+        setup:
+          description: Number of sessions that are about to being established.
+          type: integer
+          minimum: 0
+        established:
+          description: Number of established session.
+          type: integer
+          minimum: 0
+        terminating:
+          description: Number of sessions that are about to being terminated.
+          type: integer
+          minimum: 0
+
     SubscriberAccountingInfo:
       type: object
       properties:
