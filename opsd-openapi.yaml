@@ -5629,7 +5629,19 @@ components:
               description: Total number of transmitted bytes.
               type: integer
             packets_sent:
-              description: Total count ot transmitted packets.
+              description: Total count of transmitted packets.
+              type: integer
+            unicast_packets_sent: 
+              description: Total count of transmitted unicast packets.
+              type: integer
+            multicast_packets_sent: 
+              description: Total count of transmitted multicast packets.
+              type: integer
+            broadcast_packets_sent: 
+              description: Total count of transmitted broadcast packets.
+              type: integer
+            packets_dropped:
+              description: Total count of dropped egress packets.
               type: integer
         rx:
           type: object
@@ -5641,6 +5653,18 @@ components:
             packets_received:
               description: Total number of received packets.
               type: integer
+            unicast_packets_received: 
+              description: Total count of received unicast packets.
+              type: integer
+            multicast_packets_received: 
+              description: Total count of received multicast packets.
+              type: integer
+            broadcast_packets_received: 
+              description: Total count of received broadcast packets.
+              type: integer
+            packets_dropped:
+              description: Total count of dropped ingress packets.
+              type: integer            
     PhysicalInterface:
       type: object
       description: A physical interface.

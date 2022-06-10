@@ -13,6 +13,14 @@ package state
 type PhysicalInterfaceCountersTx struct {
 	// Total number of transmitted bytes.
 	BytesSent int `json:"bytes_sent,omitempty"`
-	// Total count ot transmitted packets.
+	// Total count of transmitted packets.
 	PacketsSent int `json:"packets_sent,omitempty"`
+	// Total count of transmitted unicast packets.
+	UnicastPacketsSent int `json:"unicast_packets_sent,omitempty"`
+	// Total count of transmitted multicast packets.
+	MulticastPacketsSent int `json:"multicast_packets_sent,omitempty"`
+	// Total count of transmitted broadcast packets.
+	BroadcastPacketsSent int `json:"broadcast_packets_sent,omitempty"`
+	// Total count of dropped egress packets.
+	PacketsDropped int `json:"packets_dropped,omitempty"`
 }
