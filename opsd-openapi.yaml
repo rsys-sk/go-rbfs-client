@@ -4449,7 +4449,6 @@ components:
         last_state_transition:
           description: Last BGP state transition.
           type: string
-          format: date-time
         last_reset_reason:
           description: Last session reset reason.
           type: string        
@@ -4526,7 +4525,6 @@ components:
         last_state_transition:
           description: Last BGP state transition.
           type: string
-          format: date-time
         last_reset_reason:
           description: The reason for the last BGP reset.
           type: string
@@ -4991,7 +4989,6 @@ components:
         last_state_transition:
           description: The timestamp of the last FSM state transition.
           type: string
-          format: date-time
         subscriber_termination_reason:
           description: Reason why the subscriber session got terminated.
           type: string
@@ -5212,11 +5209,9 @@ components:
         accounting_start_time:
           description: Timestamp when the accounting session has started.
           type: string
-          format: date-time
         accounting_stop_time:
           description: Timestamp when the accounting session has stopped.
           type: string
-          format: date-time
     SubscriberAdjustedAccounting:
       description: Current adjusted accounting values.
       type: object
@@ -5522,7 +5517,6 @@ components:
         up_time:
           description: Timestamp since when this interface is UP.
           type: string
-          format: date-time
         lag:
           $ref: "#/components/schemas/LinkAggregationGroup"
         logicals:
@@ -5602,7 +5596,6 @@ components:
         up_time:
           description: Timestamp since when this interface is UP.
           type: string
-          format: date-time
         ifls:
           description: The logical interfaces defined on this physical interface.
           type: array
@@ -5713,7 +5706,6 @@ components:
         up_time:
           description: Timestamp since when this interface is UP.
           type: string
-          format: date-time
         lag:
           $ref: "#/components/schemas/LinkAggregationGroup"
     PhysicalInterfaceDetail:
@@ -5764,7 +5756,6 @@ components:
         up_time:
           description: Timestamp since when this interface is UP.
           type: string
-          format: date-time
         optics:
           $ref: "#/components/schemas/Optic"
         lag:
@@ -6326,7 +6317,6 @@ components:
         last_state_transition:
           description: Last state transition time.
           type: string
-          format: date-time
         isis_adjacency_type:
           description: The IS-IS adjacency type.
           type: string
@@ -6399,7 +6389,6 @@ components:
             up_time:
               description: Since when this adjacency is UP.
               type: string
-              format: date-time
             level_mismatch_error_count:
               description: Count of adjacency down due to level mismatch
               type: integer
@@ -6721,7 +6710,6 @@ components:
             up_time:
               description: Time the OSPF neighbor is in Up state.
               type: string
-              format: date-time
             dead_interval:
               description: OSPF dead interval of the neighbor.
               type: integer
@@ -6785,11 +6773,9 @@ components:
         last_sent:
           description: Time of last LLDP packet sent to neighbor.
           type: string
-          format: date-time
         last_received:
           description: Time of last LLDP packet received from neighbor.
           type: string
-          format: date-time
         neighbor:  
           description: Parameters of remote neighbor.
           type: object
@@ -7198,7 +7184,6 @@ components:
         last_state_transition: 
           description: Last PIM neighbor state transition.
           type: string
-          format: date-time
         ifl_name:
           $ref: "#/components/schemas/IflName" 
         pim_ifl_state: 
@@ -7410,7 +7395,6 @@ components:
         manufacture_date:
           description: The date when the system has been manufactured.
           type: string
-          format: date-time
         manufacturer:
           description: The manufacturer name.
           type: string

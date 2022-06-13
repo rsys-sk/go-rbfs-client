@@ -9,10 +9,6 @@
  */
 package state
 
-import (
-	"time"
-)
-
 // BGP peering details.
 type BgpPeering struct {
 	InstanceName string `json:"instance_name,omitempty"`
@@ -20,7 +16,7 @@ type BgpPeering struct {
 	AdministrativeState string    `json:"administrative_state,omitempty"`
 	BgpState            *BgpState `json:"bgp_state,omitempty"`
 	// Last BGP state transition.
-	LastStateTransition time.Time `json:"last_state_transition,omitempty"`
+	LastStateTransition string `json:"last_state_transition,omitempty"`
 	// The reason for the last BGP reset.
 	LastResetReason string `json:"last_reset_reason,omitempty"`
 	// The local AS number.

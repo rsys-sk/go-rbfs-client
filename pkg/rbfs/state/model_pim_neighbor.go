@@ -9,17 +9,13 @@
  */
 package state
 
-import (
-	"time"
-)
-
 // PIM neighbor settings.
 type PimNeighbor struct {
 	PimNeighborState string `json:"pim_neighbor_state,omitempty"`
 	// Last PIM neighbor state transition.
-	LastStateTransition time.Time `json:"last_state_transition,omitempty"`
-	IflName             string    `json:"ifl_name,omitempty"`
-	PimIflState         string    `json:"pim_ifl_state,omitempty"`
+	LastStateTransition string `json:"last_state_transition,omitempty"`
+	IflName             string `json:"ifl_name,omitempty"`
+	PimIflState         string `json:"pim_ifl_state,omitempty"`
 	// The primary IPv4 address of the PIM interface.
 	Ipv4Address string `json:"ipv4_address,omitempty"`
 	// The primary IPv6 address of the PIM interface.
