@@ -166,15 +166,15 @@ BGPApiService Get BGP instance details.
 Provides BGP instance details including  information about the configured peerings.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param instanceName BGP routing instance name.
-@return []BgpInstance
+@return BgpInstance
 */
-func (a *BGPApiService) GetBGPInstance(ctx context.Context, instanceName string) ([]BgpInstance, *http.Response, error) {
+func (a *BGPApiService) GetBGPInstance(ctx context.Context, instanceName string) (BgpInstance, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue []BgpInstance
+		localVarReturnValue BgpInstance
 	)
 
 	// create path and map variables
@@ -232,7 +232,7 @@ func (a *BGPApiService) GetBGPInstance(ctx context.Context, instanceName string)
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v []BgpInstance
+			var v BgpInstance
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
