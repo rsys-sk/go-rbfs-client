@@ -14,10 +14,11 @@ import (
 )
 
 const (
-	ctrldURLKey          = contextKey("CtrldURL")
-	elementNameKey       = contextKey("ElementName")
-	OpsdServiceName      = ServiceName("opsd")
-	RestconfdServiceName = ServiceName("restconfd")
+	ctrldURLKey           = contextKey("CtrldURL")
+	elementNameKey        = contextKey("ElementName")
+	OpsdServiceName       = ServiceName("opsd")
+	RestconfdServiceName  = ServiceName("restconfd")
+	PrometheusServiceName = ServiceName("prometheus")
 )
 
 type (
