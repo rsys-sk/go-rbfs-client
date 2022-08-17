@@ -11,7 +11,8 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/rtbrick/go-rbfs-client/pkg/rbfs/commons"
+	"github.com/rtbrick/go-rbfs-client/pkg/rbfs"
+
 	"github.com/rtbrick/go-rbfs-client/pkg/rbfs/state"
 )
 
@@ -32,14 +33,14 @@ type (
 	// Service pings given destinations.
 	Service interface {
 		// Run executes the given ping.
-		Run(commons.RbfsContext, *Ping) (state.PingStatus, error)
+		Run(rbfs.RbfsContext, *Ping) (state.PingStatus, error)
 
 		// RunAll runs all given pings in parallel go routines.
-		RunAll(commons.RbfsContext, ...*Ping) ([]state.PingStatus, error)
+		RunAll(rbfs.RbfsContext, ...*Ping) ([]state.PingStatus, error)
 	}
 )
 
-func (s *defaultService) Run(ctx commons.RbfsContext, ping *Ping) (state.PingStatus, error) {
+func (s *defaultService) Run(ctx rbfs.RbfsContext, ping *Ping) (state.PingStatus, error) {
 	api, err := s.getActionsAPI(ctx)
 	if err != nil {
 		return state.PingStatus{}, err
@@ -49,16 +50,16 @@ func (s *defaultService) Run(ctx commons.RbfsContext, ping *Ping) (state.PingSta
 	interval := float32(math.Round(ping.interval.Seconds()*scaleToMilliPrecision) / scaleToMilliPrecision)
 
 	optionalPingPostArgs := &state.ActionsApiPingOpts{
-		DestinationIp:   commons.OptionalIP(ping.destinationIP),
-		DestinationAaaa: commons.OptionalString(ping.destinationAAAA),
-		DestinationA:    commons.OptionalString(ping.destinationA),
-		SourceIp:        commons.OptionalIP(ping.sourceIP),
-		SourceIfl:       commons.OptionalString(ping.sourceInterface),
-		Count:           commons.OptionalInt(ping.count),
-		Interval:        commons.OptionalFloat32(interval),
-		InstanceName:    commons.OptionalString(ping.instanceName),
-		Size:            commons.OptionalInt(ping.size),
-		Ttl:             commons.OptionalInt(ping.ttl),
+		DestinationIp:   rbfs.OptionalIP(ping.destinationIP),
+		DestinationAaaa: rbfs.OptionalString(ping.destinationAAAA),
+		DestinationA:    rbfs.OptionalString(ping.destinationA),
+		SourceIp:        rbfs.OptionalIP(ping.sourceIP),
+		SourceIfl:       rbfs.OptionalString(ping.sourceInterface),
+		Count:           rbfs.OptionalInt(ping.count),
+		Interval:        rbfs.OptionalFloat32(interval),
+		InstanceName:    rbfs.OptionalString(ping.instanceName),
+		Size:            rbfs.OptionalInt(ping.size),
+		Ttl:             rbfs.OptionalInt(ping.ttl),
 	}
 
 	//nolint:bodyclose //generated code
@@ -69,7 +70,7 @@ func (s *defaultService) Run(ctx commons.RbfsContext, ping *Ping) (state.PingSta
 	return pingStatus, nil
 }
 
-func (s *defaultService) RunAll(ctx commons.RbfsContext, pings ...*Ping) ([]state.PingStatus, error) {
+func (s *defaultService) RunAll(ctx rbfs.RbfsContext, pings ...*Ping) ([]state.PingStatus, error) {
 	var r []state.PingStatus
 	dataDataChannel := make(chan state.PingStatus)
 	errChannel := make(chan error)
@@ -77,7 +78,7 @@ func (s *defaultService) RunAll(ctx commons.RbfsContext, pings ...*Ping) ([]stat
 	c, cancle := context.WithCancel(ctx)
 	defer cancle()
 
-	rc := commons.MustRbfsContext(c)
+	rc := rbfs.MustRbfsContext(c)
 	for _, ping := range pings {
 		go func(p *Ping) {
 			s, err := s.Run(rc, p)
@@ -104,7 +105,7 @@ func (s *defaultService) RunAll(ctx commons.RbfsContext, pings ...*Ping) ([]stat
 	return r, err
 }
 
-func (s *defaultService) getActionsAPI(ctx commons.RbfsContext) (ActionsAPI, error) {
+func (s *defaultService) getActionsAPI(ctx rbfs.RbfsContext) (ActionsAPI, error) {
 	endpoint, err := ctx.GetServiceEndpoint("opsd")
 	if err != nil {
 		return nil, err
@@ -114,7 +115,7 @@ func (s *defaultService) getActionsAPI(ctx commons.RbfsContext) (ActionsAPI, err
 }
 
 func getActionsAPI(c *http.Client, endpoint *url.URL) (ActionsAPI, error) {
-	client := commons.GetAPIClient(c, endpoint)
+	client := rbfs.GetAPIClient(c, endpoint)
 	return client.ActionsApi, nil
 }
 

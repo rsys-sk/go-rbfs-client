@@ -8,7 +8,7 @@ import (
 	"net/url"
 	"strconv"
 
-	"github.com/rtbrick/go-rbfs-client/pkg/rbfs/commons"
+	"github.com/rtbrick/go-rbfs-client/pkg/rbfs"
 	"github.com/rtbrick/go-rbfs-client/pkg/rbfs/state"
 )
 
@@ -29,25 +29,25 @@ type (
 		Values []LabeledValue
 	}
 
-	// Metrics providess access to the switch metrics.
-	Metrics interface {
+	// Client provides access to the switch metrics.
+	Client interface {
 		// QueryMetric queries a single metric.
-		QueryMetric(ctx commons.RbfsContext, metric string) (*Metric, error)
+		QueryMetric(ctx rbfs.RbfsContext, metric string) (*Metric, error)
 	}
 
-	service struct {
-		client *http.Client
+	client struct {
+		rbfs *http.Client
 	}
 )
 
 // NewClient creates a new client to query switch metrics.
-func NewClient(client *http.Client) Metrics {
-	return &service{client}
+func NewClient(c *http.Client) Client {
+	return &client{c}
 }
 
-func (s *service) QueryMetric(ctx commons.RbfsContext, metric string) (*Metric, error) {
+func (c *client) QueryMetric(ctx rbfs.RbfsContext, metric string) (*Metric, error) {
 
-	endpoint, err := ctx.GetServiceEndpoint(commons.PrometheusServiceName)
+	endpoint, err := ctx.GetServiceEndpoint(rbfs.PrometheusServiceName)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ func (s *service) QueryMetric(ctx commons.RbfsContext, metric string) (*Metric, 
 		request.Header.Add("Authorization", "Bearer "+accessToken)
 	}
 
-	response, err := s.client.Do(request)
+	response, err := c.rbfs.Do(request)
 	if err != nil {
 		return nil, err
 	}

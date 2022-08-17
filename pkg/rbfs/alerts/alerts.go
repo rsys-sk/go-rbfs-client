@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/rtbrick/go-rbfs-client/pkg/rbfs/commons"
+	"github.com/rtbrick/go-rbfs-client/pkg/rbfs"
 	"github.com/rtbrick/go-rbfs-client/pkg/rbfs/state"
 )
 
@@ -24,25 +24,25 @@ type (
 		DateCreated time.Time `json:"date_created"`
 	}
 
-	// Metrics providess access to the switch metrics.
-	Alerts interface {
+	// Client providess access to the switch metrics.
+	Client interface {
 		// QueryAlerts returns a list of firing alerts.
-		QueryAlerts(ctx commons.RbfsContext) ([]Alert, error)
+		QueryAlerts(ctx rbfs.RbfsContext) ([]Alert, error)
 	}
 
-	service struct {
-		client *http.Client
+	client struct {
+		rbfs *http.Client
 	}
 )
 
 // NewClient creates a new client to query switch alerts.
-func NewClient(client *http.Client) Alerts {
-	return &service{client}
+func NewClient(c *http.Client) Client {
+	return &client{c}
 }
 
-func (s *service) QueryAlerts(ctx commons.RbfsContext) ([]Alert, error) {
+func (c *client) QueryAlerts(ctx rbfs.RbfsContext) ([]Alert, error) {
 
-	endpoint, err := ctx.GetServiceEndpoint(commons.PrometheusServiceName)
+	endpoint, err := ctx.GetServiceEndpoint(rbfs.PrometheusServiceName)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ func (s *service) QueryAlerts(ctx commons.RbfsContext) ([]Alert, error) {
 		request.Header.Add("Authorization", "Bearer "+accessToken)
 	}
 
-	response, err := s.client.Do(request)
+	response, err := c.rbfs.Do(request)
 	if err != nil {
 		return nil, err
 	}

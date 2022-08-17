@@ -15,7 +15,7 @@ import (
 
 	"github.com/stretchr/testify/mock"
 
-	"github.com/rtbrick/go-rbfs-client/pkg/rbfs/commons"
+	"github.com/rtbrick/go-rbfs-client/pkg/rbfs"
 	"github.com/rtbrick/go-rbfs-client/pkg/rbfs/state"
 	"github.com/stretchr/testify/require"
 )
@@ -23,16 +23,16 @@ import (
 func expectedPing(hostname string) *state.ActionsApiPingOpts {
 
 	return &state.ActionsApiPingOpts{
-		DestinationIp:   commons.OptionalIP(nil),
-		DestinationAaaa: commons.OptionalString(""),
-		DestinationA:    commons.OptionalString(hostname),
-		SourceIp:        commons.OptionalIP(nil),
-		SourceIfl:       commons.OptionalString(""),
-		Count:           commons.OptionalInt(5),
-		Interval:        commons.OptionalFloat32(1.0),
-		InstanceName:    commons.OptionalString("default"),
-		Size:            commons.OptionalInt(56),
-		Ttl:             commons.OptionalInt(64),
+		DestinationIp:   rbfs.OptionalIP(nil),
+		DestinationAaaa: rbfs.OptionalString(""),
+		DestinationA:    rbfs.OptionalString(hostname),
+		SourceIp:        rbfs.OptionalIP(nil),
+		SourceIfl:       rbfs.OptionalString(""),
+		Count:           rbfs.OptionalInt(5),
+		Interval:        rbfs.OptionalFloat32(1.0),
+		InstanceName:    rbfs.OptionalString("default"),
+		Size:            rbfs.OptionalInt(56),
+		Ttl:             rbfs.OptionalInt(64),
 	}
 
 }
@@ -41,7 +41,7 @@ func expectedPing(hostname string) *state.ActionsApiPingOpts {
 func Test_defaultService_Run(t *testing.T) {
 	endpoint, err := url.Parse("http://localhost:8080")
 	require.NoError(t, err)
-	ctx, err := commons.NewRbfsContext(context.Background(), endpoint, "test")
+	ctx, err := rbfs.NewRbfsContext(context.Background(), endpoint, "test")
 	require.NoError(t, err)
 
 	tests := []struct {
@@ -105,7 +105,7 @@ func Test_defaultService_Run(t *testing.T) {
 func Test_defaultService_RunAll(t *testing.T) {
 	endpoint, err := url.Parse("http://localhost:8080")
 	require.NoError(t, err)
-	ctx, err := commons.NewRbfsContext(context.Background(), endpoint, "test")
+	ctx, err := rbfs.NewRbfsContext(context.Background(), endpoint, "test")
 	require.NoError(t, err)
 
 	tests := []struct {
