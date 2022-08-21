@@ -16,6 +16,8 @@ type (
 
 	// Alert describes a single switch alert.
 	Alert struct {
+		// Holds the alert rule name
+		Name string `json:"name"`
 		// Summary holds the alert summary.
 		Summary string `json:"summary"`
 		// Level holds the alert level.
@@ -82,14 +84,18 @@ func (c *client) QueryAlerts(ctx rbfs.RbfsContext) ([]Alert, error) {
 					if state == "firing" {
 						annotations := item["annotations"].(map[string]interface{})
 						if level, ok := annotations["level"].(string); ok {
+							labels := item["labels"].(map[string]interface{})
+							name, _ := labels["alertname"].(string)
 							summary, _ := annotations["summary"].(string)
 							activeAt, _ := item["activeAt"].(string)
+
 							var dateCreated time.Time
 							if activeAt != "" {
 								dateCreated, _ = time.Parse(time.RFC3339Nano, activeAt)
 							}
 							l, _ := strconv.Atoi(level)
 							a := Alert{
+								Name:        name,
 								Summary:     summary,
 								Level:       l,
 								DateCreated: dateCreated,
