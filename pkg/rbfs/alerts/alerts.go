@@ -16,8 +16,8 @@ type (
 
 	// Alert describes a single switch alert.
 	Alert struct {
-		// Holds the alert rule name
-		Name string `json:"name"`
+		// AlertName holds the alert rule name
+		AlertName string `json:"name"`
 		// Summary holds the alert summary.
 		Summary string `json:"summary"`
 		// Level holds the alert level.
@@ -95,7 +95,7 @@ func (c *client) QueryAlerts(ctx rbfs.RbfsContext) ([]Alert, error) {
 							}
 							l, _ := strconv.Atoi(level)
 							a := Alert{
-								Name:        name,
+								AlertName:   name,
 								Summary:     summary,
 								Level:       l,
 								DateCreated: dateCreated,
