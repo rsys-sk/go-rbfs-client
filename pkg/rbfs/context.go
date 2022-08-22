@@ -33,6 +33,8 @@ type (
 
 		// GetServiceEndpoint computes the REST API endpoint for the given service.
 		GetServiceEndpoint(ServiceName) (*url.URL, error)
+		// GetCtrldElementEndpoint computes the REST API for the given element API path.
+		GetCtrldElementEndpoint(string) (*url.URL, error)
 	}
 
 	rbfsContext struct {
@@ -92,4 +94,15 @@ func (r *rbfsContext) GetServiceEndpoint(serviceName ServiceName) (*url.URL, err
 	serviceEndpoint := fmt.Sprintf("%v/api/v1/rbfs/elements/%v/services/%v/proxy", ctrldEndpoint, elementName, serviceName)
 
 	return url.Parse(serviceEndpoint)
+}
+
+func (r *rbfsContext) GetCtrldElementEndpoint(path string) (*url.URL, error) {
+	if path == "" {
+		return nil, fmt.Errorf("empty path is not supported")
+	}
+	ctrldEndpoint := r.Value(ctrldURLKey).(*url.URL)
+	elementName := r.Value(elementNameKey).(string)
+	endpoint := fmt.Sprintf("%v/api/v1/ctrld/elements/%v/%v", ctrldEndpoint, elementName, path)
+
+	return url.Parse(endpoint)
 }
