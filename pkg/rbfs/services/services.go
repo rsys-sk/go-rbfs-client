@@ -11,7 +11,7 @@ import (
 
 type (
 
-	// Service describes a running brick daemon or o
+	// Service describes a running brick daemon or services.
 	Service struct {
 		// ServiceName holds the daemon name.
 		ServiceName string `json:"service_name"`
@@ -32,7 +32,7 @@ type (
 	}
 )
 
-// NewClient creates a new client to query switch metrics.
+// NewClient creates a new client to query running RBFS services and daemons.
 func NewClient(c *http.Client) Client {
 	return &client{c}
 }
@@ -43,8 +43,6 @@ func (c *client) ListServices(ctx rbfs.RbfsContext) ([]Service, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	fmt.Println(endpoint)
 
 	request, err := http.NewRequestWithContext(ctx, http.MethodGet, endpoint.String(), nil)
 

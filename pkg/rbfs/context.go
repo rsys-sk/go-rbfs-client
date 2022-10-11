@@ -9,6 +9,7 @@ import (
 	"context"
 	"fmt"
 	"net/url"
+	"strings"
 
 	"github.com/rtbrick/go-rbfs-client/pkg/rbfs/state"
 )
@@ -33,8 +34,10 @@ type (
 
 		// GetServiceEndpoint computes the REST API endpoint for the given service.
 		GetServiceEndpoint(ServiceName) (*url.URL, error)
-		// GetCtrldElementEndpoint computes the REST API for the given element API path.
-		GetCtrldElementEndpoint(string) (*url.URL, error)
+		// GetCtrldElementsEndpoint computes the REST API for the elements collection.
+		GetCtrldElementsEndpoint() (*url.URL, error)
+		// GetCtrldElementEndpoint computes the REST API endpoint for the element resource accessible via the given path segments.
+		GetCtrldElementEndpoint(...string) (*url.URL, error)
 	}
 
 	rbfsContext struct {
@@ -96,13 +99,20 @@ func (r *rbfsContext) GetServiceEndpoint(serviceName ServiceName) (*url.URL, err
 	return url.Parse(serviceEndpoint)
 }
 
-func (r *rbfsContext) GetCtrldElementEndpoint(path string) (*url.URL, error) {
-	if path == "" {
-		return nil, fmt.Errorf("empty path is not supported")
-	}
+func (r *rbfsContext) GetCtrldElementsEndpoint() (*url.URL, error) {
+	ctrldEndpoint := r.Value(ctrldURLKey).(*url.URL)
+	endpoint := fmt.Sprintf("%v/api/v1/ctrld/elements", ctrldEndpoint)
+	return url.Parse(endpoint)
+}
+
+func (r *rbfsContext) GetCtrldElementEndpoint(pathSegments ...string) (*url.URL, error) {
 	ctrldEndpoint := r.Value(ctrldURLKey).(*url.URL)
 	elementName := r.Value(elementNameKey).(string)
-	endpoint := fmt.Sprintf("%v/api/v1/ctrld/elements/%v/%v", ctrldEndpoint, elementName, path)
-
+	var endpoint = ""
+	if len(pathSegments) > 0 {
+		endpoint = fmt.Sprintf("%v/api/v1/ctrld/elements/%v/%v", ctrldEndpoint, elementName, strings.Join(pathSegments, "/"))
+	} else {
+		endpoint = fmt.Sprintf("%v/api/v1/ctrld/elements/%v", ctrldEndpoint, elementName)
+	}
 	return url.Parse(endpoint)
 }
