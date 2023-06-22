@@ -20,8 +20,8 @@ type PhysicalInterfaceSummaryRefLogicals struct {
 	AdministrativeState string `json:"administrative_state,omitempty"`
 	// The operational interface state.
 	OperationalState string `json:"operational_state,omitempty"`
-	// The assigned IPv4 address.
-	Ipv4Address string `json:"ipv4_address,omitempty"`
-	// The assigned IPv6 address.
-	Ipv6Address string `json:"ipv6_address,omitempty"`
+	// The assigned IPv4 addresses.
+	Ipv4Addresses []string `json:"ipv4_addresses,omitempty"`
+	// The assigned IPv6 addresses.
+	Ipv6Addresses []string `json:"ipv6_addresses,omitempty"`
 }

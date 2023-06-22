@@ -1317,18 +1317,20 @@ Lists all matching active subscriber sessions.
  * @param optional nil or *SubscriberApiGetSubscribersOpts - Optional Parameters:
      * @param "IfpName" (optional.String) -  The physical interface name.
      * @param "IflName" (optional.String) -  The name of the subscriber&#x27;s logical interface.
-     * @param "OuterVlan" (optional.Int) -  Outer VLAN tag.
-     * @param "AnpVlan" (optional.Int) -  ANP VLAN tag (for L2BSA subscribers).
-     * @param "InnerVlan" (optional.Int) -  Inner VLAN tag.
-     * @param "SubscriberId" (optional.Interface of int) -  A unique subscriber ID
+     * @param "OuterVlan" (optional.Int) -  The outer VLAN tag.
+     * @param "AnpVlan" (optional.Int) -  The ANP-VLAN ID (for L2BSA subscribers).
+     * @param "InnerVlan" (optional.Int) -  The inner VLAN tag.
+     * @param "SubscriberId" (optional.Interface of int) -  The unique subscriber ID.
      * @param "AccountingSessionId" (optional.String) -  The accounting session ID of the subscriber session.
-     * @param "SubscriberUserName" (optional.String) -  The subscriber user name of the subscriber session.
+     * @param "SubscriberUserName" (optional.String) -  The subscriber&#x27;s user name.
      * @param "SubscriberUserNameMatches" (optional.String) -  Regular expression the subscriber user name must match.
-     * @param "AgentRemoteId" (optional.String) -  The agent remote ID of the subscriber sessions.
+     * @param "AgentRemoteId" (optional.String) -  The agent remote ID of the subscriber session.
      * @param "AgentRemoteIdMatches" (optional.String) -  Regular expression the agent remote ID must match.
-     * @param "AgentCircuitId" (optional.String) -  The agent circuit ID of the subscriber sessions.
+     * @param "AgentCircuitId" (optional.String) -  The agent circuit ID of the subscriber session.
      * @param "AgentCircuitIdMatches" (optional.String) -  Regular expression the agent circuit ID must match.
-     * @param "AccessType" (optional.Interface of SubscriberAccessType) -
+     * @param "AccessType" (optional.Interface of SubscriberAccessType) -  The access type of the subscriber session.
+     * @param "Limit" (optional.Int) -  Limits the number of returned subscriber sessions to the given value.
+     * @param "Cursor" (optional.String) -  Starts reading subscriber sessions from the given subscriber ID.
 @return []SubscriberSessionRef
 */
 
@@ -1347,6 +1349,8 @@ type SubscriberApiGetSubscribersOpts struct {
 	AgentCircuitId            optional.String
 	AgentCircuitIdMatches     optional.String
 	AccessType                optional.Interface
+	Limit                     optional.Int
+	Cursor                    optional.String
 }
 
 func (a *SubscriberApiService) GetSubscribers(ctx context.Context, localVarOptionals *SubscriberApiGetSubscribersOpts) ([]SubscriberSessionRef, *http.Response, error) {
@@ -1406,6 +1410,12 @@ func (a *SubscriberApiService) GetSubscribers(ctx context.Context, localVarOptio
 	}
 	if localVarOptionals != nil && localVarOptionals.AccessType.IsSet() {
 		localVarQueryParams.Add("access_type", parameterToString(localVarOptionals.AccessType.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Cursor.IsSet() {
+		localVarQueryParams.Add("cursor", parameterToString(localVarOptionals.Cursor.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}

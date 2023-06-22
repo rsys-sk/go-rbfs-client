@@ -24,14 +24,14 @@ type LogicalInterface struct {
 	OperationalState string `json:"operational_state,omitempty"`
 	// The administrative interface state.
 	AdministrativeState string `json:"administrative_state,omitempty"`
-	// The assigned IPv4 address.
-	Ipv4Address string `json:"ipv4_address,omitempty"`
+	// The assigned IPv4 addresses.
+	Ipv4Addresses []string `json:"ipv4_addresses,omitempty"`
 	// Whether IPv4 is enabled or disabled on this logical interface.
 	Ipv4State string `json:"ipv4_state,omitempty"`
 	// IPv4 maximum transfer unit (MTU) size in bytes.
 	Ipv4Mtu int `json:"ipv4_mtu,omitempty"`
-	// The assigned IPv6 address.
-	Ipv6Address string `json:"ipv6_address,omitempty"`
+	// The assigned IPv6 addresses.
+	Ipv6Addresses []string `json:"ipv6_addresses,omitempty"`
 	// Whether IPv6 is enabled or disabled on this logical interface.
 	Ipv6State string `json:"ipv6_state,omitempty"`
 	// IPv6 maximum transfer unit (MTU) size in bytes.

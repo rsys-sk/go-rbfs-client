@@ -12,7 +12,7 @@ package state
 // The ephemeral configuration of a L2BSA service. This configuration is lost if the switch reboots.
 type L2bsaServiceConfig struct {
 	IfpName string `json:"ifp_name,omitempty"`
-	// The ANP VLAN ID.
+	// The ANP-VLAN ID.
 	AnpVlan int `json:"anp_vlan,omitempty"`
 	// The AAA profile name.
 	AaaProfileName string                 `json:"aaa_profile_name,omitempty"`

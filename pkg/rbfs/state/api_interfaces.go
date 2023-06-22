@@ -985,9 +985,16 @@ func (a *InterfacesApiService) GetPhysicalInterface(ctx context.Context, ifpName
 InterfacesApiService Lists all physical interfaces.
 List all physical interfaces and their respective operational state.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *InterfacesApiGetPhysicalInterfacesOpts - Optional Parameters:
+     * @param "Counters" (optional.Bool) -  A flag whether counter values shall be included.
 @return []PhysicalInterface
 */
-func (a *InterfacesApiService) GetPhysicalInterfaces(ctx context.Context) ([]PhysicalInterface, *http.Response, error) {
+
+type InterfacesApiGetPhysicalInterfacesOpts struct {
+	Counters optional.Bool
+}
+
+func (a *InterfacesApiService) GetPhysicalInterfaces(ctx context.Context, localVarOptionals *InterfacesApiGetPhysicalInterfacesOpts) ([]PhysicalInterface, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -1003,6 +1010,9 @@ func (a *InterfacesApiService) GetPhysicalInterfaces(ctx context.Context) ([]Phy
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Counters.IsSet() {
+		localVarQueryParams.Add("counters", parameterToString(localVarOptionals.Counters.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 

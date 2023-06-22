@@ -9,11 +9,17 @@
  */
 package state
 
+import (
+	"time"
+)
+
 // A physical interface with its optics and counters.
 type PhysicalInterfaceDetail struct {
 	IfpName string `json:"ifp_name,omitempty"`
 	// The physical interface alias.
 	IfpAlias string `json:"ifp_alias,omitempty"`
+	// The interface index (ifIndex)
+	IfpIndex int `json:"ifp_index,omitempty"`
 	// The physical interface type.
 	IfpType string `json:"ifp_type,omitempty"`
 	// The MAC address of the physical interface.
@@ -30,8 +36,10 @@ type PhysicalInterfaceDetail struct {
 	OperationalState string `json:"operational_state,omitempty"`
 	// The administrative interface state.
 	AdministrativeState string `json:"administrative_state,omitempty"`
+	// Carrier transitions count.
+	CarrierTransitions int `json:"carrier_transitions,omitempty"`
 	// Timestamp since when this interface is UP.
-	UpTime      string                     `json:"up_time,omitempty"`
+	UpTime      time.Time                  `json:"up_time,omitempty"`
 	Optics      *Optic                     `json:"optics,omitempty"`
 	Lag         *LinkAggregationGroup      `json:"lag,omitempty"`
 	IfpCounters *PhysicalInterfaceCounters `json:"ifp_counters,omitempty"`

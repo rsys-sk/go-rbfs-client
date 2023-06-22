@@ -1282,7 +1282,7 @@ paths:
           type: "string"
       - in: query
         name: outer_vlan
-        description: Outer VLAN tag.
+        description: The outer VLAN tag.
         required: false
         schema:
           type: integer
@@ -1290,7 +1290,7 @@ paths:
           maximum: 4094
       - in: query
         name: anp_vlan
-        description: ANP VLAN tag (for L2BSA subscribers).
+        description: The ANP-VLAN ID (for L2BSA subscribers).
         required: false
         schema:
           type: integer
@@ -1298,7 +1298,7 @@ paths:
           maximum: 4094
       - in: query
         name: inner_vlan
-        description: Inner VLAN tag.
+        description: The inner VLAN tag.
         required: false
         schema:
           type: integer
@@ -1306,7 +1306,7 @@ paths:
           maximum: 4094
       - in: query
         name: subscriber_id
-        description: A unique subscriber ID
+        description: The unique subscriber ID.
         required: false
         schema:
           $ref: "#/components/schemas/SubscriberId"
@@ -1318,7 +1318,7 @@ paths:
           type: string
       - in: query
         name: subscriber_user_name
-        description: The subscriber user name of the subscriber session.
+        description: The subscriber's user name.
         required: false
         schema:
           type: string
@@ -1330,7 +1330,7 @@ paths:
           type: string
       - in: query
         name: agent_remote_id
-        description: The agent remote ID of the subscriber sessions.
+        description: The agent remote ID of the subscriber session.
         required: false
         schema:
           type: string
@@ -1342,7 +1342,7 @@ paths:
           type: string
       - in: query
         name: agent_circuit_id
-        description: The agent circuit ID of the subscriber sessions.
+        description: The agent circuit ID of the subscriber session.
         required: false
         schema:
           type: string
@@ -1354,9 +1354,22 @@ paths:
           type: string
       - in: query
         name: access_type
+        description: The access type of the subscriber session.
         required: false
         schema:
           $ref: "#/components/schemas/SubscriberAccessType"
+      - in: query
+        name: limit
+        description: Limits the number of returned subscriber sessions to the given value.
+        required: false
+        schema:
+          type: integer
+      - in: query
+        name: cursor
+        description: Starts reading subscriber sessions from the given subscriber ID.
+        required: false
+        schema:
+          type: string
       responses:
         200:
           description: List of matching subscriber sessions.
@@ -2381,6 +2394,14 @@ paths:
         List all physical interfaces and their respective operational state.
       tags:
       - Interfaces
+      parameters:
+      - in: query
+        name: counters
+        description: A flag whether counter values shall be included.
+        required: false
+        schema:
+          type: boolean
+          default: false
       responses:
         200:
           description: List of physical interfaces.
@@ -3341,10 +3362,8 @@ paths:
             schema:
               $ref: "#/components/schemas/L2bsaServiceConfig"
       responses:
-        201:
-          description: A new L2BSA service got created.          
         204:
-          description: An existing L2BSA service got updated.
+          description: The L2BSA service got stored.
         400:
           $ref: "#/components/responses/400"
         401:
@@ -3562,7 +3581,7 @@ paths:
           type: string
       - in: path
         name: s_vlan
-        description: The ANP VLAN ID.
+        description: The S-VLAN ID.
         required: true
         schema:
           type: integer
@@ -3603,7 +3622,7 @@ paths:
           type: string
       - in: path
         name: s_vlan
-        description: The ANP VLAN ID.
+        description: The S-VLAN ID.
         required: true
         schema:
           type: integer
@@ -3614,10 +3633,8 @@ paths:
             schema:
               $ref: "#/components/schemas/A10nspConfig"
       responses:
-        201:
-          description: L2X endpoint created.
         204:
-          description: L2X endpoint updated.
+          description: L2X endpoint stored.
         400:
           $ref: "#/components/responses/400"
         401:
@@ -3643,7 +3660,7 @@ paths:
           type: string
       - in: path
         name: s_vlan
-        description: The ANP VLAN ID.
+        description: The S-VLAN ID.
         required: true
         schema:
           type: integer
@@ -4447,6 +4464,7 @@ components:
         last_state_transition:
           description: Last BGP state transition.
           type: string
+          format: date-time
         last_reset_reason:
           description: Last session reset reason.
           type: string        
@@ -4523,6 +4541,7 @@ components:
         last_state_transition:
           description: Last BGP state transition.
           type: string
+          format: date-time
         last_reset_reason:
           description: The reason for the last BGP reset.
           type: string
@@ -4987,6 +5006,7 @@ components:
         last_state_transition:
           description: The timestamp of the last FSM state transition.
           type: string
+          format: date-time
         subscriber_termination_reason:
           description: Reason why the subscriber session got terminated.
           type: string
@@ -5207,9 +5227,11 @@ components:
         accounting_start_time:
           description: Timestamp when the accounting session has started.
           type: string
+          format: date-time
         accounting_stop_time:
           description: Timestamp when the accounting session has stopped.
           type: string
+          format: date-time
     SubscriberAdjustedAccounting:
       description: Current adjusted accounting values.
       type: object
@@ -5515,6 +5537,7 @@ components:
         up_time:
           description: Timestamp since when this interface is UP.
           type: string
+          format: date-time
         lag:
           $ref: "#/components/schemas/LinkAggregationGroup"
         logicals:
@@ -5541,14 +5564,18 @@ components:
               enum:
               - UP
               - DOWN
-            ipv4_address:
-              description: The assigned IPv4 address.
-              type: string
-              format: ipv4
-            ipv6_address:
-              description: The assigned IPv6 address.
-              type: string
-              format: ipv6
+            ipv4_addresses:
+              description: The assigned IPv4 addresses.
+              type: array
+              items:
+                type: string
+                format: ipv4
+            ipv6_addresses:
+              description: The assigned IPv6 addresses.
+              type: array
+              items:
+                type: string
+                format: ipv6
     PhysicalInterfaceSummary:
       type: object
       description: A physical interface
@@ -5594,6 +5621,7 @@ components:
         up_time:
           description: Timestamp since when this interface is UP.
           type: string
+          format: date-time
         ifls:
           description: The logical interfaces defined on this physical interface.
           type: array
@@ -5620,19 +5648,19 @@ components:
               description: Total number of transmitted bytes.
               type: integer
             packets_sent:
-              description: Total count of transmitted packets.
+              description: Total number of transmitted packets.
               type: integer
-            unicast_packets_sent: 
-              description: Total count of transmitted unicast packets.
+            unicast_packets_sent:
+              description: Total number of transmitted unicast packets.
               type: integer
-            multicast_packets_sent: 
-              description: Total count of transmitted multicast packets.
+            multicast_packets_sent:
+              description: Total number of transmitted multicast packets.
               type: integer
-            broadcast_packets_sent: 
-              description: Total count of transmitted broadcast packets.
+            broadcast_packets_sent:
+              description: Total number of transmitted broadcast packets.
               type: integer
             packets_dropped:
-              description: Total count of dropped egress packets.
+              description: Total number of dropped packets.
               type: integer
         rx:
           type: object
@@ -5644,18 +5672,18 @@ components:
             packets_received:
               description: Total number of received packets.
               type: integer
-            unicast_packets_received: 
-              description: Total count of received unicast packets.
+            unicast_packets_received:
+              description: Total number of received. unicast packets.
               type: integer
-            multicast_packets_received: 
-              description: Total count of received multicast packets.
+            multicast_packets_received:
+              description: Total number of received multicast packets.
               type: integer
-            broadcast_packets_received: 
+            broadcast_packets_received:
               description: Total count of received broadcast packets.
               type: integer
             packets_dropped:
-              description: Total count of dropped ingress packets.
-              type: integer            
+              description: Total count of dropped packets.
+              type: integer
     PhysicalInterface:
       type: object
       description: A physical interface.
@@ -5665,6 +5693,9 @@ components:
         ifp_alias:
           description: The physical interface alias.
           type: string
+        ifp_index:
+          description: The interface index (ifIndex)
+          type: integer
         ifp_type:
           description: The physical interface type.
           type: string
@@ -5701,11 +5732,17 @@ components:
           enum:
           - UP
           - DOWN
+        carrier_transitions:
+          description: Carrier transitions count.
+          type: integer
         up_time:
           description: Timestamp since when this interface is UP.
           type: string
+          format: date-time
         lag:
           $ref: "#/components/schemas/LinkAggregationGroup"
+        ifp_counters:
+           $ref: "#/components/schemas/PhysicalInterfaceCounters"
     PhysicalInterfaceDetail:
       type: object
       description: A physical interface with its optics and counters.
@@ -5715,6 +5752,9 @@ components:
         ifp_alias:
           description: The physical interface alias.
           type: string
+        ifp_index:
+          description: The interface index (ifIndex)
+          type: integer
         ifp_type:
           description: The physical interface type.
           type: string
@@ -5751,9 +5791,13 @@ components:
           enum:
           - UP
           - DOWN
+        carrier_transitions:
+          description: Carrier transitions count.
+          type: integer
         up_time:
           description: Timestamp since when this interface is UP.
           type: string
+          format: date-time
         optics:
           $ref: "#/components/schemas/Optic"
         lag:
@@ -5791,10 +5835,12 @@ components:
           enum:
           - UP
           - DOWN
-        ipv4_address:
-          description: The assigned IPv4 address.
-          type: string
-          format: ipv4
+        ipv4_addresses:
+          description: The assigned IPv4 addresses.
+          type: array
+          items:
+            type: string
+            format: ipv4
         ipv4_state:
           description: Whether IPv4 is enabled or disabled on this logical interface.
           type: string
@@ -5804,10 +5850,12 @@ components:
         ipv4_mtu:
           description: IPv4 maximum transfer unit (MTU) size in bytes.
           type: integer
-        ipv6_address:
-          description: The assigned IPv6 address.
-          type: string
-          format: ipv6
+        ipv6_addresses:
+          description: The assigned IPv6 addresses.
+          type: array
+          items:
+            type: string
+            format: ipv6
         ipv6_state:
           description: Whether IPv6 is enabled or disabled on this logical interface.
           type: string
@@ -6315,6 +6363,7 @@ components:
         last_state_transition:
           description: Last state transition time.
           type: string
+          format: date-time
         isis_adjacency_type:
           description: The IS-IS adjacency type.
           type: string
@@ -6387,6 +6436,7 @@ components:
             up_time:
               description: Since when this adjacency is UP.
               type: string
+              format: date-time
             level_mismatch_error_count:
               description: Count of adjacency down due to level mismatch
               type: integer
@@ -6708,6 +6758,7 @@ components:
             up_time:
               description: Time the OSPF neighbor is in Up state.
               type: string
+              format: date-time
             dead_interval:
               description: OSPF dead interval of the neighbor.
               type: integer
@@ -6771,9 +6822,11 @@ components:
         last_sent:
           description: Time of last LLDP packet sent to neighbor.
           type: string
+          format: date-time
         last_received:
           description: Time of last LLDP packet received from neighbor.
           type: string
+          format: date-time
         neighbor:  
           description: Parameters of remote neighbor.
           type: object
@@ -6858,7 +6911,7 @@ components:
         ifp_name:
           $ref: "#/components/schemas/IfpName"
         anp_vlan:
-          description: The ANP VLAN ID.
+          description: The ANP-VLAN ID.
           type: integer
           minimum: 1
           maximum: 4094
@@ -7182,6 +7235,7 @@ components:
         last_state_transition: 
           description: Last PIM neighbor state transition.
           type: string
+          format: date-time
         ifl_name:
           $ref: "#/components/schemas/IflName" 
         pim_ifl_state: 
@@ -7393,6 +7447,7 @@ components:
         manufacture_date:
           description: The date when the system has been manufactured.
           type: string
+          format: date-time
         manufacturer:
           description: The manufacturer name.
           type: string
