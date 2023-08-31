@@ -9,6 +9,10 @@
  */
 package state
 
+import (
+	"time"
+)
+
 // Next hop details.
 type NextHops struct {
 	// IP address of the next hop.
@@ -29,4 +33,6 @@ type NextHops struct {
 	LookupAfi string `json:"lookup_afi,omitempty"`
 	// Sub-address family of the next hop.
 	LookupSafi string `json:"lookup_safi,omitempty"`
+	// Next hop creation time.
+	DateCreated time.Time `json:"date_created,omitempty"`
 }

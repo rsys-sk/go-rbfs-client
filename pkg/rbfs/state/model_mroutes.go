@@ -9,6 +9,10 @@
  */
 package state
 
+import (
+	"time"
+)
+
 // Multicast route table entries for a multicast group.
 type Mroutes struct {
 	// IPv4 group address with mask. Applicable to AFI 'ipv4' only
@@ -26,4 +30,6 @@ type Mroutes struct {
 	// Multicast route type.
 	MulticastRouteType string       `json:"multicast_route_type,omitempty"`
 	NextHops           []McNextHops `json:"next_hops,omitempty"`
+	// Route creation time.
+	DateCreated time.Time `json:"date_created,omitempty"`
 }

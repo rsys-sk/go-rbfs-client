@@ -27,7 +27,8 @@ type SystemApiService service
 /*
 SystemApiService Shows system hardware inventory
 Shows chassis, modules, and optics.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return SystemHardware
 */
 func (a *SystemApiService) GetSystemHardware(ctx context.Context) (SystemHardware, *http.Response, error) {

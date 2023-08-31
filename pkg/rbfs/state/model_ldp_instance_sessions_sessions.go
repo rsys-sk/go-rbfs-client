@@ -9,25 +9,18 @@
  */
 package state
 
-import (
-	"time"
-)
-
-// Route table entries for an IP prefix or MPLS label.
-type Routes struct {
-	// IPv4 address with mask. Applicable to AFI 'ipv4' only
-	Prefix4 string `json:"prefix4,omitempty"`
-	// IPv6 address with mask. Applicable to AFI 'ipv6' only.
-	Prefix6 string `json:"prefix6,omitempty"`
-	// MPLS label value. Applicable to AFI 'mpls' only.
-	Label int `json:"label,omitempty"`
-	// Route distingusher.
-	RouteDistinguisher string `json:"route_distinguisher,omitempty"`
-	// Soure of the route.
-	Source string `json:"source,omitempty"`
-	// Protocol preference.
-	Preference int        `json:"preference,omitempty"`
-	NextHops   []NextHops `json:"next_hops,omitempty"`
-	// Route creation time.
-	DateCreated time.Time `json:"date_created,omitempty"`
+// LDP session
+type LdpInstanceSessionsSessions struct {
+	// Number of LDP sessions in NONEXISTENT state, i.e. session establishment has not started.
+	NonExistent int `json:"non_existent,omitempty"`
+	// Number of LDP sessions in OPENSENT state.
+	OpensentCount int `json:"opensent_count,omitempty"`
+	// Number of LDP sessions in OPENREC state.
+	OpenrecCount int `json:"openrec_count,omitempty"`
+	// Number of initialized LDP session.
+	InitializedCount int `json:"initialized_count,omitempty"`
+	// Number of operational LDP sessions.
+	OperationalCount int `json:"operational_count,omitempty"`
+	// List of LDP sessions.
+	Sessions []LdpSession `json:"sessions,omitempty"`
 }

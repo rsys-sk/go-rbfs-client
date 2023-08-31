@@ -23,15 +23,16 @@ var (
 	_ context.Context
 )
 
-type BGPApiService service
+type LDPApiService service
 
 /*
-BGPApiService Clears all instance BGP peerings.
-Clears all BGP peerings associated with the specified BGP instance. The API confirms that the clear request has been accepted and tells RBFS to re-establish the BGP peerings.   This is an asynchronous operation.
+LDPApiService Clears a LDP session
+Clears the LDP sessions and statistics for the LDP session with the given peer.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param instanceName BGP routing instance name.
+  - @param instanceName The routing instance name.
+  - @param peerIp The the peer IPv4 or IPv4 address.
 */
-func (a *BGPApiService) ClearBGPInstancePeerings(ctx context.Context, instanceName string) (*http.Response, error) {
+func (a *LDPApiService) ClearLDPSession(ctx context.Context, instanceName string, peerIp string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
@@ -40,74 +41,7 @@ func (a *BGPApiService) ClearBGPInstancePeerings(ctx context.Context, instanceNa
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/bgp/instances/{instance_name}/peerings/clear"
-	localVarPath = strings.Replace(localVarPath, "{"+"instance_name"+"}", fmt.Sprintf("%v", instanceName), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
-	if localVarHttpContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHttpContentType
-	}
-
-	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{}
-
-	// set Accept header
-	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
-	if localVarHttpHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHttpResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHttpResponse == nil {
-		return localVarHttpResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
-	localVarHttpResponse.Body.Close()
-	if err != nil {
-		return localVarHttpResponse, err
-	}
-
-	if localVarHttpResponse.StatusCode >= 300 {
-		newErr := GenericSwaggerError{
-			body:  localVarBody,
-			error: localVarHttpResponse.Status,
-		}
-		return localVarHttpResponse, newErr
-	}
-
-	return localVarHttpResponse, nil
-}
-
-/*
-BGPApiService Clears a BGP peering.
-Clears a BGP peerings. The management API confirms that the clear request has been accepted and delegates the clear request to RBFS. This is an asynchronous operation.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param instanceName BGP routing instance name.
-  - @param peerIp Peer IPv4 or peer IPv6 address.
-*/
-func (a *BGPApiService) ClearBGPPeering(ctx context.Context, instanceName string, peerIp string) (*http.Response, error) {
-	var (
-		localVarHttpMethod = strings.ToUpper("Post")
-		localVarPostBody   interface{}
-		localVarFileName   string
-		localVarFileBytes  []byte
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/bgp/instances/{instance_name}/peerings/{peer_ip}/clear"
+	localVarPath := a.client.cfg.BasePath + "/ldp/instances/{instance_name}/sessions/{peer_ip}/clear"
 	localVarPath = strings.Replace(localVarPath, "{"+"instance_name"+"}", fmt.Sprintf("%v", instanceName), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"peer_ip"+"}", fmt.Sprintf("%v", peerIp), -1)
 
@@ -160,24 +94,90 @@ func (a *BGPApiService) ClearBGPPeering(ctx context.Context, instanceName string
 }
 
 /*
-BGPApiService Get BGP instance details.
-Provides BGP instance details including  information about the configured peerings.
+LDPApiService Clears all LDP sessions.
+Clears all LDP sessions associated with this instance.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param instanceName BGP routing instance name.
-
-@return BgpInstance
+  - @param instanceName The routing instance name.
 */
-func (a *BGPApiService) GetBGPInstance(ctx context.Context, instanceName string) (BgpInstance, *http.Response, error) {
+func (a *LDPApiService) ClearLDPSessions(ctx context.Context, instanceName string) (*http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/ldp/instances/{instance_name}/sessions/clear"
+	localVarPath = strings.Replace(localVarPath, "{"+"instance_name"+"}", fmt.Sprintf("%v", instanceName), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		return localVarHttpResponse, newErr
+	}
+
+	return localVarHttpResponse, nil
+}
+
+/*
+LDPApiService Returns the LDP sessions and statistics.
+Returns the LDP sessions and statistics for the routing instance with the given name.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param instanceName The routing instance name.
+
+@return LdpInstanceSessions
+*/
+func (a *LDPApiService) GetLDPInstance(ctx context.Context, instanceName string) (LdpInstanceSessions, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue BgpInstance
+		localVarReturnValue LdpInstanceSessions
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/bgp/instances/{instance_name}"
+	localVarPath := a.client.cfg.BasePath + "/ldp/instances/{instance_name}"
 	localVarPath = strings.Replace(localVarPath, "{"+"instance_name"+"}", fmt.Sprintf("%v", instanceName), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -231,7 +231,7 @@ func (a *BGPApiService) GetBGPInstance(ctx context.Context, instanceName string)
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v BgpInstance
+			var v LdpInstanceSessions
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -247,23 +247,23 @@ func (a *BGPApiService) GetBGPInstance(ctx context.Context, instanceName string)
 }
 
 /*
-BGPApiService Lists all BGP instances.
-Lists all BGP instances, including  auto-discovered fabric peerings.
+LDPApiService Lists all instances running LDP.
+Returns all routing instances running LDP with some LDP statistics.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
-@return []BgpInstanceRef
+@return LdpInstanceRef
 */
-func (a *BGPApiService) GetBGPInstances(ctx context.Context) ([]BgpInstanceRef, *http.Response, error) {
+func (a *LDPApiService) GetLDPInstances(ctx context.Context) (LdpInstanceRef, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue []BgpInstanceRef
+		localVarReturnValue LdpInstanceRef
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/bgp/instances"
+	localVarPath := a.client.cfg.BasePath + "/ldp/instances"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -316,7 +316,7 @@ func (a *BGPApiService) GetBGPInstances(ctx context.Context) ([]BgpInstanceRef, 
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v []BgpInstanceRef
+			var v LdpInstanceRef
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -332,25 +332,25 @@ func (a *BGPApiService) GetBGPInstances(ctx context.Context) ([]BgpInstanceRef, 
 }
 
 /*
-BGPApiService Provides BGP peering details
-Returns BGP peering details including summary statistics  of received and sent prefixes per AFI/SAFI.
+LDPApiService Returns the LDP sessions details
+Returns the LDP sessions and statistics for the LDP session with the given peer.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param instanceName BGP routing instance name.
-  - @param peerIp The BGP peering details.
+  - @param instanceName The routing instance name.
+  - @param peerIp The the peer IPv4 or IPv4 address.
 
-@return BgpPeering
+@return LdpInstanceSession
 */
-func (a *BGPApiService) GetBGPPeering(ctx context.Context, instanceName string, peerIp string) (BgpPeering, *http.Response, error) {
+func (a *LDPApiService) GetLDPSession(ctx context.Context, instanceName string, peerIp string) (LdpInstanceSession, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue BgpPeering
+		localVarReturnValue LdpInstanceSession
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/bgp/instances/{instance_name}/peerings/{peer_ip}"
+	localVarPath := a.client.cfg.BasePath + "/ldp/instances/{instance_name}/sessions/{peer_ip}"
 	localVarPath = strings.Replace(localVarPath, "{"+"instance_name"+"}", fmt.Sprintf("%v", instanceName), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"peer_ip"+"}", fmt.Sprintf("%v", peerIp), -1)
 
@@ -405,7 +405,7 @@ func (a *BGPApiService) GetBGPPeering(ctx context.Context, instanceName string, 
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v BgpPeering
+			var v LdpInstanceSession
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -421,23 +421,23 @@ func (a *BGPApiService) GetBGPPeering(ctx context.Context, instanceName string, 
 }
 
 /*
-BGPApiService Lists all BGP peerings grouped by instance.
-Provides a list of all BGP peerings of all BGP instances including the total count of received and sent prefixes.
+LDPApiService Lists LDP sessions
+Lists LDP sessions grouped by routing instance.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
-@return []BgpInstancePeerings
+@return LdpInstanceSessions
 */
-func (a *BGPApiService) GetBGPPeerings(ctx context.Context) ([]BgpInstancePeerings, *http.Response, error) {
+func (a *LDPApiService) GetLDPSessions(ctx context.Context) (LdpInstanceSessions, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue []BgpInstancePeerings
+		localVarReturnValue LdpInstanceSessions
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/bgp/peerings"
+	localVarPath := a.client.cfg.BasePath + "/ldp/sessions"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -490,7 +490,7 @@ func (a *BGPApiService) GetBGPPeerings(ctx context.Context) ([]BgpInstancePeerin
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v []BgpInstancePeerings
+			var v LdpInstanceSessions
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

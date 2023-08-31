@@ -9,25 +9,21 @@
  */
 package state
 
-import (
-	"time"
-)
-
-// Route table entries for an IP prefix or MPLS label.
-type Routes struct {
-	// IPv4 address with mask. Applicable to AFI 'ipv4' only
-	Prefix4 string `json:"prefix4,omitempty"`
-	// IPv6 address with mask. Applicable to AFI 'ipv6' only.
-	Prefix6 string `json:"prefix6,omitempty"`
-	// MPLS label value. Applicable to AFI 'mpls' only.
-	Label int `json:"label,omitempty"`
-	// Route distingusher.
-	RouteDistinguisher string `json:"route_distinguisher,omitempty"`
-	// Soure of the route.
-	Source string `json:"source,omitempty"`
-	// Protocol preference.
-	Preference int        `json:"preference,omitempty"`
-	NextHops   []NextHops `json:"next_hops,omitempty"`
-	// Route creation time.
-	DateCreated time.Time `json:"date_created,omitempty"`
+type LdpSessionStatisticsSessionIngress struct {
+	// Number of received init messages.
+	Init int `json:"init,omitempty"`
+	// Number of received keep-alive messages.
+	KeepAlive int `json:"keep_alive,omitempty"`
+	// Number of received notify messages.
+	Notify int `json:"notify,omitempty"`
+	// Number of received label mapping messages.
+	LabelMapping int `json:"label_mapping,omitempty"`
+	// Number of received label withdraw messages.
+	LabelWithdraw int `json:"label_withdraw,omitempty"`
+	// Number of received label release messages.
+	LabelRelease int `json:"label_release,omitempty"`
+	// Number of received address messages.
+	LabelAddress int `json:"label_address,omitempty"`
+	// Number of received address withdraw messages.
+	AddressWithdraw int `json:"address_withdraw,omitempty"`
 }

@@ -9,25 +9,10 @@
  */
 package state
 
-import (
-	"time"
-)
-
-// Route table entries for an IP prefix or MPLS label.
-type Routes struct {
-	// IPv4 address with mask. Applicable to AFI 'ipv4' only
-	Prefix4 string `json:"prefix4,omitempty"`
-	// IPv6 address with mask. Applicable to AFI 'ipv6' only.
-	Prefix6 string `json:"prefix6,omitempty"`
-	// MPLS label value. Applicable to AFI 'mpls' only.
-	Label int `json:"label,omitempty"`
-	// Route distingusher.
-	RouteDistinguisher string `json:"route_distinguisher,omitempty"`
-	// Soure of the route.
-	Source string `json:"source,omitempty"`
-	// Protocol preference.
-	Preference int        `json:"preference,omitempty"`
-	NextHops   []NextHops `json:"next_hops,omitempty"`
-	// Route creation time.
-	DateCreated time.Time `json:"date_created,omitempty"`
+// LDP statistics of a routing instance.
+type LdpInstanceStatistics struct {
+	// Link adjacencies count.
+	LinkAdjacenciesCount int `json:"link_adjacencies_count,omitempty"`
+	// Targeted adjacencies count.
+	TargetedAdjacenciesCount int `json:"targeted_adjacencies_count,omitempty"`
 }

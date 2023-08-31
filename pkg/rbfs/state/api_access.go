@@ -384,9 +384,8 @@ func (a *AccessApiService) GetVLANProfiles(ctx context.Context, localVarOptional
 /*
 AccessApiService Runs a VLAN profile configuration batch job.
 Stores and removes all VLAN profiles as specified in the batch.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
 */
 func (a *AccessApiService) ProcessVLANProfilesBatch(ctx context.Context, body VlanProfileBatch) (*http.Response, error) {
 	var (

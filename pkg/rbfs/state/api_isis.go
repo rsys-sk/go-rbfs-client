@@ -28,9 +28,8 @@ type ISISApiService service
 /*
 ISISApiService Clears the IS-IS instance adjacency.
 Clears all IS-IS instance sessions to re-establish them. Watch the IS-IS neighbors state to track the session re-establishment progress.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param instanceName The IS-IS instance name.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param instanceName The IS-IS instance name.
 */
 func (a *ISISApiService) ClearISISInstanceNeighbors(ctx context.Context, instanceName string) (*http.Response, error) {
 	var (
@@ -95,10 +94,9 @@ func (a *ISISApiService) ClearISISInstanceNeighbors(ctx context.Context, instanc
 /*
 ISISApiService Clears all IS-IS neighbors connected through the specified logical interface.
 Clears the IS-IS neighbor to re-establish the adjacency. Watch the neighbor state to track the resetablishment progress.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param instanceName The IS-IS instance name.
- * @param iflName The logical interface the neighbor is connected to.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param instanceName The IS-IS instance name.
+  - @param iflName The logical interface the neighbor is connected to.
 */
 func (a *ISISApiService) ClearISISInterfaceNeighbors(ctx context.Context, instanceName string, iflName string) (*http.Response, error) {
 	var (
@@ -164,8 +162,9 @@ func (a *ISISApiService) ClearISISInterfaceNeighbors(ctx context.Context, instan
 /*
 ISISApiService Shows IS-IS instance details.
 Shows the details of an IS-IS instance including the discovered neighbors.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param instanceName The IS-IS instance name.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param instanceName The IS-IS instance name.
+
 @return IsisInstance
 */
 func (a *ISISApiService) GetISISInstance(ctx context.Context, instanceName string) (IsisInstance, *http.Response, error) {
@@ -250,7 +249,8 @@ func (a *ISISApiService) GetISISInstance(ctx context.Context, instanceName strin
 /*
 ISISApiService Lists all IS-IS instances.
 Lists all IS-IS instances including administrative and operational state information.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return []IsisInstanceRef
 */
 func (a *ISISApiService) GetISISInstances(ctx context.Context) ([]IsisInstanceRef, *http.Response, error) {
@@ -334,9 +334,10 @@ func (a *ISISApiService) GetISISInstances(ctx context.Context) ([]IsisInstanceRe
 /*
 ISISApiService Shows details of a IS-IS interface.
 Shows details of an IS-IS interface including statistics.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param instanceName The IS-IS instance name.
- * @param iflName The logical interface name.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param instanceName The IS-IS instance name.
+  - @param iflName The logical interface name.
+
 @return IsisInstanceInterface
 */
 func (a *ISISApiService) GetISISInterface(ctx context.Context, instanceName string, iflName string) (IsisInstanceInterface, *http.Response, error) {
@@ -422,7 +423,8 @@ func (a *ISISApiService) GetISISInterface(ctx context.Context, instanceName stri
 /*
 ISISApiService Lists all IS-IS interfaces.
 Lists all IS-IS interfaces grouped by IS-IS instances.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return []IsisInstanceInterfaces
 */
 func (a *ISISApiService) GetISISInterfaces(ctx context.Context) ([]IsisInstanceInterfaces, *http.Response, error) {
@@ -506,9 +508,10 @@ func (a *ISISApiService) GetISISInterfaces(ctx context.Context) ([]IsisInstanceI
 /*
 ISISApiService Shows details of a IS-IS neighbor.
 Shows details of an IS-IS neighbor including statistics.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param instanceName The IS-IS instance name.
- * @param iflName The logical interface the neighbor is connected to.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param instanceName The IS-IS instance name.
+  - @param iflName The logical interface the neighbor is connected to.
+
 @return IsisInstanceNeighbor
 */
 func (a *ISISApiService) GetISISNeighbor(ctx context.Context, instanceName string, iflName string) (IsisInstanceNeighbor, *http.Response, error) {
@@ -594,7 +597,8 @@ func (a *ISISApiService) GetISISNeighbor(ctx context.Context, instanceName strin
 /*
 ISISApiService Lists all IS-IS neighbors.
 Lists all IS-IS neighbors grouped by IS-IS instance.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return []IsisInstanceNeighbors
 */
 func (a *ISISApiService) GetISISNeighbors(ctx context.Context) ([]IsisInstanceNeighbors, *http.Response, error) {

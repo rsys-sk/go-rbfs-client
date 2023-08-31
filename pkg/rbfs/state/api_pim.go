@@ -28,8 +28,9 @@ type PIMApiService service
 /*
 PIMApiService Returns a PIM instance.
 Returns the PIM settings of the routing instance with the given instance name.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param instanceName The PIM instance name
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param instanceName The PIM instance name
+
 @return PimInstance
 */
 func (a *PIMApiService) GetPIMInstance(ctx context.Context, instanceName string) (PimInstance, *http.Response, error) {
@@ -114,7 +115,8 @@ func (a *PIMApiService) GetPIMInstance(ctx context.Context, instanceName string)
 /*
 PIMApiService Lists all PIM instances.
 Lists all routing instances with PIM enabled.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return []PimInstanceRef
 */
 func (a *PIMApiService) GetPIMInstances(ctx context.Context) ([]PimInstanceRef, *http.Response, error) {
@@ -198,9 +200,10 @@ func (a *PIMApiService) GetPIMInstances(ctx context.Context) ([]PimInstanceRef, 
 /*
 PIMApiService Returns the PIM interface.
 Returns the PIM settings of the logical interface with the given name  configured in the given instance.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param instanceName The PIM instance name
- * @param iflName The logical interface name.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param instanceName The PIM instance name
+  - @param iflName The logical interface name.
+
 @return PimInterface
 */
 func (a *PIMApiService) GetPIMInterface(ctx context.Context, instanceName string, iflName string) (PimInterface, *http.Response, error) {
@@ -286,7 +289,8 @@ func (a *PIMApiService) GetPIMInterface(ctx context.Context, instanceName string
 /*
 PIMApiService Lists all PIM interfaces.
 Lists all logical interfaces with PIM enabled grouped by routing instances.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return []PimInterfaces
 */
 func (a *PIMApiService) GetPIMInterfaces(ctx context.Context) ([]PimInterfaces, *http.Response, error) {
@@ -370,9 +374,10 @@ func (a *PIMApiService) GetPIMInterfaces(ctx context.Context) ([]PimInterfaces, 
 /*
 PIMApiService Returns the PIM neighbor.
 Returns the PIM neighbor information for the neighbor with the given IP address  configured in the given instance.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param instanceName The PIM instance name
- * @param neighborIp The neighbor IPv4 or IPv6 address.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param instanceName The PIM instance name
+  - @param neighborIp The neighbor IPv4 or IPv6 address.
+
 @return PimNeighbor
 */
 func (a *PIMApiService) GetPIMNeighbor(ctx context.Context, instanceName string, neighborIp string) (PimNeighbor, *http.Response, error) {
@@ -458,7 +463,8 @@ func (a *PIMApiService) GetPIMNeighbor(ctx context.Context, instanceName string,
 /*
 PIMApiService Lists all PIM neighbors.
 Lists all PIM neighbors grouped by routing instances.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return []PimNeighbors
 */
 func (a *PIMApiService) GetPIMNeighbors(ctx context.Context) ([]PimNeighbors, *http.Response, error) {

@@ -59,6 +59,8 @@ type APIClient struct {
 
 	L2BSAApi *L2BSAApiService
 
+	LDPApi *LDPApiService
+
 	LLDPApi *LLDPApiService
 
 	OSPFApi *OSPFApiService
@@ -99,6 +101,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ISISApi = (*ISISApiService)(&c.common)
 	c.InterfacesApi = (*InterfacesApiService)(&c.common)
 	c.L2BSAApi = (*L2BSAApiService)(&c.common)
+	c.LDPApi = (*LDPApiService)(&c.common)
 	c.LLDPApi = (*LLDPApiService)(&c.common)
 	c.OSPFApi = (*OSPFApiService)(&c.common)
 	c.OpticsApi = (*OpticsApiService)(&c.common)

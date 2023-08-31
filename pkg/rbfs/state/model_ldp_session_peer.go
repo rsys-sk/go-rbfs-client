@@ -9,25 +9,13 @@
  */
 package state
 
-import (
-	"time"
-)
-
-// Route table entries for an IP prefix or MPLS label.
-type Routes struct {
-	// IPv4 address with mask. Applicable to AFI 'ipv4' only
-	Prefix4 string `json:"prefix4,omitempty"`
-	// IPv6 address with mask. Applicable to AFI 'ipv6' only.
-	Prefix6 string `json:"prefix6,omitempty"`
-	// MPLS label value. Applicable to AFI 'mpls' only.
-	Label int `json:"label,omitempty"`
-	// Route distingusher.
-	RouteDistinguisher string `json:"route_distinguisher,omitempty"`
-	// Soure of the route.
-	Source string `json:"source,omitempty"`
-	// Protocol preference.
-	Preference int        `json:"preference,omitempty"`
-	NextHops   []NextHops `json:"next_hops,omitempty"`
-	// Route creation time.
-	DateCreated time.Time `json:"date_created,omitempty"`
+// The peer of this LSR session.
+type LdpSessionPeer struct {
+	// The LSR identifier.
+	LsrId   string   `json:"lsr_id,omitempty"`
+	LdpRole *LdpRole `json:"ldp_role,omitempty"`
+	// The peer IPv4 address.
+	Ipv4Address string `json:"ipv4_address,omitempty"`
+	// The peer IPv6 address.
+	Ipv6Address string `json:"ipv6_address,omitempty"`
 }

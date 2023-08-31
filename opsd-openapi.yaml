@@ -46,6 +46,8 @@ tags:
   description: A10NSP L2X configuration and accounting
 - name: PIM 
   description: Protocol Independent Multicast
+- name: LDP
+  description: Label Distribution Protocol
 
 paths:
   /actions/ping:
@@ -4008,7 +4010,183 @@ paths:
           $ref: "#/components/responses/422"
         500:
           $ref: "#/components/responses/500"
+  /ldp/sessions:
+    get:
+      summary: Lists LDP sessions
+      operationId: getLDPSessions
+      description: Lists LDP sessions grouped by routing instance.
+      tags:
+      - LDP
+      responses:
+        200:
+          description: List of LDP sessions and their respective state grouped by instance.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LDPInstanceSessions"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        422:
+          $ref: "#/components/responses/422"
+        500:
+          $ref: "#/components/responses/500"
+  /ldp/instances:
+    get:
+      summary: Lists all instances running LDP.
+      operationId: getLDPInstances
+      description: Returns all routing instances running LDP with some LDP statistics.
+      tags:
+      - LDP
+      responses:
+        200:
+          description: List of LDP sessions and their respective state grouped by instance.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LDPInstanceRef"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        422:
+          $ref: "#/components/responses/422"
+        500:
+          $ref: "#/components/responses/500"
+  /ldp/instances/{instance_name}:
+    get:
+      summary: Returns the LDP sessions and statistics.
+      operationId: getLDPInstance
+      description: Returns the LDP sessions and statistics for the routing instance with the given name.
+      tags:
+      - LDP
+      parameters:
+        - in: path
+          name: instance_name
+          description: The routing instance name.
+          required: true
+          schema:
+            $ref: "#/components/schemas/InstanceName"
+      responses:
+        200:
+          description: List of LDP sessions and their respective state grouped by instance.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LDPInstanceSessions"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        422:
+          $ref: "#/components/responses/422"
+        500:
+          $ref: "#/components/responses/500"      
+  /ldp/instances/{instance_name}/sessions/clear:
+    post:
+      summary: Clears all LDP sessions.
+      operationId: clearLDPSessions
+      description: Clears all LDP sessions associated with this instance.
+      tags:
+      - LDP
+      parameters:
+        - in: path
+          name: instance_name
+          description: The routing instance name.
+          required: true
+          schema:
+            $ref: "#/components/schemas/InstanceName"
+      responses:
+        204:
+          description: All LDP sessions have been cleared.
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        422:
+          $ref: "#/components/responses/422"
+        500:
+          $ref: "#/components/responses/500"   
 
+  /ldp/instances/{instance_name}/sessions/{peer_ip}:
+    get:
+      summary: Returns the LDP sessions details
+      operationId: getLDPSession
+      description: Returns the LDP sessions and statistics for the LDP session with the given peer.
+      tags:
+      - LDP
+      parameters:
+        - in: path
+          name: instance_name
+          description: The routing instance name.
+          required: true
+          schema:
+            $ref: "#/components/schemas/InstanceName"
+        - in: path
+          name: peer_ip
+          description: The the peer IPv4 or IPv4 address.
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: The LDP session details.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LDPInstanceSession"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        422:
+          $ref: "#/components/responses/422"
+        500:
+          $ref: "#/components/responses/500"    
+  /ldp/instances/{instance_name}/sessions/{peer_ip}/clear:
+    post:
+      summary: Clears a LDP session
+      operationId: clearLDPSession
+      description: Clears the LDP sessions and statistics for the LDP session with the given peer.
+      tags:
+      - LDP
+      parameters:
+        - in: path
+          name: instance_name
+          description: The routing instance name.
+          required: true
+          schema:
+            $ref: "#/components/schemas/InstanceName"
+        - in: path
+          name: peer_ip
+          description: The the peer IPv4 or IPv4 address.
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: The LDP session has been cleared.
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        422:
+          $ref: "#/components/responses/422"
+        500:
+          $ref: "#/components/responses/500"  
 components:
   responses:
     400:
@@ -7552,6 +7730,10 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/NextHops"
+        date_created:
+          description: Route creation time.
+          type: string
+          format: date-time
     NextHops:
       type: object
       description: Next hop details.
@@ -7586,6 +7768,10 @@ components:
         lookup_safi:
           description: Sub-address family of the next hop.
           type: string 
+        date_created:
+          description: Next hop creation time.
+          type: string
+          format: date-time
     InstanceMulticastRoutes:
       type: object
       description: Multicast route information for an instance and AFI/SAFI.
@@ -7632,6 +7818,10 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/MCNextHops"
+        date_created:
+          description: Route creation time.
+          type: string
+          format: date-time
     MCNextHops:
       type: object
       description: Next hop details.
@@ -7662,6 +7852,10 @@ components:
         lookup_safi:
           description: Sub-address family of the next hop.
           type: string
+        date_created:
+          description: Next hop creation time.
+          type: string
+          format: date-time
     LinkAggregationGroup:
       description: Link aggreation group (LAG) state.
       type: object
@@ -7703,3 +7897,287 @@ components:
         bandwidth:
           description: The maximum bandwidth available.
           type: string
+    LDPSessionState:
+      description: Enumeration of LDP sessions states.
+      type: string
+      enum:
+      - NON_EXISTENT
+      - INITIALIZED
+      - OPENREC
+      - OPENSENT
+      - OPERATIONAL
+    LDPLabelRetentionMode:
+      description: Label retention mode.
+      type: string
+      enum:
+      - CONSERVATIVE
+      - LIBERAL
+    LDPLabelAdvertismentMode:
+      description: Label mapping control mode.
+      type: string
+      enum:
+      - ORDERED
+      - INDEPENDENT
+    LDPLabelDistributionControlMode:
+      description: Label mapping advertisment mode.
+      type: string
+      enum:
+      - DOWNSTREAM_UNSOLICITED
+      - DOWNSTREAM_ON_DEMAND
+    LDPRole:
+      description: The role during TCP connection and LDP session establishment.
+      type: string
+      enum:
+      - ACTIVE
+      - PASSIVE
+    LDPInstanceRef:
+      description: A routing instance with LDP enabled.
+      type: object
+      properties:
+        instance_name:
+          $ref: "#/components/schemas/InstanceName"
+        lsr_id:
+          description: The LSR identifier.
+          type: string
+    LDPInstanceSessions:
+      type: object
+      properties:
+        instance_name:
+          $ref: "#/components/schemas/InstanceName"
+        lsr_id:
+          description: The LSR identifier.
+          type: string
+        capabilities:
+          $ref: "#/components/schemas/LDPCapabilities"
+        sessions:
+          $ref: "#/components/schemas/LDPInstanceSessionsSessions"
+        statistics:
+          $ref: "#/components/schemas/LDPInstanceStatistics"
+    LDPPeer:
+      type: object 
+      properties:
+        ipv4_address:
+          type: string
+          format: ipv4
+        ipv6_address:
+          type: string
+          format: ipv6
+        ldp_role:
+          $ref: "#/components/schemas/LDPRole"    
+    LDPInstanceStatistics:
+      type: object
+      description: LDP statistics of a routing instance.
+      properties:
+        link_adjacencies_count:
+          description: Link adjacencies count.
+          type: integer
+        targeted_adjacencies_count:
+          description: Targeted adjacencies count.
+          type: integer
+    LDPInstanceSessionsSessions:
+      type: object
+      description: LDP session
+      properties:
+        non_existent:
+          description: Number of LDP sessions in NONEXISTENT state, i.e. session establishment has not started.
+          type: integer
+        opensent_count:
+          description: Number of LDP sessions in OPENSENT state.
+          type: integer
+        openrec_count:
+          description: Number of LDP sessions in OPENREC state.
+          type: integer
+        initialized_count:
+          description: Number of initialized LDP session.
+          type: integer
+        operational_count:
+          description: Number of operational LDP sessions.
+          type: integer
+        sessions:
+          description: List of LDP sessions.
+          type: array
+          items:
+            $ref: "#/components/schemas/LDPSession"
+    LDPSession:
+      type: object
+      properties:
+        ldp_id:
+          description: The LSR lable-space identifier.
+          type: string
+        lsr_id:
+          description: The LSR identifier.
+          type: string
+        ldp_state:
+          $ref: "#/components/schemas/LDPSessionState"
+        ldp_label_advertisment_mode:
+          $ref: "#/components/schemas/LDPLabelAdvertismentMode"
+        ldp_label_distribution_control_mode:
+          $ref: "#/components/schemas/LDPLabelDistributionControlMode"
+        ldp_label_retention_mode:
+          $ref: "#/components/schemas/LDPLabelRetentionMode"
+        ldp_session_flaps:
+          description: LDP session flap count
+          type: integer
+        last_state_transition:
+          description: Last session state transition.
+          type: string
+          format: dateTime
+        ldp_role:
+          $ref: "#/components/schemas/LDPRole"
+        ifl_name:
+          $ref: "#/components/schemas/IflName"
+        ipv4_address:
+          description: The local IPv4 address.
+          type: string
+          format: ipv4
+        ipv6_address:
+          description: The local IPv6 address.
+          type: string 
+          format: ipv6
+        peer:
+          type: object 
+          description: The peer of this LSR session.
+          properties:
+            lsr_id:
+              description: The LSR identifier.
+              type: string
+            ldp_role:
+              $ref: "#/components/schemas/LDPRole"
+            ipv4_address:
+              description: The peer IPv4 address.
+              type: string
+              format: ipv4
+            ipv6_address:
+              description: The peer IPv6 address.
+              type: string 
+              format: ipv6
+        statistics:
+          description: LDP session statistics.
+          type: object
+          properties:
+            labels:
+              type: object
+              properties:
+                fecs_received:
+                  description: Number of received FECs.
+                  type: integer
+                fecs_sent:
+                  description: Number of FECs sent.
+                  type: integer
+            session:
+              type: object
+              properties:
+                ingress:
+                  type: object
+                  properties:
+                    init:
+                      description: Number of received init messages.
+                      type: integer
+                      minimum: 0
+                    keep_alive:
+                      description: Number of received keep-alive messages.
+                      type: integer
+                      minimum: 0
+                    notify:
+                      description: Number of received notify messages.
+                      type: integer
+                      minimum: 0
+                    label_mapping:
+                      description: Number of received label mapping messages.
+                      type: integer
+                      minimum: 0
+                    label_withdraw:
+                      description: Number of received label withdraw messages.
+                      type: integer
+                      minimum: 0
+                    label_release:
+                      description: Number of received label release messages.
+                      type: integer
+                      minimum: 0
+                    label_address:
+                      description: Number of received address messages.
+                      type: integer
+                      minimum: 0
+                    address_withdraw:
+                      description: Number of received address withdraw messages.
+                      type: integer
+                      minimum: 0
+                egress:
+                  type: object
+                  properties:
+                    init:
+                      description: Number of sent init messages.
+                      type: integer
+                      minimum: 0
+                    keep_alive:
+                      description: Number of sent keep-alive messages.
+                      type: integer
+                      minimum: 0
+                    notify:
+                      description: Number of sent notify messages.
+                      type: integer
+                      minimum: 0
+                    label_mapping:
+                      description: Number of sent label mapping messages.
+                      type: integer
+                      minimum: 0
+                    label_withdraw:
+                      description: Number of sent label withdraw messages.
+                      type: integer
+                      minimum: 0
+                    label_release:
+                      description: Number of sent label release messages.
+                      type: integer
+                      minimum: 0
+                    label_address:
+                      description: Number of sent address messages.
+                      type: integer
+                      minimum: 0
+                    address_withdraw:
+                      description: Number of sent address withdraw messages.
+                      type: integer
+                      minimum: 0  
+        timers:
+          description: The timers associated with this LDP session. 
+          type: object 
+          properties:
+            hold_time:
+              description: The negotiated hold time in seconds.
+              type: integer
+            hold_timer:
+              description: The hold timer value in seconds.
+              type: integer
+            keep_alive_time:
+              description: The negotiated keep-alive time in seconds.
+              type: integer
+            keep_alive_timer:
+              description: The keep-alive timer value in seconds.
+              type: integer 
+    LDPInstanceSession:
+      type: object
+      allOf:
+        - type: object
+          properties:
+            instance_name: 
+              $ref: "#/components/schemas/InstanceName"
+        - $ref: "#/components/schemas/LDPSession"
+    LDPCapabilities:
+      type: object    
+      description: Overview of LDP capabilities.
+      properties:
+        graceful_restart:
+          description: Graceful restart capabilty status.
+          type: boolean
+        loop_detection:
+          type: object
+          description: Loop detection settings if loop detection is enabled.
+          properties:
+            max_hop_count:
+              description: Maximum number of hops accepted.
+              type: integer
+            max_vector_length:
+              description: Maximum vector length accepted.
+              type: integer
+
+
+      

@@ -28,9 +28,10 @@ type A10NSPApiService service
 /*
 A10NSPApiService Shows an L2X endpoint.
 Shows the configuration of the L2X endpoint configured on the specified LAG interface with the specified S-VLAN.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param lagInterfaceName The link aggregation (LAG) interface name.
- * @param sVlan The S-VLAN ID.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param lagInterfaceName The link aggregation (LAG) interface name.
+  - @param sVlan The S-VLAN ID.
+
 @return []A10nspConfig
 */
 func (a *A10NSPApiService) GetA10NSPL2XEndpoint(ctx context.Context, lagInterfaceName string, sVlan int) ([]A10nspConfig, *http.Response, error) {
@@ -116,7 +117,8 @@ func (a *A10NSPApiService) GetA10NSPL2XEndpoint(ctx context.Context, lagInterfac
 /*
 A10NSPApiService Lists all L2X endpoints.
 List all L2X endpoints configured on this A10-NSP switch.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return []A10nspConfig
 */
 func (a *A10NSPApiService) GetA10NSPL2XEndpoints(ctx context.Context) ([]A10nspConfig, *http.Response, error) {
@@ -200,8 +202,9 @@ func (a *A10NSPApiService) GetA10NSPL2XEndpoints(ctx context.Context) ([]A10nspC
 /*
 A10NSPApiService Lists all L2X endpoints.
 List all L2X endpoints configured on the specified LAG interface.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param lagInterfaceName The link aggregation (LAG) interface name.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param lagInterfaceName The link aggregation (LAG) interface name.
+
 @return []A10nspConfig
 */
 func (a *A10NSPApiService) GetA10NSPL2XEndpointsOfLAGInterface(ctx context.Context, lagInterfaceName string) ([]A10nspConfig, *http.Response, error) {
@@ -286,9 +289,8 @@ func (a *A10NSPApiService) GetA10NSPL2XEndpointsOfLAGInterface(ctx context.Conte
 /*
 A10NSPApiService Runs a A10NSP L2X configuration batch job.
 Adds and removes A10NSP L2X endpoints as specified in the batch job.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
 */
 func (a *A10NSPApiService) ProcessA10NSPL2XBatch(ctx context.Context, body A10nspConfigBatch) (*http.Response, error) {
 	var (
@@ -354,10 +356,9 @@ func (a *A10NSPApiService) ProcessA10NSPL2XBatch(ctx context.Context, body A10ns
 /*
 A10NSPApiService Removes the L2X endpoint.
 Removes the L2X endpoints with the specified S-VLAN from the specified LAG interface.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param lagInterfaceName The link aggregation (LAG) interface name.
- * @param sVlan The S-VLAN ID.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param lagInterfaceName The link aggregation (LAG) interface name.
+  - @param sVlan The S-VLAN ID.
 */
 func (a *A10NSPApiService) RemoveA10NSPL2XEndpoint(ctx context.Context, lagInterfaceName string, sVlan int) (*http.Response, error) {
 	var (
@@ -423,11 +424,10 @@ func (a *A10NSPApiService) RemoveA10NSPL2XEndpoint(ctx context.Context, lagInter
 /*
 A10NSPApiService Stores a L2X endpoint.
 Stores a L2X endpoints by either  creating a new L2X endpoint on the specified LAG interface with the specified S-VLAN or  updating an existing L2X endpoint configuration.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
- * @param lagInterfaceName The link aggregation (LAG) interface name.
- * @param sVlan The S-VLAN ID.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+  - @param lagInterfaceName The link aggregation (LAG) interface name.
+  - @param sVlan The S-VLAN ID.
 */
 func (a *A10NSPApiService) StoreA10NSPL2XEndpoint(ctx context.Context, body A10nspConfig, lagInterfaceName string, sVlan int) (*http.Response, error) {
 	var (
@@ -495,9 +495,8 @@ func (a *A10NSPApiService) StoreA10NSPL2XEndpoint(ctx context.Context, body A10n
 /*
 A10NSPApiService Updates all L2X endpoint configurations.
 Updates all L2X endpoint configurations by  - adding new L2X endpoints, - updating existing L2X endpoints and - removing all L2X endpoints not listed in the request entity anymore.  An empty array removes all L2X endpoints.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
 */
 func (a *A10NSPApiService) StoreA10NSPL2XEndpoints(ctx context.Context, body []A10nspConfig) (*http.Response, error) {
 	var (
@@ -563,10 +562,9 @@ func (a *A10NSPApiService) StoreA10NSPL2XEndpoints(ctx context.Context, body []A
 /*
 A10NSPApiService Updates all L2X endpoint configurations for a LAG interface.
 Updates all L2X endpoint configurations for a LAG interface by  - adding new L2X endpoints, - updating existing L2X endpoints and - removing all L2X endpoints not listed in the request entity anymore.  An empty array removes all L2X endpoints from the specified LAG interface.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
- * @param lagInterfaceName The link aggregation (LAG) interface name.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+  - @param lagInterfaceName The link aggregation (LAG) interface name.
 */
 func (a *A10NSPApiService) StoreA10NSPL2XEndpointsForLAGInterface(ctx context.Context, body []A10nspConfig, lagInterfaceName string) (*http.Response, error) {
 	var (

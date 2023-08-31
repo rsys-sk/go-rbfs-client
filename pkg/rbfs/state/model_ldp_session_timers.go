@@ -9,25 +9,14 @@
  */
 package state
 
-import (
-	"time"
-)
-
-// Route table entries for an IP prefix or MPLS label.
-type Routes struct {
-	// IPv4 address with mask. Applicable to AFI 'ipv4' only
-	Prefix4 string `json:"prefix4,omitempty"`
-	// IPv6 address with mask. Applicable to AFI 'ipv6' only.
-	Prefix6 string `json:"prefix6,omitempty"`
-	// MPLS label value. Applicable to AFI 'mpls' only.
-	Label int `json:"label,omitempty"`
-	// Route distingusher.
-	RouteDistinguisher string `json:"route_distinguisher,omitempty"`
-	// Soure of the route.
-	Source string `json:"source,omitempty"`
-	// Protocol preference.
-	Preference int        `json:"preference,omitempty"`
-	NextHops   []NextHops `json:"next_hops,omitempty"`
-	// Route creation time.
-	DateCreated time.Time `json:"date_created,omitempty"`
+// The timers associated with this LDP session.
+type LdpSessionTimers struct {
+	// The negotiated hold time in seconds.
+	HoldTime int `json:"hold_time,omitempty"`
+	// The hold timer value in seconds.
+	HoldTimer int `json:"hold_timer,omitempty"`
+	// The negotiated keep-alive time in seconds.
+	KeepAliveTime int `json:"keep_alive_time,omitempty"`
+	// The keep-alive timer value in seconds.
+	KeepAliveTimer int `json:"keep_alive_timer,omitempty"`
 }

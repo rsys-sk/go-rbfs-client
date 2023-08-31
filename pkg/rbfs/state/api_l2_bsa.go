@@ -28,8 +28,9 @@ type L2BSAApiService service
 /*
 L2BSAApiService Lists all L2BSA services on a physical interface.
 Lists all L2BSA services provisioned on the specified physical interface.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param ifpName The physical interface name.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ifpName The physical interface name.
+
 @return []L2bsaServiceConfig
 */
 func (a *L2BSAApiService) GetL2BSAService(ctx context.Context, ifpName string) ([]L2bsaServiceConfig, *http.Response, error) {
@@ -114,7 +115,8 @@ func (a *L2BSAApiService) GetL2BSAService(ctx context.Context, ifpName string) (
 /*
 L2BSAApiService Lists all L2BSA services.
 Lists all L2BSA services provisioned on this switch.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return []L2bsaServiceConfig
 */
 func (a *L2BSAApiService) GetL2BSAServices(ctx context.Context) ([]L2bsaServiceConfig, *http.Response, error) {
@@ -198,9 +200,10 @@ func (a *L2BSAApiService) GetL2BSAServices(ctx context.Context) ([]L2bsaServiceC
 /*
 L2BSAApiService Shows a L2BSA service.
 Shows the L2BSA service on the given interface with the given ANP VLAN.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param ifpName The physical interface name.
- * @param anp The ANP VLAN ID.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ifpName The physical interface name.
+  - @param anp The ANP VLAN ID.
+
 @return L2bsaServiceConfig
 */
 func (a *L2BSAApiService) GetL2BSAServicesOfANP(ctx context.Context, ifpName string, anp int) (L2bsaServiceConfig, *http.Response, error) {
@@ -292,9 +295,8 @@ func (a *L2BSAApiService) GetL2BSAServicesOfANP(ctx context.Context, ifpName str
 /*
 L2BSAApiService Runs L2BSA service configuration batch job.
 Stores or removes all L2BSA service configurations as specified in the batch instructions.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
 */
 func (a *L2BSAApiService) ProcessL2BSAServiceBatch(ctx context.Context, body L2bsaServiceConfigBatch) (*http.Response, error) {
 	var (
@@ -360,10 +362,9 @@ func (a *L2BSAApiService) ProcessL2BSAServiceBatch(ctx context.Context, body L2b
 /*
 L2BSAApiService Removes a L2BSA service.
 Removes the L2BSA service configuration and terminates the associated subscriber session.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param ifpName The physical interface name.
- * @param anp The ANP VLAN ID.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ifpName The physical interface name.
+  - @param anp The ANP VLAN ID.
 */
 func (a *L2BSAApiService) RemoveL2BSAServicesForANP(ctx context.Context, ifpName string, anp int) (*http.Response, error) {
 	var (
@@ -429,9 +430,10 @@ func (a *L2BSAApiService) RemoveL2BSAServicesForANP(ctx context.Context, ifpName
 /*
 L2BSAApiService Updates all L2BSA services on the given physical interface
 Updates all L2BSA services provisioned on the given physical interface of this switch by  - adding new L2BSA services,  - updating existing L2BSA services and  - removing L2BSA services not included in the request entity.  An empty request removes all L2BSA services from the given physical interface.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
- * @param ifpName The physical interface name.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+  - @param ifpName The physical interface name.
+
 @return []L2bsaServiceConfig
 */
 func (a *L2BSAApiService) StoreL2BSAService(ctx context.Context, body []L2bsaServiceConfig, ifpName string) ([]L2bsaServiceConfig, *http.Response, error) {
@@ -518,8 +520,9 @@ func (a *L2BSAApiService) StoreL2BSAService(ctx context.Context, body []L2bsaSer
 /*
 L2BSAApiService Updates all L2BSA services.
 Updates all L2BSA services provisioned on this switch by  - adding new L2BSA services,  - updating existing L2BSA services and  - removing L2BSA services not included in the request entity.  An empty request removes all L2BSA services from this switch.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+
 @return []L2bsaServiceConfig
 */
 func (a *L2BSAApiService) StoreL2BSAServices(ctx context.Context, body []L2bsaServiceConfig) ([]L2bsaServiceConfig, *http.Response, error) {
@@ -605,11 +608,10 @@ func (a *L2BSAApiService) StoreL2BSAServices(ctx context.Context, body []L2bsaSe
 /*
 L2BSAApiService Stores a L2BSA service configuration.
 Stores the L2BSA service configuration.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
- * @param ifpName The physical interface name.
- * @param anp The ANP VLAN ID.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+  - @param ifpName The physical interface name.
+  - @param anp The ANP VLAN ID.
 */
 func (a *L2BSAApiService) StoreL2BSAServicesForANP(ctx context.Context, body L2bsaServiceConfig, ifpName string, anp int) (*http.Response, error) {
 	var (

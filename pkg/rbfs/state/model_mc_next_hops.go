@@ -9,6 +9,10 @@
  */
 package state
 
+import (
+	"time"
+)
+
 // Next hop details.
 type McNextHops struct {
 	// Logical exit interface.
@@ -27,4 +31,6 @@ type McNextHops struct {
 	LookupAfi string `json:"lookup_afi,omitempty"`
 	// Sub-address family of the next hop.
 	LookupSafi string `json:"lookup_safi,omitempty"`
+	// Next hop creation time.
+	DateCreated time.Time `json:"date_created,omitempty"`
 }

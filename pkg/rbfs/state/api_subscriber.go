@@ -29,9 +29,8 @@ type SubscriberApiService service
 /*
 SubscriberApiService Adds test subscribers.
 Injects test subscribers into the Test AAA request table.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body List of subscriber attribute objects.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body List of subscriber attribute objects.
 */
 func (a *SubscriberApiService) AddTestSubscribers(ctx context.Context, body []TestAaaObject) (*http.Response, error) {
 	var (
@@ -97,10 +96,9 @@ func (a *SubscriberApiService) AddTestSubscribers(ctx context.Context, body []Te
 /*
 SubscriberApiService Terminates the L2BSA subscriber session.
 Trigger the asynchronous subscribers termination.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param ifpName The physical interface name.
- * @param anp The ANP VLAN ID.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ifpName The physical interface name.
+  - @param anp The ANP VLAN ID.
 */
 func (a *SubscriberApiService) ClearL2BSASubscriber(ctx context.Context, ifpName string, anp int) (*http.Response, error) {
 	var (
@@ -389,10 +387,9 @@ func (a *SubscriberApiService) ClearSubscribers(ctx context.Context, localVarOpt
 /*
 SubscriberApiService Disables lawful interception for the specified subscriber.
 Disables lawful interception (LI) for the specified subscriber  with the specified mediation device, direction and LI identifier.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param subscriberId The subscriber ID.
- * @param id The LI request ID.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param subscriberId The subscriber ID.
+  - @param id The LI request ID.
 */
 func (a *SubscriberApiService) DisableLawfulInterception(ctx context.Context, subscriberId int, id int) (*http.Response, error) {
 	var (
@@ -464,14 +461,13 @@ func (a *SubscriberApiService) DisableLawfulInterception(ctx context.Context, su
 /*
 SubscriberApiService Enables lawful interception for the specified subscriber.
 Enables lawful interception (LI) for the specified subscriber  with the specified mediation device, direction and LI identifier.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param subscriberId The subscriber ID.
- * @param id The LI request ID.
- * @param direction The direction of traffic being intercepted.
- * @param medIp Mediation device IP address.
- * @param medPort Meditation device port.
- * @param medInstance Meditation device routing instance name.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param subscriberId The subscriber ID.
+  - @param id The LI request ID.
+  - @param direction The direction of traffic being intercepted.
+  - @param medIp Mediation device IP address.
+  - @param medPort Meditation device port.
+  - @param medInstance Meditation device routing instance name.
 */
 func (a *SubscriberApiService) EnableLawfulInterception(ctx context.Context, subscriberId int, id int, direction string, medIp string, medPort int, medInstance string) (*http.Response, error) {
 	var (
@@ -553,8 +549,9 @@ func (a *SubscriberApiService) EnableLawfulInterception(ctx context.Context, sub
 /*
 SubscriberApiService Returns access line information.
 Returns the access line information for the given subscriber.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param subscriberId The subscriber ID.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param subscriberId The subscriber ID.
+
 @return AccessLineInfo
 */
 func (a *SubscriberApiService) GetAccessLineInfo(ctx context.Context, subscriberId int) (AccessLineInfo, *http.Response, error) {
@@ -639,8 +636,9 @@ func (a *SubscriberApiService) GetAccessLineInfo(ctx context.Context, subscriber
 /*
 SubscriberApiService Returns adjusted accounting counter values.
 Computes the adjusted accounting counter values for a given subscriber.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param subscriberId The subscriber ID.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param subscriberId The subscriber ID.
+
 @return SubscriberAdjustedAccounting
 */
 func (a *SubscriberApiService) GetAjdustedAccountingValues(ctx context.Context, subscriberId int) (SubscriberAdjustedAccounting, *http.Response, error) {
@@ -725,8 +723,9 @@ func (a *SubscriberApiService) GetAjdustedAccountingValues(ctx context.Context, 
 /*
 SubscriberApiService Returns the subscriber session statistics for a physical interface.
 Returns the number of subscriber sessions grouped by access type (IPoE, PPPoE, L2TP, L2BSA and test),  the session state (setup, established, terminating) as well as the total session count grouped by the session state.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param ifpName The physical interface name.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ifpName The physical interface name.
+
 @return IfpSubscriberSessionStatistics
 */
 func (a *SubscriberApiService) GetIfpSubscriberSessionStatistics(ctx context.Context, ifpName string) (IfpSubscriberSessionStatistics, *http.Response, error) {
@@ -811,9 +810,10 @@ func (a *SubscriberApiService) GetIfpSubscriberSessionStatistics(ctx context.Con
 /*
 SubscriberApiService Shows L2BSA subscriber session details.
 Provides L2BSA subscriber details including accounting information,  logical interface information, VLAN information, physical interface  information, and access line information.  This commands returns the same output as &#x60;GET /subscribers/{subscriber_id}&#x60; just with a different key using interface name and ANP VLAN ID instead of subscriber ID.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param ifpName The physical interface name.
- * @param anp The ANP VLAN ID.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ifpName The physical interface name.
+  - @param anp The ANP VLAN ID.
+
 @return SubscriberSession
 */
 func (a *SubscriberApiService) GetL2BSASubscriber(ctx context.Context, ifpName string, anp int) (SubscriberSession, *http.Response, error) {
@@ -905,9 +905,10 @@ func (a *SubscriberApiService) GetL2BSASubscriber(ctx context.Context, ifpName s
 /*
 SubscriberApiService Get adjusted accounting counter values.
 Computes the adjusted accounting counter values for a given L2BSA subscriber.  This commands returns the same output as &#x60;GET /subscribers/{subscriber_id}/adjusted-accounting&#x60; just with a different key using interface name and ANP VLAN ID instead of subscriber ID.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param ifpName The physical interface name.
- * @param anp The ANP VLAN ID.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ifpName The physical interface name.
+  - @param anp The ANP VLAN ID.
+
 @return SubscriberAdjustedAccounting
 */
 func (a *SubscriberApiService) GetL2BSASubscriberAdjustedAccountingValues(ctx context.Context, ifpName string, anp int) (SubscriberAdjustedAccounting, *http.Response, error) {
@@ -999,8 +1000,9 @@ func (a *SubscriberApiService) GetL2BSASubscriberAdjustedAccountingValues(ctx co
 /*
 SubscriberApiService Shows subscriber session details.
 Provides subscriber session details including accounting information,  logical interface information, VLAN information, L2TP or PPPoE session  information, physical interface information, and access line information.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param subscriberId The subscriber ID.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param subscriberId The subscriber ID.
+
 @return SubscriberSession
 */
 func (a *SubscriberApiService) GetSubscriber(ctx context.Context, subscriberId int) (SubscriberSession, *http.Response, error) {
@@ -1229,7 +1231,8 @@ func (a *SubscriberApiService) GetSubscriberHistory(ctx context.Context, localVa
 /*
 SubscriberApiService Returns the subscriber session summary statistics.
 Returns the number of subscriber sessions grouped by the access type (IPoE, PPPoE, L2TP, L2BSA and test),  the session state (setup, established, terminating) and the physical interface as well as aggregated counts. The aggregated counts include the total number of sessions per physical interface and state as well as  the number of sessions per access type and state, and the total session count per state for the entire switch.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return SubscriberSessionStatistics
 */
 func (a *SubscriberApiService) GetSubscriberSessionStatistics(ctx context.Context) (SubscriberSessionStatistics, *http.Response, error) {
@@ -1482,7 +1485,8 @@ func (a *SubscriberApiService) GetSubscribers(ctx context.Context, localVarOptio
 /*
 SubscriberApiService Lists all test subscribers.
 Reads all test subscriber objects from the Test AAA request table.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return []TestAaaObject
 */
 func (a *SubscriberApiService) GetTestSubscribers(ctx context.Context) ([]TestAaaObject, *http.Response, error) {
@@ -1566,9 +1570,8 @@ func (a *SubscriberApiService) GetTestSubscribers(ctx context.Context) ([]TestAa
 /*
 SubscriberApiService Deletes a test subscriber.
 Removes a test subscriber from the Test AAA request table.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param subscriberId The subscriber ID.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param subscriberId The subscriber ID.
 */
 func (a *SubscriberApiService) RemoveTestSubscriber(ctx context.Context, subscriberId int) (*http.Response, error) {
 	var (
@@ -1633,10 +1636,9 @@ func (a *SubscriberApiService) RemoveTestSubscriber(ctx context.Context, subscri
 /*
 SubscriberApiService Adds or updates a test subscriber.
 Injects a test subscriber into the Test AAA request table.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body Subscriber attributes.
- * @param subscriberId The subscriber ID.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body Subscriber attributes.
+  - @param subscriberId The subscriber ID.
 */
 func (a *SubscriberApiService) StoreTestSubscriber(ctx context.Context, body TestAaaObject, subscriberId int) (*http.Response, error) {
 	var (
@@ -1703,9 +1705,8 @@ func (a *SubscriberApiService) StoreTestSubscriber(ctx context.Context, body Tes
 /*
 SubscriberApiService Replaces all test subscribers.
 Flushes the Test AAA request table and adds the test subscribers.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body List of subscriber attribute objects.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body List of subscriber attribute objects.
 */
 func (a *SubscriberApiService) StoreTestSubscribers(ctx context.Context, body []TestAaaObject) (*http.Response, error) {
 	var (

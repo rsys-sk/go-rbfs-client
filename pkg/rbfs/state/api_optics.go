@@ -28,9 +28,8 @@ type OpticsApiService service
 /*
 OpticsApiService Disable the laser.
 Disables the laser of the optic attached to the given physical port. Be aware that disabling the laser raises a LoS alert on the remote optic.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param ifpName The physical interface (&#x3D;port) name.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ifpName The physical interface (&#x3D;port) name.
 */
 func (a *OpticsApiService) DisableLaser(ctx context.Context, ifpName string) (*http.Response, error) {
 	var (
@@ -95,9 +94,8 @@ func (a *OpticsApiService) DisableLaser(ctx context.Context, ifpName string) (*h
 /*
 OpticsApiService Enables the laser.
 Enables the laser of the optic attached to the given port.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param ifpName The physical interface (&#x3D;port) name.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ifpName The physical interface (&#x3D;port) name.
 */
 func (a *OpticsApiService) EnableLaser(ctx context.Context, ifpName string) (*http.Response, error) {
 	var (
@@ -162,8 +160,9 @@ func (a *OpticsApiService) EnableLaser(ctx context.Context, ifpName string) (*ht
 /*
 OpticsApiService Lists details of an attached optic.
 Provides a list of all single-form factor pluggable (SFP) optics attached to this switch.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param ifpName The physical interface (&#x3D;port) name.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ifpName The physical interface (&#x3D;port) name.
+
 @return Optic
 */
 func (a *OpticsApiService) GetOptic(ctx context.Context, ifpName string) (Optic, *http.Response, error) {
@@ -248,7 +247,8 @@ func (a *OpticsApiService) GetOptic(ctx context.Context, ifpName string) (Optic,
 /*
 OpticsApiService Lists all attached optics.
 Provides a list of all single-form factor pluggable (SFP) optics attached to this switch.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return []Optic
 */
 func (a *OpticsApiService) GetOptics(ctx context.Context) ([]Optic, *http.Response, error) {

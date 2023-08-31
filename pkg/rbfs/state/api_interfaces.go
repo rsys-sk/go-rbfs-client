@@ -29,9 +29,8 @@ type InterfacesApiService service
 /*
 InterfacesApiService Clears physical or logical interface counters.
 Clears the counters of a physical or logical interface with the given name.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param ifName The physical or logical interface name.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ifName The physical or logical interface name.
 */
 func (a *InterfacesApiService) ClearInterfaceCounters(ctx context.Context, ifName string) (*http.Response, error) {
 	var (
@@ -96,9 +95,8 @@ func (a *InterfacesApiService) ClearInterfaceCounters(ctx context.Context, ifNam
 /*
 InterfacesApiService Clears logical interface counters.
 Clears the counters of the logical interface with the given name.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param iflName The logical interface name.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param iflName The logical interface name.
 */
 func (a *InterfacesApiService) ClearLogicalInterfaceCounters(ctx context.Context, iflName string) (*http.Response, error) {
 	var (
@@ -163,9 +161,8 @@ func (a *InterfacesApiService) ClearLogicalInterfaceCounters(ctx context.Context
 /*
 InterfacesApiService Clears physical interface counters.
 Clears the counters of the physical interface with the given name.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param ifpName The physical interface name.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ifpName The physical interface name.
 */
 func (a *InterfacesApiService) ClearPhysicalInterfaceCounters(ctx context.Context, ifpName string) (*http.Response, error) {
 	var (
@@ -230,9 +227,8 @@ func (a *InterfacesApiService) ClearPhysicalInterfaceCounters(ctx context.Contex
 /*
 InterfacesApiService Disables a physical or a logical interface name.
 Disables the specified physical or a logical interface.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param ifName The physical or logical interface name.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ifName The physical or logical interface name.
 */
 func (a *InterfacesApiService) DisableInterface(ctx context.Context, ifName string) (*http.Response, error) {
 	var (
@@ -297,9 +293,8 @@ func (a *InterfacesApiService) DisableInterface(ctx context.Context, ifName stri
 /*
 InterfacesApiService Disables a logical interface.
 Disables a logical interface in the running-configuration. Disabling an interface fires events including deferred events which are processed asynchronously.  Disabling a logical interface is therefore considered an asynchronous operation.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param iflName The logical interface name.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param iflName The logical interface name.
 */
 func (a *InterfacesApiService) DisableLogicalInterface(ctx context.Context, iflName string) (*http.Response, error) {
 	var (
@@ -364,9 +359,8 @@ func (a *InterfacesApiService) DisableLogicalInterface(ctx context.Context, iflN
 /*
 InterfacesApiService Disables a physical interface.
 Disables a physical interface in the running-configuration. Disabling an interface fires events including deferred events which are processed asynchronously. Disabling a physical interface is therefore considered an asynchronous operation.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param ifpName The physical interface name.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ifpName The physical interface name.
 */
 func (a *InterfacesApiService) DisablePhysicalInterface(ctx context.Context, ifpName string) (*http.Response, error) {
 	var (
@@ -431,9 +425,8 @@ func (a *InterfacesApiService) DisablePhysicalInterface(ctx context.Context, ifp
 /*
 InterfacesApiService Enables a physical or a logical interface name.
 Enables the specified physical or a logical interface.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param ifName The physical or logical interface name.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ifName The physical or logical interface name.
 */
 func (a *InterfacesApiService) EnableInterface(ctx context.Context, ifName string) (*http.Response, error) {
 	var (
@@ -498,9 +491,8 @@ func (a *InterfacesApiService) EnableInterface(ctx context.Context, ifName strin
 /*
 InterfacesApiService Enables a logical interface.
 Enables a logical interface in the running-configuration. Enables an interface fires events including deferred events which are processed asynchronously. Also certain services, like BGP peerings or IS-IS adjacencies for example, will be enabled after a logical interface has been enabled.  Enabling a logical interface is therefore considered an asynchronous operation.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param iflName The logical interface name.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param iflName The logical interface name.
 */
 func (a *InterfacesApiService) EnableLogicalInterface(ctx context.Context, iflName string) (*http.Response, error) {
 	var (
@@ -565,9 +557,8 @@ func (a *InterfacesApiService) EnableLogicalInterface(ctx context.Context, iflNa
 /*
 InterfacesApiService Enables a physical interface.
 Enables a physical interface in the running-configuration. Enables an interface fires events including deferred events which are processed asynchronously. Also certain services, like BGP peerings or IS-IS adjacencies for example, will be enabled after a physical interface has been enabled. Enabling a physical interface is therefore considered an asynchronous operation.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param ifpName The physical interface name.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ifpName The physical interface name.
 */
 func (a *InterfacesApiService) EnablePhysicalInterface(ctx context.Context, ifpName string) (*http.Response, error) {
 	var (
@@ -632,8 +623,9 @@ func (a *InterfacesApiService) EnablePhysicalInterface(ctx context.Context, ifpN
 /*
 InterfacesApiService Shows a physical interface and its logical interfaces.
 Shows a physical interface an its logical interfaces including  their operational and administrative states, packet and byte counters, as well as configured speed, IP addresses and other settings.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param ifpName The physical interface name.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ifpName The physical interface name.
+
 @return PhysicalInterfaceSummary
 */
 func (a *InterfacesApiService) GetInterface(ctx context.Context, ifpName string) (PhysicalInterfaceSummary, *http.Response, error) {
@@ -718,7 +710,8 @@ func (a *InterfacesApiService) GetInterface(ctx context.Context, ifpName string)
 /*
 InterfacesApiService Lists all physical interfaces and their logical interfaces.
 Lists all physical interfaces and their logical interfaces including their administrative state,  operational state, configured bandwidth, MAC address and neighbor information. Subscriber interfaces are not included in the response.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return []PhysicalInterfaceSummaryRef
 */
 func (a *InterfacesApiService) GetInterfaces(ctx context.Context) ([]PhysicalInterfaceSummaryRef, *http.Response, error) {
@@ -802,8 +795,9 @@ func (a *InterfacesApiService) GetInterfaces(ctx context.Context) ([]PhysicalInt
 /*
 InterfacesApiService Shows a logical interface.
 Provides details of a logical interface including VLANs, IP addresses, administrative and operational states and counters.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param iflName The logical interface name.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param iflName The logical interface name.
+
 @return LogicalInterface
 */
 func (a *InterfacesApiService) GetLogicalInterface(ctx context.Context, iflName string) (LogicalInterface, *http.Response, error) {
@@ -1078,11 +1072,10 @@ func (a *InterfacesApiService) GetPhysicalInterfaces(ctx context.Context, localV
 /*
 InterfacesApiService Starts logical interface traffic capturing.
 Starts capturing logical interface traffic to a file.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param iflName The logical interface name.
- * @param direction The direction of traffic to be captured.
- * @param fileName The capture file name.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param iflName The logical interface name.
+  - @param direction The direction of traffic to be captured.
+  - @param fileName The capture file name.
 */
 func (a *InterfacesApiService) StartLogicalInterfaceTrafficCapture(ctx context.Context, iflName string, direction string, fileName string) (*http.Response, error) {
 	var (
@@ -1149,11 +1142,10 @@ func (a *InterfacesApiService) StartLogicalInterfaceTrafficCapture(ctx context.C
 /*
 InterfacesApiService Starts physical interface traffic capturing.
 Starts capturing physical interface traffic to a file.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param ifpName The physical interface name.
- * @param direction The direction of traffic to be captured.
- * @param fileName The capture file name.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ifpName The physical interface name.
+  - @param direction The direction of traffic to be captured.
+  - @param fileName The capture file name.
 */
 func (a *InterfacesApiService) StartPhysicalInterfaceTrafficCapture(ctx context.Context, ifpName string, direction string, fileName string) (*http.Response, error) {
 	var (
@@ -1220,11 +1212,10 @@ func (a *InterfacesApiService) StartPhysicalInterfaceTrafficCapture(ctx context.
 /*
 InterfacesApiService Starts physical or logical interface traffic capturing.
 Starts capturing physical or logical interface traffic to a file.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param ifName The physical or logical interface name.
- * @param direction The direction of traffic to be captured.
- * @param fileName The capture file name.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ifName The physical or logical interface name.
+  - @param direction The direction of traffic to be captured.
+  - @param fileName The capture file name.
 */
 func (a *InterfacesApiService) StartTrafficCapture(ctx context.Context, ifName string, direction string, fileName string) (*http.Response, error) {
 	var (
@@ -1291,11 +1282,10 @@ func (a *InterfacesApiService) StartTrafficCapture(ctx context.Context, ifName s
 /*
 InterfacesApiService Stops logical interface traffic capturing.
 Stops traffic capturing of a logical interface to a file.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param iflName The logical interface name.
- * @param direction The direction of traffic to be captured.
- * @param fileName The capture file name.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param iflName The logical interface name.
+  - @param direction The direction of traffic to be captured.
+  - @param fileName The capture file name.
 */
 func (a *InterfacesApiService) StopLogicalInterfaceTrafficCapture(ctx context.Context, iflName string, direction string, fileName string) (*http.Response, error) {
 	var (
@@ -1362,11 +1352,10 @@ func (a *InterfacesApiService) StopLogicalInterfaceTrafficCapture(ctx context.Co
 /*
 InterfacesApiService Stops physical interface traffic capturing.
 Stops traffic capturing of a physical interface to a file.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param ifpName The physical interface name.
- * @param direction The direction of traffic to be captured.
- * @param fileName The capture file name.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ifpName The physical interface name.
+  - @param direction The direction of traffic to be captured.
+  - @param fileName The capture file name.
 */
 func (a *InterfacesApiService) StopPhysicalInterfaceTrafficCapture(ctx context.Context, ifpName string, direction string, fileName string) (*http.Response, error) {
 	var (
@@ -1433,11 +1422,10 @@ func (a *InterfacesApiService) StopPhysicalInterfaceTrafficCapture(ctx context.C
 /*
 InterfacesApiService Stops physical or logical interface traffic capturing.
 Stops capturing physical or logical interface traffic to a file.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param ifName The physical or logical interface name.
- * @param direction The direction of traffic to be captured.
- * @param fileName The capture file name.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ifName The physical or logical interface name.
+  - @param direction The direction of traffic to be captured.
+  - @param fileName The capture file name.
 */
 func (a *InterfacesApiService) StopTrafficCapture(ctx context.Context, ifName string, direction string, fileName string) (*http.Response, error) {
 	var (

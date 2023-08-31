@@ -28,8 +28,9 @@ type LLDPApiService service
 /*
 LLDPApiService Shows an LLDP neighbor
 Shows the LLDP neighbor for a given interface.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param ifpName The physical interface name.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ifpName The physical interface name.
+
 @return LldpGlobalNeighbor
 */
 func (a *LLDPApiService) GetLLDPNeighbor(ctx context.Context, ifpName string) (LldpGlobalNeighbor, *http.Response, error) {
@@ -114,7 +115,8 @@ func (a *LLDPApiService) GetLLDPNeighbor(ctx context.Context, ifpName string) (L
 /*
 LLDPApiService Lists all LLDP neighbors
 Lists all LLDP neighbors on all interfaces
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return LldpGlobalNeighbors
 */
 func (a *LLDPApiService) GetLLDPNeighbors(ctx context.Context) (LldpGlobalNeighbors, *http.Response, error) {

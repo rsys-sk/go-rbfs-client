@@ -28,11 +28,10 @@ type OSPFApiService service
 /*
 OSPFApiService Clears an OSPF neighbor
 Resets an OSPF neighbor relationship, so that it needs to be re-established.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param instanceName The OSPF instance name.
- * @param areaId The area in which the neighbor resides.
- * @param iflName The logical interface name.
-
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param instanceName The OSPF instance name.
+  - @param areaId The area in which the neighbor resides.
+  - @param iflName The logical interface name.
 */
 func (a *OSPFApiService) ClearOSPFNeighbor(ctx context.Context, instanceName string, areaId string, iflName string) (*http.Response, error) {
 	var (
@@ -99,8 +98,9 @@ func (a *OSPFApiService) ClearOSPFNeighbor(ctx context.Context, instanceName str
 /*
 OSPFApiService Shows OSPF instance details
 Shows an OSPF instance including its interfaces and neighbors.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param instanceName The OSPF instance name.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param instanceName The OSPF instance name.
+
 @return OspfInstanceDetails
 */
 func (a *OSPFApiService) GetOSPFInstance(ctx context.Context, instanceName string) (OspfInstanceDetails, *http.Response, error) {
@@ -185,8 +185,9 @@ func (a *OSPFApiService) GetOSPFInstance(ctx context.Context, instanceName strin
 /*
 OSPFApiService Lists interfaces in an OSPF instance
 Shows an OSPF instance with its interfaces.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param instanceName The OSPF instance name.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param instanceName The OSPF instance name.
+
 @return OspfInstanceInterfaces
 */
 func (a *OSPFApiService) GetOSPFInstanceInterfaces(ctx context.Context, instanceName string) (OspfInstanceInterfaces, *http.Response, error) {
@@ -271,8 +272,9 @@ func (a *OSPFApiService) GetOSPFInstanceInterfaces(ctx context.Context, instance
 /*
 OSPFApiService Lists neighbors in an OSPF instance
 Shows an OSPF instance with its neighbors.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param instanceName The OSPF instance name.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param instanceName The OSPF instance name.
+
 @return OspfInstanceNeighbors
 */
 func (a *OSPFApiService) GetOSPFInstanceNeighbors(ctx context.Context, instanceName string) (OspfInstanceNeighbors, *http.Response, error) {
@@ -357,7 +359,8 @@ func (a *OSPFApiService) GetOSPFInstanceNeighbors(ctx context.Context, instanceN
 /*
 OSPFApiService Lists summary of all OSPF instances
 Lists all OSPF instances with some global administrative parameters and their areas.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return []OspfInstanceSummary
 */
 func (a *OSPFApiService) GetOSPFInstances(ctx context.Context) ([]OspfInstanceSummary, *http.Response, error) {
@@ -441,9 +444,10 @@ func (a *OSPFApiService) GetOSPFInstances(ctx context.Context) ([]OspfInstanceSu
 /*
 OSPFApiService Shows an OSPF interface
 Shows a single OSPF interface.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param instanceName The OSPF instance name.
- * @param iflName The logical interface name.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param instanceName The OSPF instance name.
+  - @param iflName The logical interface name.
+
 @return OspfInstanceInterface
 */
 func (a *OSPFApiService) GetOSPFInterface(ctx context.Context, instanceName string, iflName string) (OspfInstanceInterface, *http.Response, error) {
@@ -529,7 +533,8 @@ func (a *OSPFApiService) GetOSPFInterface(ctx context.Context, instanceName stri
 /*
 OSPFApiService Lists all OSPF interfaces
 Lists all OSPF instances with their interfaces.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return []OspfInstanceInterfaces
 */
 func (a *OSPFApiService) GetOSPFInterfaces(ctx context.Context) ([]OspfInstanceInterfaces, *http.Response, error) {
@@ -613,9 +618,10 @@ func (a *OSPFApiService) GetOSPFInterfaces(ctx context.Context) ([]OspfInstanceI
 /*
 OSPFApiService Shows an OSPF neighbor
 Shows a single OSPF neighbor.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param instanceName The OSPF instance name.
- * @param iflName The logical interface name.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param instanceName The OSPF instance name.
+  - @param iflName The logical interface name.
+
 @return OspfInstanceNeighbor
 */
 func (a *OSPFApiService) GetOSPFNeighbor(ctx context.Context, instanceName string, iflName string) (OspfInstanceNeighbor, *http.Response, error) {
@@ -701,7 +707,8 @@ func (a *OSPFApiService) GetOSPFNeighbor(ctx context.Context, instanceName strin
 /*
 OSPFApiService List all OSPF neighbors
 Lists all OSPF instances with their neighbors.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return OspfInstanceNeighbors
 */
 func (a *OSPFApiService) GetOSPFNeighbors(ctx context.Context) (OspfInstanceNeighbors, *http.Response, error) {

@@ -9,25 +9,14 @@
  */
 package state
 
-import (
-	"time"
-)
+// LdpSessionState : Enumeration of LDP sessions states.
+type LdpSessionState string
 
-// Route table entries for an IP prefix or MPLS label.
-type Routes struct {
-	// IPv4 address with mask. Applicable to AFI 'ipv4' only
-	Prefix4 string `json:"prefix4,omitempty"`
-	// IPv6 address with mask. Applicable to AFI 'ipv6' only.
-	Prefix6 string `json:"prefix6,omitempty"`
-	// MPLS label value. Applicable to AFI 'mpls' only.
-	Label int `json:"label,omitempty"`
-	// Route distingusher.
-	RouteDistinguisher string `json:"route_distinguisher,omitempty"`
-	// Soure of the route.
-	Source string `json:"source,omitempty"`
-	// Protocol preference.
-	Preference int        `json:"preference,omitempty"`
-	NextHops   []NextHops `json:"next_hops,omitempty"`
-	// Route creation time.
-	DateCreated time.Time `json:"date_created,omitempty"`
-}
+// List of LDPSessionState
+const (
+	NON_EXISTENT_LdpSessionState LdpSessionState = "NON_EXISTENT"
+	INITIALIZED_LdpSessionState  LdpSessionState = "INITIALIZED"
+	OPENREC_LdpSessionState      LdpSessionState = "OPENREC"
+	OPENSENT_LdpSessionState     LdpSessionState = "OPENSENT"
+	OPERATIONAL_LdpSessionState  LdpSessionState = "OPERATIONAL"
+)
