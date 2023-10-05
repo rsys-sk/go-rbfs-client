@@ -142,7 +142,7 @@ func Count(count int) Option {
 			return fmt.Errorf("count value must be greater than 0")
 		}
 
-		const maxAllowedPings = 10
+		const maxAllowedPings = 10000
 		if count > maxAllowedPings {
 			return fmt.Errorf("count value must be less or equal than %d", maxAllowedPings)
 		}
