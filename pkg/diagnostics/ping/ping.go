@@ -144,7 +144,7 @@ func Count(count int) Option {
 
 		const maxAllowedPings = 10000
 		if count > maxAllowedPings {
-			return fmt.Errorf("count value must be less or equal than %d", maxAllowedPings)
+			return fmt.Errorf("count value must not be greater than %d", maxAllowedPings)
 		}
 
 		p.count = count
@@ -159,8 +159,8 @@ func Interval(interval time.Duration) Option {
 		if interval < 1*time.Millisecond {
 			return fmt.Errorf("interval must not be less than 1ms")
 		}
-		if interval > 10*time.Second {
-			return fmt.Errorf("interval must not exceed 10s")
+		if interval > 5*time.Second {
+			return fmt.Errorf("interval must not exceed 5s")
 		}
 		p.interval = interval
 		return nil
