@@ -90,12 +90,12 @@ func TestNewPing(t *testing.T) {
 			},
 			wantErr: "count value must be greater than 0",
 		}, {
-			name: "count value must be less or equal than 10",
+			name: "count value must be less or equal than 10k",
 			options: []Option{
 				DestinationHostNameA("www.rtbrick.com"),
-				Count(11),
+				Count(10001),
 			},
-			wantErr: "count value must be less or equal than 10",
+			wantErr: "count value must not be greater than 10000",
 		}, {
 			name: "interval must not be less than 1ms",
 			options: []Option{
@@ -104,12 +104,12 @@ func TestNewPing(t *testing.T) {
 			},
 			wantErr: "interval must not be less than 1ms",
 		}, {
-			name: "interval must not exceed 10s",
+			name: "interval must not exceed 5s",
 			options: []Option{
 				DestinationHostNameA("www.rtbrick.com"),
-				Interval(time.Minute),
+				Interval(6 * time.Second),
 			},
-			wantErr: "interval must not exceed 10s",
+			wantErr: "interval must not exceed 5s",
 		}, {
 			name: "instance name must not be empty",
 			options: []Option{
