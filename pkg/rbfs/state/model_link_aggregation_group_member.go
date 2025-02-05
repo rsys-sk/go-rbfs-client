@@ -20,4 +20,6 @@ type LinkAggregationGroupMember struct {
 	Speed string `json:"speed,omitempty"`
 	// The maximum bandwidth available.
 	Bandwidth string `json:"bandwidth,omitempty"`
+	// The LAG member state indicates whether this LAG member is resolved or unresolved.
+	LagMemberState string `json:"lag_member_state,omitempty"`
 }

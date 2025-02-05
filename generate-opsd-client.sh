@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: BSD-3-Clause
 #
 
-#curl https://documents.rtbrick.com/current/api/api/swagger_opsd.yaml --output opsd-openapi.yaml
+# curl https://documents.rtbrick.com/techdocs/current/api/_attachments/rbfs/swagger_opsd.yaml --output opsd-openapi.yaml
 
 # Generate code from scratch to avoid preserving previsouly generated code the recent API specification does not generate anymore
 rm -r ./pkg/rbfs/state
@@ -30,4 +30,4 @@ rm -rf ./pkg/rbfs/state/api
 #rm opsd-openapi.yaml
 
 # Format generated go code
-gofmt -w .
+make fumpt

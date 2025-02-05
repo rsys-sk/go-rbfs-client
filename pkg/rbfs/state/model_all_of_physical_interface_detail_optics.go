@@ -9,14 +9,7 @@
  */
 package state
 
-// Segment routing indexes of an ISIS interface.
-type IsisInterfaceSriDs struct {
-	// IPv4 SR index
-	Ipv4Sid int `json:"ipv4_sid,omitempty"`
-	// IPv6 SR index
-	Ipv6Sid int `json:"ipv6_sid,omitempty"`
-	// IPv4 SR anycast index
-	Ipv4AnycastSid int `json:"ipv4_anycast_sid,omitempty"`
-	// IPv6 SR anycast index
-	Ipv6AnycastSid int `json:"ipv6_anycast_sid,omitempty"`
+// The optics informations  NOTE: This attribute never got populated. Use the /optics endpoint to obtain this information.
+type AllOfPhysicalInterfaceDetailOptics struct {
+	Lanes []Lane `json:"lanes,omitempty"`
 }

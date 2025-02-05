@@ -14,9 +14,9 @@ type SubscriberAccessType string
 
 // List of SubscriberAccessType
 const (
-	PP_PO_E_SubscriberAccessType SubscriberAccessType = "PPPoE"
-	L2_TP_SubscriberAccessType   SubscriberAccessType = "L2TP"
-	I_PO_E_SubscriberAccessType  SubscriberAccessType = "IPoE"
-	L2_BSA_SubscriberAccessType  SubscriberAccessType = "L2BSA"
-	TEST_SubscriberAccessType    SubscriberAccessType = "Test"
+	PPPO_E_SubscriberAccessType SubscriberAccessType = "PPPoE"
+	L2_TP_SubscriberAccessType  SubscriberAccessType = "L2TP"
+	IPO_E_SubscriberAccessType  SubscriberAccessType = "IPoE"
+	L2_BSA_SubscriberAccessType SubscriberAccessType = "L2BSA"
+	TEST_SubscriberAccessType   SubscriberAccessType = "Test"
 )

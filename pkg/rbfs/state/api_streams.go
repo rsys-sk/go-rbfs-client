@@ -41,6 +41,7 @@ Pings the given destination from the specified source IP or source IFL with the 
      * @param "Interval" (optional.Float32) -  Ping interval in seconds.
      * @param "Size" (optional.Int) -  Packet payload size in bytes.
      * @param "Ttl" (optional.Int) -  IP TTL value
+     * @param "Tos" (optional.Int) -  IP ToS value
 @return string
 */
 
@@ -55,6 +56,7 @@ type StreamsApiStreamPingOpts struct {
 	Interval        optional.Float32
 	Size            optional.Int
 	Ttl             optional.Int
+	Tos             optional.Int
 }
 
 func (a *StreamsApiService) StreamPing(ctx context.Context, localVarOptionals *StreamsApiStreamPingOpts) (string, *http.Response, error) {
@@ -102,6 +104,9 @@ func (a *StreamsApiService) StreamPing(ctx context.Context, localVarOptionals *S
 	}
 	if localVarOptionals != nil && localVarOptionals.Ttl.IsSet() {
 		localVarQueryParams.Add("ttl", parameterToString(localVarOptionals.Ttl.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Tos.IsSet() {
+		localVarQueryParams.Add("tos", parameterToString(localVarOptionals.Tos.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}

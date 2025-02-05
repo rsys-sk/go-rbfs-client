@@ -9,7 +9,12 @@
  */
 package state
 
+import (
+	"time"
+)
+
 type LdpInstanceSession struct {
+	InstanceName string `json:"instance_name,omitempty"`
 	// The LSR lable-space identifier.
 	LdpId string `json:"ldp_id,omitempty"`
 	// The LSR identifier.
@@ -21,9 +26,9 @@ type LdpInstanceSession struct {
 	// LDP session flap count
 	LdpSessionFlaps int `json:"ldp_session_flaps,omitempty"`
 	// Last session state transition.
-	LastStateTransition string   `json:"last_state_transition,omitempty"`
-	LdpRole             *LdpRole `json:"ldp_role,omitempty"`
-	IflName             string   `json:"ifl_name,omitempty"`
+	LastStateTransition time.Time `json:"last_state_transition,omitempty"`
+	LdpRole             *LdpRole  `json:"ldp_role,omitempty"`
+	IflName             string    `json:"ifl_name,omitempty"`
 	// The local IPv4 address.
 	Ipv4Address string `json:"ipv4_address,omitempty"`
 	// The local IPv6 address.

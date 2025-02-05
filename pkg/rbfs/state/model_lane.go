@@ -13,9 +13,9 @@ package state
 type Lane struct {
 	// The lane ID.
 	LaneId int `json:"lane_id,omitempty"`
-	// The optic temperature in degree celsius.
+	// The optic temperature in degree celsius.  **Deprecated**. Moved to the optic because the temperature value exists for the entire optic rather than per lane.
 	TemperatureCelsius float64 `json:"temperature_celsius,omitempty"`
-	// Voltage in volts.
+	// The optic temperature in degree celsius.  **Deprecated**. Moved to the optic because the voltage exists for the entire optic rather than per lane.
 	Voltage float64 `json:"voltage,omitempty"`
 	Tx      *LaneTx `json:"tx,omitempty"`
 	Rx      *LaneRx `json:"rx,omitempty"`

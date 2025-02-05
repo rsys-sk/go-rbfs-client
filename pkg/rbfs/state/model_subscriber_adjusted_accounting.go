@@ -33,48 +33,96 @@ type SubscriberAdjustedAccounting struct {
 	Class0EgressPackets int `json:"class_0_egress_packets,omitempty"`
 	// Number of sent bytes in class 0.
 	Class0EgressBytes int `json:"class_0_egress_bytes,omitempty"`
+	// Number of dropped packets in class 0.
+	Class0EgressDroppedPackets int `json:"class_0_egress_dropped_packets,omitempty"`
+	// Number of dropped bytes in class 0.
+	Class0EgressDroppedBytes int `json:"class_0_egress_dropped_bytes,omitempty"`
 	// Number of sent packets in class 1.
 	Class1EgressPackets int `json:"class_1_egress_packets,omitempty"`
 	// Number of sent bytes in class 1.
 	Class1EgressBytes int `json:"class_1_egress_bytes,omitempty"`
+	// Number of dropped packets in class 1.
+	Class1EgressDroppedPackets int `json:"class_1_egress_dropped_packets,omitempty"`
+	// Number of dropped bytes in class 1.
+	Class1EgressDroppedBytes int `json:"class_1_egress_dropped_bytes,omitempty"`
 	// Number of sent packets in class 2.
 	Class2EgressPackets int `json:"class_2_egress_packets,omitempty"`
 	// Number of sent bytes in class 2.
 	Class2EgressBytes int `json:"class_2_egress_bytes,omitempty"`
+	// Number of dropped packets in class 2.
+	Class2EgressDroppedPackets int `json:"class_2_egress_dropped_packets,omitempty"`
+	// Number of dropped bytes in class 2.
+	Class2EgressDroppedBytes int `json:"class_2_egress_dropped_bytes,omitempty"`
 	// Number of sent packets in class 3.
 	Class3EgressPackets int `json:"class_3_egress_packets,omitempty"`
 	// Number of sent bytes in class 3.
 	Class3EgressBytes int `json:"class_3_egress_bytes,omitempty"`
+	// Number of dropped packets in class 3.
+	Class3EgressDroppedPackets int `json:"class_3_egress_dropped_packets,omitempty"`
+	// Number of dropped bytes in class 3.
+	Class3EgressDroppedBytes int `json:"class_3_egress_dropped_bytes,omitempty"`
 	// Number of sent packets in class 4.
 	Class4EgressPackets int `json:"class_4_egress_packets,omitempty"`
 	// Number of sent bytes in class 4.
 	Class4EgressBytes int `json:"class_4_egress_bytes,omitempty"`
+	// Number of dropped packets in class 4.
+	Class4EgressDroppedPackets int `json:"class_4_egress_dropped_packets,omitempty"`
+	// Number of dropped bytes in class 4.
+	Class4EgressDroppedBytes int `json:"class_4_egress_dropped_bytes,omitempty"`
 	// Number of sent packets in class 5.
 	Class5EgressPackets int `json:"class_5_egress_packets,omitempty"`
 	// Number of sent bytes in class 5.
 	Class5EgressBytes int `json:"class_5_egress_bytes,omitempty"`
+	// Number of dropped packets in class 5.
+	Class5EgressDroppedPackets int `json:"class_5_egress_dropped_packets,omitempty"`
+	// Number of dropped bytes in class 5.
+	Class5EgressDroppedBytes int `json:"class_5_egress_dropped_bytes,omitempty"`
 	// Number of sent packets in class 6.
 	Class6EgressPackets int `json:"class_6_egress_packets,omitempty"`
 	// Number of sent bytes in class 6.
 	Class6EgressBytes int `json:"class_6_egress_bytes,omitempty"`
+	// Number of dropped packets in class 6.
+	Class6EgressDroppedPackets int `json:"class_6_egress_dropped_packets,omitempty"`
+	// Number of dropped bytes in class 6.
+	Class6EgressDroppedBytes int `json:"class_6_egress_dropped_bytes,omitempty"`
 	// Number of sent packets in class 7.
 	Class7EgressPackets int `json:"class_7_egress_packets,omitempty"`
 	// Number of sent bytes in class 7.
 	Class7EgressBytes int `json:"class_7_egress_bytes,omitempty"`
+	// Number of dropped packets in class 7.
+	Class7EgressDroppedPackets int `json:"class_7_egress_dropped_packets,omitempty"`
+	// Number of dropped bytes in class 7.
+	Class7EgressDroppedBytes int `json:"class_7_egress_dropped_bytes,omitempty"`
 	// Number of received packets in policer level 1.
 	PolicerL1IngressPackets int `json:"policer_l1_ingress_packets,omitempty"`
 	// Number of received bytes in policer level 1.
 	PolicerL1IngressBytes int `json:"policer_l1_ingress_bytes,omitempty"`
+	// Number of dropped packets in policer level 1.
+	PolicerL1IngressDroppedPackets int `json:"policer_l1_ingress_dropped_packets,omitempty"`
+	// Number of dropped bytes in policer level 1.
+	PolicerL1IngressDroppedBytes int `json:"policer_l1_ingress_dropped_bytes,omitempty"`
 	// Number of received packets in policer level 2.
 	PolicerL2IngressPackets int `json:"policer_l2_ingress_packets,omitempty"`
 	// Number of received bytes in policer level 2.
 	PolicerL2IngressBytes int `json:"policer_l2_ingress_bytes,omitempty"`
+	// Number of dropped packets in policer level 2.
+	PolicerL2IngressDroppedPackets int `json:"policer_l2_ingress_dropped_packets,omitempty"`
+	// Number of dropped bytes in policer level 2.
+	PolicerL2IngressDroppedBytes int `json:"policer_l2_ingress_dropped_bytes,omitempty"`
 	// Number of received packets in policer level 3.
 	PolicerL3IngressPackets int `json:"policer_l3_ingress_packets,omitempty"`
 	// Number of received bytes in policer level 3.
 	PolicerL3IngressBytes int `json:"policer_l3_ingress_bytes,omitempty"`
+	// Number of dropped packets in policer level 3.
+	PolicerL3IngressDroppedPackets int `json:"policer_l3_ingress_dropped_packets,omitempty"`
+	// Number of dropped bytes in policer level 3.
+	PolicerL3IngressDroppedBytes int `json:"policer_l3_ingress_dropped_bytes,omitempty"`
 	// Number of received packets in policer level 4.
 	PolicerL4IngressPackets int `json:"policer_l4_ingress_packets,omitempty"`
 	// Number of received bytes in policer level 4.
 	PolicerL4IngressBytes int `json:"policer_l4_ingress_bytes,omitempty"`
+	// Number of dropped packets in policer level 4.
+	PolicerL4IngressDroppedPackets int `json:"policer_l4_ingress_dropped_packets,omitempty"`
+	// Number of dropped bytes in policer level 4.
+	PolicerL4IngressDroppedBytes int `json:"policer_l4_ingress_dropped_bytes,omitempty"`
 }

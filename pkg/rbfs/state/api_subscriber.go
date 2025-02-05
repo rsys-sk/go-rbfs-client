@@ -392,7 +392,7 @@ Disables lawful interception (LI) for the specified subscriber  with the specifi
   - @param subscriberId The subscriber ID.
   - @param id The LI request ID.
 */
-func (a *SubscriberApiService) DisableLawfulInterception(ctx context.Context, subscriberId int, id int) (*http.Response, error) {
+func (a *SubscriberApiService) DisableLawfulInterceptionSubscriber(ctx context.Context, subscriberId int, id int) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
@@ -470,7 +470,7 @@ Enables lawful interception (LI) for the specified subscriber  with the specifie
   - @param medPort Meditation device port.
   - @param medInstance Meditation device routing instance name.
 */
-func (a *SubscriberApiService) EnableLawfulInterception(ctx context.Context, subscriberId int, id int, direction string, medIp string, medPort int, medInstance string) (*http.Response, error) {
+func (a *SubscriberApiService) EnableLawfulInterceptionSubscriber(ctx context.Context, subscriberId int, id int, direction string, medIp string, medPort int, medInstance string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}

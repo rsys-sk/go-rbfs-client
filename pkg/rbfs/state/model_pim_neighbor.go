@@ -15,6 +15,7 @@ import (
 
 // PIM neighbor settings.
 type PimNeighbor struct {
+	InstanceName     string `json:"instance_name,omitempty"`
 	PimNeighborState string `json:"pim_neighbor_state,omitempty"`
 	// Last PIM neighbor state transition.
 	LastStateTransition time.Time `json:"last_state_transition,omitempty"`

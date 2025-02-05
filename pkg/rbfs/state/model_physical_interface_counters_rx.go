@@ -19,8 +19,10 @@ type PhysicalInterfaceCountersRx struct {
 	UnicastPacketsReceived int `json:"unicast_packets_received,omitempty"`
 	// Total number of received multicast packets.
 	MulticastPacketsReceived int `json:"multicast_packets_received,omitempty"`
-	// Total count of received broadcast packets.
+	// Total number of received broadcast packets.
 	BroadcastPacketsReceived int `json:"broadcast_packets_received,omitempty"`
-	// Total count of dropped packets.
+	// Total number of dropped packets.
 	PacketsDropped int `json:"packets_dropped,omitempty"`
+	// Total number of erroneous packets.
+	PacketsError int `json:"packets_error,omitempty"`
 }

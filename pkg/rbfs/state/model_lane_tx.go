@@ -33,4 +33,14 @@ type LaneTx struct {
 	PowerLowWarnThresholdMw float64 `json:"power_low_warn_threshold_mw,omitempty"`
 	// The power low warning threshold in dBm.
 	PowerLowWarnThresholdDbm float64 `json:"power_low_warn_threshold_dbm,omitempty"`
+	// Laser bias current in mA.
+	BiasCurrentMa float64 `json:"bias_current_ma,omitempty"`
+	// Laser bias current high alarm threshold in mA.
+	BiasCurrentHighAlarmThresholdMa float64 `json:"bias_current_high_alarm_threshold_ma,omitempty"`
+	// Laser bias current high warning threshold in mA.
+	BiasCurrentHighWarningThresholdMa float64 `json:"bias_current_high_warning_threshold_ma,omitempty"`
+	// Laser bias current low alarm threshold in mA.
+	BiasCurrentLowAlarmThresholdMa float64 `json:"bias_current_low_alarm_threshold_ma,omitempty"`
+	// Laser bias current low warning threshold in mA.
+	BiasCurrentLowWarningThresholdMa float64 `json:"bias_current_low_warning_threshold_ma,omitempty"`
 }

@@ -9,24 +9,12 @@
  */
 package state
 
-// The arguments of the executed ping command.
-type PingArguments struct {
-	// The pinged destination IP address.
-	DestinationIp string `json:"destination_ip,omitempty"`
-	// The source IP address.
-	SourceIp string `json:"source_ip,omitempty"`
-	// The egress interface name.
-	SourceIfl string `json:"source_ifl,omitempty"`
-	// The routing instance name.
+// OSPF neighbors in an instance.
+type Ospfv3InstanceNeighbors struct {
 	InstanceName string `json:"instance_name,omitempty"`
-	// The interval between two pings.
-	Interval float32 `json:"interval,omitempty"`
-	// The number of pings sent.
-	Count int `json:"count,omitempty"`
-	// The packet size in bytes.
-	Size int `json:"size,omitempty"`
-	// The IP TTL value.
-	Ttl int `json:"ttl,omitempty"`
-	// The IP ToS value
-	Tos int `json:"tos,omitempty"`
+	// The instance ID.
+	InstanceId int `json:"instance_id,omitempty"`
+	// The OSPF router ID.
+	RouterId  string           `json:"router_id,omitempty"`
+	Neighbors []Ospfv3Neighbor `json:"neighbors,omitempty"`
 }

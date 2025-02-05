@@ -48,7 +48,10 @@ tags:
   description: Protocol Independent Multicast
 - name: LDP
   description: Label Distribution Protocol
-
+- name: Neighbors
+  description: ARP and NDP neighbors
+- name: RPKI-RTR
+  description: RPKI-RTR protocol
 paths:
   /actions/ping:
     post:
@@ -113,7 +116,7 @@ paths:
           type: integer 
           default: 5
           minimum: 1
-          maximum: 10
+          maximum: 65535
       - in: query 
         name: interval
         description: Ping interval in seconds.
@@ -123,7 +126,7 @@ paths:
           format: float
           default: 1.0
           minimum: 0.001
-          maximum: 5.0
+          maximum: 60.0
       - in: query 
         name: size
         description: Packet payload size in bytes.
@@ -141,6 +144,14 @@ paths:
           type: integer
           default: 64
           minimum: 1
+          maximum: 255
+      - in: query
+        name: tos
+        description: IP ToS value
+        required: false
+        schema:
+          type: integer
+          minimum: 0
           maximum: 255          
       responses:
         200:
@@ -319,7 +330,7 @@ paths:
           type: integer 
           default: 5
           minimum: 1
-          maximum: 10
+          maximum: 65535
       - in: query 
         name: interval
         description: Ping interval in seconds.
@@ -329,7 +340,7 @@ paths:
           format: float
           default: 1.0
           minimum: 0.001
-          maximum: 5.0
+          maximum: 60.0
       - in: query 
         name: size
         description: Packet payload size in bytes.
@@ -347,6 +358,14 @@ paths:
           type: integer
           default: 64
           minimum: 1
+          maximum: 255
+      - in: query
+        name: tos
+        description: IP ToS value
+        required: false
+        schema:
+          type: integer
+          minimum: 0
           maximum: 255
       responses:
         200:
@@ -1116,10 +1135,43 @@ paths:
           $ref: "#/components/responses/404"
         500:
           $ref: "#/components/responses/500"
-  /ospf/instances/{instance_name}/area/{area_id}/neighbors/{ifl_name}/clear:
+  /ospf/instances/{instance_name}/neighbors/{ifl_name}/clear:
     post:
       summary: Clears an OSPF neighbor
       operationId: clearOSPFNeighbor
+      description: Resets an OSPF neighbor relationship, so that it needs to be re-established.
+      tags:
+      - OSPF  
+      parameters:
+      - in: path
+        name: instance_name
+        description: The OSPF instance name.
+        required: true
+        schema:
+            type: string
+      - in: path
+        name: ifl_name
+        description: The logical interface name. 
+        required: true
+        schema:
+          type: string
+      responses:
+        202:
+          description: The request has been successful and the neighbor has been cleared.
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        500:
+          $ref: "#/components/responses/500" 
+
+  /ospf/instances/{instance_name}/area/{area_id}/neighbors/{ifl_name}/clear:
+    post:
+      deprecated: true
+      summary: Clears an OSPF neighbor
+      operationId: clearOSPFAreaNeighbor
       description: Resets an OSPF neighbor relationship, so that it needs to be re-established.
       tags:
       - OSPF  
@@ -1136,6 +1188,300 @@ paths:
         required: true
         schema:
             type: string
+      - in: path
+        name: ifl_name
+        description: The logical interface name. 
+        required: true
+        schema:
+          type: string
+      responses:
+        202:
+          description: The request has been successful and the neighbor has been cleared.
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        500:
+          $ref: "#/components/responses/500" 
+  /ospfv3/instances:
+    get:
+      summary: Lists summary of all OSPFv3 instances 
+      operationId: getOSPFv3Instances
+      description: Lists all OSPFv3 instances with some global administrative parameters and their areas. 
+      tags:
+      - OSPF
+      responses:
+        200:
+          description: The request has been successful and a response has been received.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OSPFv3InstanceSummary"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        500:
+          $ref: "#/components/responses/500"
+  /ospfv3/instances/{instance_name}/{instance_id}:
+    get:
+      summary: Shows OSPFv3 instance details
+      operationId: getOSPFv3Instance
+      description: Shows an OSPFv3 instance including its interfaces and neighbors. 
+      tags:
+      - OSPF
+      parameters:
+      - in: path
+        name: instance_name
+        description: The OSPFv3 instance name.
+        required: true
+        schema:
+            type: string
+      - in: path
+        name: instance_id
+        description: The OSPFv3 instance ID.
+        required: true
+        schema:
+            type: integer            
+      responses:
+        200:
+          description: The request has been successful and a response has been received.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OSPFv3InstanceDetails"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        500:
+          $ref: "#/components/responses/500"
+  /ospfv3/interfaces:
+    get:
+      summary: Lists all OSPFv3 interfaces
+      operationId: getOSPFv3Interfaces
+      description: Lists all OSPFv3 instances with their interfaces.
+      tags:
+      - OSPF
+      responses:
+        200:
+          description: The request has been successful and a response has been received.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OSPFv3InstanceInterfaces"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        500:
+          $ref: "#/components/responses/500"
+  /ospfv3/instances/{instance_name}/{instance_id}/interfaces:
+    get:
+      summary: Lists interfaces in an OSPFv3 instance
+      operationId: getOSPFv3InstanceInterfaces
+      description: Shows an OSPFv3 instance with its interfaces.
+      tags:
+      - OSPF
+      parameters:
+      - in: path
+        name: instance_name
+        description: The OSPF instance name.
+        required: true
+        schema:
+            type: string
+      - in: path
+        name: instance_id
+        description: The OSPFv3 instance ID.
+        required: true
+        schema:
+            type: integer
+      responses:
+        200:
+          description: The request has been successful and a response has been received.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OSPFv3InstanceInterfaces"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        500:
+          $ref: "#/components/responses/500"
+  /ospfv3/instances/{instance_name}/{instance_id}/interfaces/{ifl_name}:
+    get: 
+      summary: Shows an OSPFv3 interface
+      operationId: getOSPFv3Interface
+      description: Shows a single OSPFv3 interface.
+      tags:
+      - OSPF
+      parameters:
+      - in: path
+        name: instance_name
+        description: The OSPFv3 instance name.
+        required: true
+        schema:
+            type: string
+      - in: path
+        name: instance_id
+        description: The OSPFv3 instance area_id:.
+        required: true
+        schema:
+            type: integer
+      - in: path
+        name: ifl_name
+        description: The logical interface name. 
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: The request has been successful and a response has been received.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OSPFv3InstanceInterface"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        500:
+          $ref: "#/components/responses/500"
+  /ospfv3/neighbors:
+    get:
+      summary: List all OSPFv3 neighbors
+      operationId: getOSPFv3Neighbors
+      description: Lists all OSPFv3 instances with their neighbors.
+      tags:
+      - OSPF
+      responses:
+        200:
+          description: The request has been successful and a response has been received.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OSPFv3InstanceNeighbors"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        500:
+          $ref: "#/components/responses/500"
+  /ospfv3/instances/{instance_name}/{instance_id}/neighbors:
+    get:
+      summary: Lists neighbors in an OSPFv3 instance
+      operationId: getOSPFv3InstanceNeighbors
+      description: Shows an OSPFv3 instance with its neighbors.
+      tags:
+      - OSPF
+      parameters:
+      - in: path
+        name: instance_name
+        description: The OSPFv3 instance name.
+        required: true
+        schema:
+            type: string
+      - in: path
+        name: instance_id
+        description: The OSPFv3 instance ID.
+        required: true
+        schema:
+            type: integer
+      responses:
+        200:
+          description: The request has been successful and a response has been received.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OSPFv3InstanceNeighbors"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        500:
+          $ref: "#/components/responses/500"
+  /ospfv3/instances/{instance_name}/{instance_id}/neighbors/{ifl_name}:
+    get:
+      summary: Shows an OSPFv3 neighbor
+      operationId: getOSPFv3Neighbor
+      description: Shows a single OSPF neighbor.
+      tags:
+      - OSPF
+      parameters:
+      - in: path
+        name: instance_name
+        description: The OSPFv3 instance name.
+        required: true
+        schema:
+            type: string
+      - in: path
+        name: instance_id
+        description: The OSPFv3 instance ID.
+        required: true
+        schema:
+            type: string     
+      - in: path
+        name: ifl_name
+        description: The logical interface name. 
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: The request has been successful and a response has been received.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OSPFv3InstanceNeighbor"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        500:
+          $ref: "#/components/responses/500"
+  /ospfv3/instances/{instance_name}/{instance_id}/neighbors/{ifl_name}/clear:
+    post:
+      summary: Clears an OSPFv3 neighbor
+      operationId: clearOSPFv3Neighbor
+      description: Resets an OSPFv3 neighbor relationship, so that it needs to be re-established.
+      tags:
+      - OSPF  
+      parameters:
+      - in: path
+        name: instance_name
+        description: The OSPF instance name.
+        required: true
+        schema:
+            type: string
+      - in: path
+        name: instance_id
+        description: The OSPF instance ID.
+        required: true
+        schema:
+            type: integer
       - in: path
         name: ifl_name
         description: The logical interface name. 
@@ -1633,7 +1979,7 @@ paths:
   /subscribers/{subscriber_id}/enableLI:
     post:
       summary: Enables lawful interception for the specified subscriber.
-      operationId: enableLawfulInterception
+      operationId: enableLawfulInterceptionSubscriber
       description: |
         Enables lawful interception (LI) for the specified subscriber 
         with the specified mediation device, direction and LI identifier.
@@ -1699,7 +2045,7 @@ paths:
   /subscribers/{subscriber_id}/disableLI:
     post:
       summary: Disables lawful interception for the specified subscriber.
-      operationId: disableLawfulInterception
+      operationId: disableLawfulInterceptionSubscriber
       description: |
         Disables lawful interception (LI) for the specified subscriber 
         with the specified mediation device, direction and LI identifier.
@@ -2161,7 +2507,7 @@ paths:
       operationId: getInterfaces
       description: |
         Lists all physical interfaces and their logical interfaces including their administrative state, 
-        operational state, configured bandwidth, MAC address and neighbor information.
+        operational state, configured bandwidth and MAC address.
         Subscriber interfaces are not included in the response.
       tags:
       - Interfaces
@@ -2438,7 +2784,11 @@ paths:
           $ref: "#/components/schemas/IfpName"
       - in: query
         name: optics
-        description: Include optic informations in the response.
+        description: | 
+          Include optic informations in the response.
+
+          NOTE: Use the /optics endpoint to obtain optics information.
+        deprecated: true
         schema:
           type: boolean
           default: true
@@ -2837,6 +3187,107 @@ paths:
           $ref: "#/components/responses/403"  
         404:
           $ref: "#/components/responses/404"  
+        500:
+          $ref: "#/components/responses/500"
+  /interfaces/logicals/{ifl_name}/enableLI:
+    post:
+      summary: Enables lawful interception for the specified logical interface.
+      operationId: enableLawfulInterceptionIFL
+      description: |
+        Enables lawful interception (LI) for the specified logical interface 
+        with the specified mediation device, direction and LI identifier.
+      tags:
+      - Interfaces
+      parameters:
+      - in: path
+        name: ifl_name
+        description: The logical-interface name.
+        required: true
+        schema:
+          $ref: "#/components/schemas/IflName"
+      - in: query
+        name: id
+        description: The LI request ID.
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 4194303
+      - in: query
+        name: direction
+        description: The direction of traffic being intercepted.
+        required: true
+        schema:
+          type: string
+          enum:
+          - EGRESS 
+          - INGRESS
+          - BOTH
+      - in: query 
+        name: med_ip
+        description: Mediation device IP address.
+        required: true
+        schema:
+          type: string
+          format: ipv4
+      - in: query
+        name: med_port
+        description: Meditation device port.
+        required: true
+        schema:
+          type: integer
+          minimum: 49152
+          maximum: 65535
+      - in: query
+        name: med_instance
+        description: Meditation device routing instance name.
+        required: true
+        schema:
+          $ref: "#/components/schemas/InstanceName"
+      responses:
+        204:
+          description: Lawful interception enabled.
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        500:
+          $ref: "#/components/responses/500"
+  /interfaces/logicals/{ifl_name}/disableLI:
+    post:
+      summary: Disables lawful interception for the specified logical interface.
+      operationId: disableLawfulInterceptionIFL
+      description: |
+        Disables lawful interception (LI) for the specified logical interface 
+        with the specified mediation device, direction and LI identifier.
+      tags:
+      - Interfaces
+      parameters:
+      - in: path
+        name: ifl_name
+        description: The logical-interface name.
+        required: true
+        schema:
+          $ref: "#/components/schemas/IflName"
+      - in: query
+        name: id
+        description: The LI request ID.
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 4194303
+      responses:
+        204:
+          description: Lawful interception disabled.
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
         500:
           $ref: "#/components/responses/500"
   /lldp/neighbors:
@@ -3880,6 +4331,69 @@ paths:
           $ref: "#/components/responses/404"
         500:
           $ref: "#/components/responses/500"
+  /routes:
+    get:
+      summary: Returns route summary statistics
+      operationId: getRoutesSummary
+      description:
+        Returns the number of routes for each instance grouped by originating protocol from the RIB.
+      tags:
+      - Routes
+      responses:
+        200:
+          description: The request has been successful and a response has been received.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Contains the route summary statistics for each instance.
+                additionalProperties:
+                  $ref: "#/components/schemas/RoutesSummary"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        422:
+          $ref: "#/components/responses/422"
+        500:
+          $ref: "#/components/responses/500"
+  /routes/{instance_name}:
+    get:
+      summary: Returns route summary statistics
+      operationId: getInstanceRoutesSummary
+      description:
+        Returns the number of routes for each instance grouped by originating protocol from the RIB.
+      tags:
+      - Routes
+      parameters:
+        - in: path
+          name: instance_name
+          description: The routing instance name
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: The request has been successful and a response has been received.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Contains the route summary statistics for the given instance.
+                additionalProperties:
+                  $ref: "#/components/schemas/RoutesSummary"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        422:
+          $ref: "#/components/responses/422"
+        500:
+          $ref: "#/components/responses/500"
   /routes/{instance_name}/{afi}/{safi}:
     get:
       summary: List route information for a prefix
@@ -3889,6 +4403,8 @@ paths:
         - prefix4 query parameter mandatory for AFI IPv4
         - prefix6 query parameter mandatory for AFI IPv6
         - label query parameter mandatory for AFI MPLS
+
+        Bear in mind that the SAFI needs to be unicast for querying MPLS label route entries.
       tags:
       - Routes
       parameters:
@@ -4187,6 +4703,354 @@ paths:
           $ref: "#/components/responses/422"
         500:
           $ref: "#/components/responses/500"  
+  /neighbors:
+    get:
+      summary: Lists all known ARP/NDP neighbors
+      operationId: getNeighbors
+      description: Lists all known ARP/NDP neighbors of all instances.
+      tags:
+      - Neighbors
+      parameters:
+      - in: query
+        name: afi
+        description: The address family
+        required: false
+        schema:
+          type: string
+          enum:
+          - ipv4
+          - ipv6
+      responses:
+        200:
+          description: The ARP/NDP neighbors grouped by instance
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ARPNDPInstanceNeighbors"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        422:
+          $ref: "#/components/responses/422"
+        500:
+          $ref: "#/components/responses/500"  
+  /neighbors/instances/{instance_name}:
+    get:
+      summary: Lists all known ARP/NDP neighbors
+      operationId: getInstanceNeighbors
+      description: Lists all known ARP/NDP neighbors of the requested instance.
+      tags:
+      - Neighbors
+      parameters:
+      - in: path
+        name: instance_name
+        description: The instance name
+        required: true
+        schema:
+          $ref: "#/components/schemas/InstanceName"
+      - in: query
+        name: afi
+        description: The address family
+        required: false
+        schema:
+          type: string
+          enum:
+          - ipv4
+          - ipv6
+      responses:
+        200:
+          description: The neighbors of the instance
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ARPNDPInstanceNeighbors"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        422:
+          $ref: "#/components/responses/422"
+        500:
+          $ref: "#/components/responses/500"  
+  /rpki-rtr/instances:
+    get:
+      summary: Lists all instances with configured RPKI-RTR.
+      operationId: getRPKIRTRInstances
+      description: Lists all instances with configured RPKI-RTR including the configured sessions.
+      tags:
+      - RPKI-RTR
+      responses:
+        200:
+          description: All instances with configured RPKI-RTR 
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RPKIRTRInstance"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        422:
+          $ref: "#/components/responses/422"
+        500:
+          $ref: "#/components/responses/500" 
+  /rpki-rtr/instances/{instance_name}:
+    get:
+      summary: Returns the instance with configured RPKI-RTR.
+      operationId: getRPKIRTRInstance
+      description: Returns the instance with configured RPKI-RTR including all configured sessions.
+      tags:
+      - RPKI-RTR
+      parameters:
+      - in: path
+        name: instance_name
+        description: The instance name
+        required: true
+        schema:
+          $ref: "#/components/schemas/InstanceName"
+      responses:
+        200:
+          description: All instances with configured RPKI-RTR 
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RPKIRTRInstance"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        422:
+          $ref: "#/components/responses/422"
+        500:
+          $ref: "#/components/responses/500" 
+  /rpki-rtr/instances/{instance_name}/clear:
+    post:
+      summary: Clears all RPKI-RTR sessions on the given instance.
+      operationId: clearRPKIRTRInstance
+      description: |
+        Clears all sessions configured on the given sessions. 
+        The soft flag allows doing a soft reset that merely sends a cache refresh request.
+      tags:
+      - RPKI-RTR
+      parameters:
+      - in: path
+        name: instance_name
+        description: The instance name
+        required: true
+        schema:
+          $ref: "#/components/schemas/InstanceName"
+      - in: query
+        name: soft
+        description: Whether to run a soft reset.
+        schema:
+          type: boolean
+          default: false
+      responses:
+        202:
+          description: Reset request accepted
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        422:
+          $ref: "#/components/responses/422"
+        500:
+          $ref: "#/components/responses/500" 
+  /rpki-rtr/instances/{instance_name}/sessions/{cache_ip}:
+    post:
+      summary: Returns a RPKI-RTR session.
+      operationId: getRPKIRTRSession
+      description: |
+        Returns the sessions with the given RPKI cache IP.
+        The source_ip parameter selects the specific session, if multiple session with the cache exist.
+      tags:
+      - RPKI-RTR
+      parameters:
+      - in: path
+        name: instance_name
+        description: The instance name
+        required: true
+        schema:
+          $ref: "#/components/schemas/InstanceName"
+      - in: path
+        name: cache_ip
+        description: The RPKI cache IP.
+        required: true
+        schema:
+          oneOf:
+          - type: string
+            format: ipv4
+          - type: string
+            format: ipv6
+      - in: query
+        name: source_ip
+        description: The session source IP address.
+        required: false
+        schema:
+          oneOf:
+          - type: string
+            format: ipv4
+          - type: string
+            format: ipv6
+      responses:
+        200:
+          description: The RPKI-RTR session. 
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RPKIRTRSession"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        422:
+          $ref: "#/components/responses/422"
+        500:
+          $ref: "#/components/responses/500" 
+  /rpki-rtr/instances/{instance_name}/sessions/{cache_ip}/clear:
+    post:
+      summary: Clears a RPKI-RTR session.
+      operationId: clearRPKIRTRSession
+      description: |
+        Clears all sessions with the given RPKI cache IP.
+        The source_ip parameter allows selecting a specific session if multiple session with the cache exist.
+        The soft flag allows doing a soft reset that merely sends a cache refresh request.
+      tags:
+      - RPKI-RTR
+      parameters:
+      - in: path
+        name: instance_name
+        description: The instance name
+        required: true
+        schema:
+          $ref: "#/components/schemas/InstanceName"
+      - in: path
+        name: cache_ip
+        description: The RPKI cache IP.
+        required: true
+        schema:
+          oneOf:
+          - type: string
+            format: ipv4
+          - type: string
+            format: ipv6
+      - in: query
+        name: source_ip
+        description: The session source IP address.
+        required: false
+        schema:
+          oneOf:
+          - type: string
+            format: ipv4
+          - type: string
+            format: ipv6
+      - in: query
+        name: soft
+        description: Whether to run a soft reset.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        202:
+          description: Reset request accepted
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        422:
+          $ref: "#/components/responses/422"
+        500:
+          $ref: "#/components/responses/500" 
+  /rpki-rtr/instances/{instance_name}/database/{prefix}:
+    post:
+      summary: Returns the database record for the given prefix.
+      operationId: getRPKIRTRRecord
+      description: |
+        Searches the covering prefix for the given prefix and returns the AS number associated with this prefix.
+      tags:
+      - RPKI-RTR
+      parameters:
+      - in: path
+        name: instance_name
+        description: The instance name
+        required: true
+        schema:
+          $ref: "#/components/schemas/InstanceName"
+      - in: path
+        name: prefix
+        description: The IP prefix.
+        required: true
+        schema:
+          oneOf:
+          - type: string
+            format: ipv4_prefix
+          - type: string
+            format: ipv6_prefix
+      responses:
+        200:
+          description: The RPKI database record.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RPKIRTRRecord"
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        422:
+          $ref: "#/components/responses/422"
+        500:
+          $ref: "#/components/responses/500" 
+  /rpki-rtr/instances/{instance_name}/database/clear:
+    post:
+      summary: Clears the RPKI-RTR database for the given session.
+      operationId: clearRPKIRTRDatabase
+      description: |
+        Clears the RPKI database and all session in the given instance.
+      tags:
+      - RPKI-RTR
+      parameters:
+      - in: path
+        name: instance_name
+        description: The instance name
+        required: true
+        schema:
+          $ref: "#/components/schemas/InstanceName"
+      responses:
+        202:
+          description: Reset request accepted
+        401:
+          $ref: "#/components/responses/401"
+        403:
+          $ref: "#/components/responses/403"
+        404:
+          $ref: "#/components/responses/404"
+        422:
+          $ref: "#/components/responses/422"
+        500:
+          $ref: "#/components/responses/500" 
 components:
   responses:
     400:
@@ -4220,7 +5084,7 @@ components:
         and can therefore not be executed.
     422:
       description: |
-        ** Unprocessable Entity.**
+        **Unprocessable Entity.**
       
         The request entity was syntactically correct but cannot be processed due 
         to missing attributes or invalid attribute values.
@@ -4302,6 +5166,9 @@ components:
         ttl:
           type: integer
           description: The IP TTL value.
+        tos:
+          type: integer
+          description: The IP ToS value
     PingStatistics:
       type: object
       description: Ping counters.
@@ -5043,6 +5910,12 @@ components:
           description: The optics manufacturing date.
           type: string
           format: date
+        voltage_v:
+          description: The optics voltage supply in volts.
+          type: number
+        temperature_c:
+          description: The optics temperature in degree celsius.
+          type: number
     Lane:
       type: object
       description: The optical lane information.
@@ -5051,11 +5924,19 @@ components:
           description: The lane ID.
           type: integer
         temperature_celsius:
-          description: The optic temperature in degree celsius.
+          description: |
+            The optic temperature in degree celsius.
+          
+            **Deprecated**. Moved to the optic because the temperature value exists for the entire optic rather than per lane.
           type: number
+          deprecated: true
         voltage:
-          description: Voltage in volts.
+          description: |
+            The optic temperature in degree celsius.
+          
+            **Deprecated**. Moved to the optic because the voltage exists for the entire optic rather than per lane.
           type: number
+          deprecated: true
         tx:
           description: TX-related state.
           type: object
@@ -5093,6 +5974,21 @@ components:
             power_low_warn_threshold_dbm: 
               description: The power low warning threshold in dBm.
               type: number
+            bias_current_ma:
+              description: Laser bias current in mA.
+              type: number
+            bias_current_high_alarm_threshold_ma:
+              description: Laser bias current high alarm threshold in mA.
+              type: number
+            bias_current_high_warning_threshold_ma:
+              description: Laser bias current high warning threshold in mA.
+              type: number
+            bias_current_low_alarm_threshold_ma:
+              description: Laser bias current low alarm threshold in mA.
+              type: number
+            bias_current_low_warning_threshold_ma:
+              description: Laser bias current low warning threshold in mA.
+              type: number              
         rx:
           description: RX-related state.
           type: object
@@ -5449,11 +6345,23 @@ components:
         class_0_egress_bytes:
           description: Number of sent bytes in class 0.
           type: integer
+        class_0_egress_dropped_packets:
+          description: Number of dropped packets in class 0.
+          type: integer
+        class_0_egress_dropped_bytes:
+          description: Number of dropped bytes in class 0.
+          type: integer
         class_1_egress_packets:
           description: Number of sent packets in class 1.
           type: integer
         class_1_egress_bytes:
           description: Number of sent bytes in class 1.
+          type: integer
+        class_1_egress_dropped_packets:
+          description: Number of dropped packets in class 1.
+          type: integer
+        class_1_egress_dropped_bytes:
+          description: Number of dropped bytes in class 1.
           type: integer
         class_2_egress_packets:
           description: Number of sent packets in class 2.
@@ -5461,17 +6369,35 @@ components:
         class_2_egress_bytes:
           description: Number of sent bytes in class 2.
           type: integer
+        class_2_egress_dropped_packets:
+          description: Number of dropped packets in class 2.
+          type: integer
+        class_2_egress_dropped_bytes:
+          description: Number of dropped bytes in class 2.
+          type: integer
         class_3_egress_packets:
           description: Number of sent packets in class 3.
           type: integer
         class_3_egress_bytes:
           description: Number of sent bytes in class 3.
           type: integer
+        class_3_egress_dropped_packets:
+          description: Number of dropped packets in class 3.
+          type: integer
+        class_3_egress_dropped_bytes:
+          description: Number of dropped bytes in class 3.
+          type: integer  
         class_4_egress_packets:
           description: Number of sent packets in class 4.
           type: integer
         class_4_egress_bytes:
           description: Number of sent bytes in class 4.
+          type: integer
+        class_4_egress_dropped_packets:
+          description: Number of dropped packets in class 4.
+          type: integer
+        class_4_egress_dropped_bytes:
+          description: Number of dropped bytes in class 4.
           type: integer
         class_5_egress_packets:
           description: Number of sent packets in class 5.
@@ -5479,11 +6405,23 @@ components:
         class_5_egress_bytes:
           description: Number of sent bytes in class 5.
           type: integer
+        class_5_egress_dropped_packets:
+          description: Number of dropped packets in class 5.
+          type: integer
+        class_5_egress_dropped_bytes:
+          description: Number of dropped bytes in class 5.
+          type: integer
         class_6_egress_packets:
           description: Number of sent packets in class 6.
           type: integer
         class_6_egress_bytes:
           description: Number of sent bytes in class 6.
+          type: integer
+        class_6_egress_dropped_packets:
+          description: Number of dropped packets in class 6.
+          type: integer
+        class_6_egress_dropped_bytes:
+          description: Number of dropped bytes in class 6.
           type: integer
         class_7_egress_packets:
           description: Number of sent packets in class 7.
@@ -5491,11 +6429,23 @@ components:
         class_7_egress_bytes:
           description: Number of sent bytes in class 7.
           type: integer
+        class_7_egress_dropped_packets:
+          description: Number of dropped packets in class 7.
+          type: integer
+        class_7_egress_dropped_bytes:
+          description: Number of dropped bytes in class 7.
+          type: integer
         policer_l1_ingress_packets:
           description: Number of received packets in policer level 1.
           type: integer
         policer_l1_ingress_bytes:
           description: Number of received bytes in policer level 1.
+          type: integer
+        policer_l1_ingress_dropped_packets:
+          description: Number of dropped packets in policer level 1.
+          type: integer
+        policer_l1_ingress_dropped_bytes:
+          description: Number of dropped bytes in policer level 1.
           type: integer
         policer_l2_ingress_packets:
           description: Number of received packets in policer level 2.
@@ -5503,17 +6453,35 @@ components:
         policer_l2_ingress_bytes:
           description: Number of received bytes in policer level 2.
           type: integer
+        policer_l2_ingress_dropped_packets:
+          description: Number of dropped packets in policer level 2.
+          type: integer
+        policer_l2_ingress_dropped_bytes:
+          description: Number of dropped bytes in policer level 2.
+          type: integer
         policer_l3_ingress_packets:
           description: Number of received packets in policer level 3.
           type: integer
         policer_l3_ingress_bytes:
           description: Number of received bytes in policer level 3.
           type: integer
+        policer_l3_ingress_dropped_packets:
+          description: Number of dropped packets in policer level 3.
+          type: integer
+        policer_l3_ingress_dropped_bytes:
+          description: Number of dropped bytes in policer level 3.
+          type: integer
         policer_l4_ingress_packets:
           description: Number of received packets in policer level 4.
           type: integer
         policer_l4_ingress_bytes:
           description: Number of received bytes in policer level 4.
+          type: integer
+        policer_l4_ingress_dropped_packets:
+          description: Number of dropped packets in policer level 4.
+          type: integer
+        policer_l4_ingress_dropped_bytes:
+          description: Number of dropped bytes in policer level 4.
           type: integer
     SubscriberHistory:
       description: Provides details about a terminated subscriber session.
@@ -5698,7 +6666,17 @@ components:
           - FULL
           - HALF
         mtu_size:
+          description: |
+            The configured maximum transfer unit (MTU) size in bytes.
+            
+            *NOTE:*Use l2_mtu instead.
+          type: integer
+          deprecated: true
+        l2_mtu:
           description: The configured maximum transfer unit (MTU) size in bytes.
+          type: integer
+        l2_mru:
+          description: The maximum receive unit (MRU) size in bytes
           type: integer
         operational_state:
           description: The operational interface state.
@@ -5782,8 +6760,18 @@ components:
           - FULL
           - HALF
         mtu_size:
+          description: |
+            The configured maximum transfer unit (MTU) size in bytes.
+            
+            *NOTE:*Use l2_mtu instead.
+          type: integer
+          deprecated: true
+        l2_mtu:
           description: The configured maximum transfer unit (MTU) size in bytes.
           type: integer
+        l2_mru:
+          description: The maximum receive unit (MRU) size in bytes
+          type: integer  
         operational_state:
           description: The operational interface state.
           type: string
@@ -5840,6 +6828,9 @@ components:
             packets_dropped:
               description: Total number of dropped packets.
               type: integer
+            packets_error:
+              description: Total number of erroneous packets.
+              type: integer
         rx:
           type: object
           description: Received data counters.
@@ -5857,10 +6848,13 @@ components:
               description: Total number of received multicast packets.
               type: integer
             broadcast_packets_received:
-              description: Total count of received broadcast packets.
+              description: Total number of received broadcast packets.
               type: integer
             packets_dropped:
-              description: Total count of dropped packets.
+              description: Total number of dropped packets.
+              type: integer
+            packets_error:
+              description: Total number of erroneous packets.
               type: integer
     PhysicalInterface:
       type: object
@@ -5896,7 +6890,17 @@ components:
           - FULL
           - HALF
         mtu_size:
+          description: |
+            The configured maximum transfer unit (MTU) size in bytes.
+            
+            *NOTE:*Use l2_mtu instead.
+          type: integer
+          deprecated: true
+        l2_mtu:
           description: The configured maximum transfer unit (MTU) size in bytes.
+          type: integer
+        l2_mru:
+          description: The maximum receive unit (MRU) size in bytes
           type: integer
         operational_state:
           description: The operational interface state.
@@ -5955,8 +6959,18 @@ components:
           - FULL
           - HALF
         mtu_size:
+          description: |
+            The configured maximum transfer unit (MTU) size in bytes.
+            
+            *NOTE:*Use l2_mtu instead.
+          type: integer
+          deprecated: true
+        l2_mtu:
           description: The configured maximum transfer unit (MTU) size in bytes.
           type: integer
+        l2_mru:
+          description: The maximum receive unit (MRU) size in bytes
+          type: integer  
         operational_state:
           description: The operational interface state.
           type: string
@@ -5977,7 +6991,15 @@ components:
           type: string
           format: date-time
         optics:
-          $ref: "#/components/schemas/Optic"
+          description: | 
+            The optics informations
+
+            NOTE: This attribute never got populated.
+            Use the /optics endpoint to obtain this information.
+          deprecated: true
+          type: object
+          allOf:
+            - $ref: "#/components/schemas/Optic"
         lag:
           $ref: "#/components/schemas/LinkAggregationGroup"
         ifp_counters:
@@ -6084,13 +7106,16 @@ components:
                   description: Total number of packets sent.
                   type: integer
                 packets_dropped:
-                  description: Total number packets dropped.
+                  description: Total number of packets dropped.
+                  type: integer
+                packets_error:
+                  description: Total number of erroneous packets.
                   type: integer
                 bytes_sent:
                   description: Total number of bytes sent.
                   type: integer
                 bytes_dropped:
-                  description: Total number bytes dropped.
+                  description: Total number of bytes dropped.
                   type: integer
             rx:
               description: Counters for received data.
@@ -6100,13 +7125,16 @@ components:
                   description: Total number of packets received.
                   type: integer
                 packets_dropped:
-                  description: Total number packets dropped.
+                  description: Total number of packets dropped.
+                  type: integer
+                packets_error:
+                  description: Total number of erroneous packets.
                   type: integer
                 bytes_received:
                   description: Total number of bytes received.
                   type: integer
                 bytes_dropped:
-                  description: Total number bytes dropped.
+                  description: Total number of bytes dropped.
                   type: integer
     ISISInstanceRef:
       type: object
@@ -6940,6 +7968,250 @@ components:
             dead_interval:
               description: OSPF dead interval of the neighbor.
               type: integer
+    
+    OSPFv3InstanceSummary:
+      allOf:
+      - type: object
+        description: OSPF instance summary.
+        properties:
+          instance_name:
+            $ref: "#/components/schemas/InstanceName"
+          instance_id:
+            description: The OSPFv3 instance ID.
+            type: integer
+          router_id:
+            description: The OSPF router ID.
+            type: string
+            format: ipv4
+          areas:
+            type: array
+            items:
+              $ref: "#/components/schemas/OSPFArea" 
+      - $ref: "#/components/schemas/OSPFInstanceGlobal"
+
+    OSPFv3InstanceDetails:
+      allOf:
+      - type: object
+        description: OSPF instance details.
+        properties:
+          instance_name:
+            $ref: "#/components/schemas/InstanceName"
+          instance_id:
+            description: The OSPFv3 instance ID.
+            type: integer
+          router_id:
+            description: The OSPF router ID.
+            type: string
+            format: ipv4
+          areas:
+            type: array
+            items:
+              $ref: "#/components/schemas/OSPFArea"
+          interfaces:
+            type: array
+            items:
+              $ref: "#/components/schemas/OSPFv3Interface" 
+          neighbors:
+            type: array
+            items:
+              $ref: "#/components/schemas/OSPFv3Neighbor" 
+      - $ref: "#/components/schemas/OSPFInstanceGlobal"
+
+    OSPFv3InstanceInterfaces:
+      type: object
+      description: OSPF interfaces in an instance.
+      properties:
+        instance_name:
+          $ref: "#/components/schemas/InstanceName"
+        instance_id:
+          description: The OSPFv3 instance ID.
+          type: integer
+        router_id:
+          description: The OSPF router ID.
+          type: string
+          format: ipv4
+        interfaces:
+          type: array
+          items:
+            $ref: "#/components/schemas/OSPFv3Interface" 
+
+    OSPFv3InstanceInterface:
+      type: object
+      description: A specific OSPF interface.
+      properties:
+        instance_name:
+          $ref: "#/components/schemas/InstanceName"
+        instance_id:
+          description: The OSPFv3 instance ID.
+          type: integer
+        router_id:
+          description: The OSPF router ID.
+          type: string
+          format: ipv4
+        interface:
+          $ref: "#/components/schemas/OSPFv3Interface" 
+
+    OSPFv3Interface:
+      type: object
+      properties:
+        ifl_name:
+          $ref: "#/components/schemas/IflName"
+        area_id:
+          description: The OSPF area to which the interface belongs.
+          type: string
+          format: ipv4
+        ospf_ifl_state:
+          description: The state of the OSPF interface.
+          type: string
+          enum:
+          - Depend_Upon
+          - Down
+          - Loopback
+          - Waiting
+          - PointToPoint
+          - DROther
+          - Backup
+          - DR
+          - Invalid
+        ospf_ifl_type:
+          description: The OSPF interface type.
+          type: string
+          enum:
+          - p2p
+          - broadcast
+        full_neighbors:
+          description: Number of neighbors on the OSPF interface.
+          type: integer
+        metric:
+          description: The interface OSPF metric value.
+          type: integer
+        ipv6_prefix:
+          description: The IPv6 address of the interface in CIDR notation.
+          type: string
+        ipv6_mtu:
+          description: The OSPF protocol MTU.
+          type: integer
+        priority:
+          description: OSPF priority on the interface.
+          type: integer
+        designated_router:
+          description: The designated router on the interface.
+          type: string
+          format: ipv4
+        backup_designated_router:
+          description: The backup designated router on the interface.
+          type: string
+          format: ipv4
+        hello_interval:
+          description: OSPF hello interval on the interface.
+          type: integer
+        dead_interval:
+          description: OSPF dead interval on the interface.
+          type: integer
+        segment_routing_index:
+          description: The segment routing index on the interface.
+          type: integer
+        authentication_type:
+          description: The authentication type on the interface.
+          type: string
+          enum:
+          - none
+          - clear_text
+          - md5
+
+    OSPFv3InstanceNeighbors:
+      type: object
+      description: OSPF neighbors in an instance.
+      properties:
+        instance_name:
+          $ref: "#/components/schemas/InstanceName"
+        instance_id:
+          description: The instance ID.
+          type: integer  
+        router_id:
+          description: The OSPF router ID.
+          type: string
+          format: ipv4
+        neighbors:
+          type: array
+          items:
+            $ref: "#/components/schemas/OSPFv3Neighbor" 
+
+    OSPFv3InstanceNeighbor:
+      type: object
+      description: A specific OSPF neighbor.
+      properties:
+        instance_name:
+          $ref: "#/components/schemas/InstanceName"
+        instance_id:
+          description: The instance lsr_id.
+          type: string
+        router_id:
+          description: The OSPF router ID.
+          type: string
+          format: ipv4
+        neighbor:
+          $ref: "#/components/schemas/OSPFv3Neighbor" 
+
+    OSPFv3Neighbor:
+      type: object
+      description: OSPF neighbor details.
+      properties:
+        ospf_neighbor_state:
+          description: The OSPF neighbor state.
+          type: string
+          enum:
+          - Depend_Upon
+          - Deleted
+          - Down
+          - Attempt
+          - Init
+          - TwoWay
+          - ExStart
+          - Exchange
+          - Loading
+          - Full
+          - Max     
+        area_id:
+          description: The area in which the neighbor resides.
+          type: string
+          format: ipv4
+        ifl_name:
+          $ref: "#/components/schemas/IflName"
+        ipv6_address:
+          description: The local IPv6 address of the neighborship.
+          type: string
+          format: ipv6
+        designated_router:
+          description: The designated router on the neighbor interface.
+          type: string
+          format: ipv4
+        backup_designated_router:
+          description: The backup designated router on the neighbor interface.
+          type: string
+          format: ipv4
+        neighbor:
+          description: OSPF neighbor remote parameters.
+          type: object
+          properties:
+            router_id:
+              description: OSPF neighbor router ID.
+              type: string
+              format: ipv4
+            ipv6_address:
+              description: OSPF neighbor IPv6 address.
+              type: string
+              format: ipv6
+            priority:
+              description: Priority of the OSPF neighbor.
+              type: integer
+            up_time:
+              description: Time the OSPF neighbor is in Up state.
+              type: string
+              format: date-time
+            dead_interval:
+              description: OSPF dead interval of the neighbor.
+              type: integer
 
     LldpGlobalNeighbors:
       type: object
@@ -7623,7 +8895,16 @@ components:
           description: The system MAC address.
           type: string
         manufacture_date:
-          description: The date when the system has been manufactured.
+          description: |
+              The date when the system has been manufactured.
+
+              Please use date_manufactured instead.
+          type: string
+          format: date-time
+          deprecated: true
+        date_manufactured:
+          description: |
+              The date when the system was manufactured.
           type: string
           format: date
         manufacturer:
@@ -7734,6 +9015,67 @@ components:
           description: Route creation time.
           type: string
           format: date-time
+    RoutesSummary:
+      type: object
+      description: Contains the number of routes in the RIB grouped by originating protocol
+      properties:
+        arp_nd:
+          type: integer
+          description: ARP ND routes count
+        direct:
+          type: integer
+          description: direct routes count
+        static:
+          type: integer
+          description: static routes count
+        bgp:
+          type: integer
+          description: BGP routes count
+        bgp_local:
+          type: integer
+          description: Local BGP routes count
+        bgp_local_origin:
+          type: integer
+          description: Local origin BGP routes count
+        isis:
+          type: integer
+          description: ISIS routes count
+        ospf:
+          type: integer
+          description: OSPF routes count
+        ldp:
+          type: integer
+          description: LDP routes count
+        pim:
+          type: integer
+          description: PIM routes count
+        igmp:
+          type: integer
+          description: IGMP routes count
+        l2tpv2:
+          type: integer
+          description: L2TPv2 routes count
+        ipoe:
+          type: integer
+          description: IPoE routes count
+        ppp:
+          type: integer
+          description: PPP routes count
+        dhcp:
+          type: integer
+          description: DHCP routes count
+        local:
+          type: integer
+          description: local routes count
+        rib:
+          type: integer
+          description: RIB routes count
+        mrib:
+          type: integer
+          description: mRIB routes count
+        total:
+          type: integer
+          description: Total routes count
     NextHops:
       type: object
       description: Next hop details.
@@ -7897,6 +9239,12 @@ components:
         bandwidth:
           description: The maximum bandwidth available.
           type: string
+        lag_member_state:
+          description: The LAG member state indicates whether this LAG member is resolved or unresolved.
+          type: string
+          enum:
+          - RESOLVED
+          - UNRESOLVED
     LDPSessionState:
       description: Enumeration of LDP sessions states.
       type: string
@@ -8021,7 +9369,7 @@ components:
         last_state_transition:
           description: Last session state transition.
           type: string
-          format: dateTime
+          format: date-time
         ldp_role:
           $ref: "#/components/schemas/LDPRole"
         ifl_name:
@@ -8178,6 +9526,160 @@ components:
             max_vector_length:
               description: Maximum vector length accepted.
               type: integer
-
-
-      
+    ARPNDPInstanceNeighbors:
+      type: object
+      description: ARP and NDP neighbors
+      properties:
+        instance_name:
+          $ref: "#/components/schemas/InstanceName"
+        neighbors:
+          description: The ARP and NDP neighbors.
+          type: array
+          items:
+            $ref: "#/components/schemas/ARPNDPNeighbor"
+    ARPNDPNeighbor:
+      type: object
+      description: ARP / NDP neighbor
+      properties:
+        ifl_name:
+          $ref: "#/components/schemas/IflName"
+        mac_address:
+          description: The neighbor MAC address
+          type: string
+        afi:
+          description: The address family
+          type: string
+          enum:
+          - ipv4
+          - ipv6
+        ipv4_address:
+          description: The neighbors IPv4 address
+          type: string
+          format: ipv4
+        ipv6_address:
+          description: The neighbors IPv6 address
+          type: string
+          format: ipv6
+        auto_discovered:
+          description: Flag to indicate whether the neighbor was discovered automatically
+          type: boolean
+        date_created:
+          description: The creation time of the neighbor record
+          type: string
+          format: date-time
+    RPKIRTRInstance:
+      type: object
+      description: The RPKI-RTR instance state.
+      properties:
+        instance_name: 
+          $ref: "#/components/schemas/InstanceName"
+        sessions: 
+          description: Array of RPKI-RTR sessions.
+          type: array
+          items:
+            $ref: "#/components/schemas/RPKIRTRSessionInfo"
+    RPKIRTRSessionInfo:
+      type: object
+      description: The RPKI-RTR session state.
+      properties:
+        session_state:
+          description: | 
+            The session state.
+          type: string
+          enum:
+          - IDLE
+          - CONNECT
+          - SYNC
+          - ESTABLISHED
+        last_state_transition:
+          description: The timestamp of the last session state transition.
+          type: string
+          format: date-time
+        rpki_cache:
+          $ref: "#/components/schemas/RPKIRTRCache"
+        preference:
+          description: The session preference.
+          type: integer
+        ipv4_address:
+          description: The local IPv4 address.
+          type: string
+          format: ipv4
+        ipv6_address:
+          description: The local IPv6 address.
+          type: string
+          format: ipv6  
+    RPKIRTRSession:
+      type: object
+      description: RPKI RTR session state.
+      allOf:
+      - $ref: "#/components/schemas/RPKIRTRSessionInfo"
+      - type: object
+        properties:
+          instance_name:
+            $ref: "#/components/schemas/InstanceName"
+          timers:
+            type: object
+            properties: 
+              connect_time:
+                description: The connect timer interval in seconds.
+                type: integer
+              connect_timer:
+                description: The remaining time in seconds until the connect timer fires.
+                type: integer
+              refresh_time:
+                description: The refresh timer interval in seconds.
+                type: integer
+              refresh_timer:
+                description: The remaining time in seconds until the refresh timer fires.
+                type: integer
+              retry_time:
+                description: The retry timer interval in seconds.
+                type: integer
+              retry_timer:
+                description: The remaining time in seconds until the retry timer fires.
+                type: integer
+              record_expiry_time:
+                description: The record expiry timer interval in seconds.
+                type: integer
+              record_expiry_timer:
+                description: The remaining time in seconds until the record expiry timer fires.
+                type: integer
+          statistics:
+            type: object
+            properties:
+              ipv4_prefix_count:
+                description: Total count of stored IPv4 prefixes.
+                type: integer
+              ipv6_prefix_count:  
+                description: Total count of stored IPv6 prefixes.
+                type: integer  
+    RPKIRTRCache:
+      type: object
+      description: The RPKI-RTR cache handle.
+      properties:
+        ipv4_address:
+          description: The cache IPv4 address.
+          type: string
+          format: ipv4
+        ipv6_address:
+          description: The cache IPv6 address.
+          type: string
+          format: ipv6
+        port:
+          description: The cache network port.
+          type: integer
+    RPKIRTRRecord:
+      type: object  
+      description: A RPKI-RTR database record.
+      properties:    
+        instance_name:
+          $ref: "#/components/schemas/InstanceName"
+        prefix:
+          description: The requested prefix.
+          type: string
+        covering_prefix:
+          description: The longest matching prefix for the request prefix.
+          type: string
+        asn:
+          description: The AS number.
+          type: integer

@@ -9,24 +9,13 @@
  */
 package state
 
-// The arguments of the executed ping command.
-type PingArguments struct {
-	// The pinged destination IP address.
-	DestinationIp string `json:"destination_ip,omitempty"`
-	// The source IP address.
-	SourceIp string `json:"source_ip,omitempty"`
-	// The egress interface name.
-	SourceIfl string `json:"source_ifl,omitempty"`
-	// The routing instance name.
+// A RPKI-RTR database record.
+type RpkirtrRecord struct {
 	InstanceName string `json:"instance_name,omitempty"`
-	// The interval between two pings.
-	Interval float32 `json:"interval,omitempty"`
-	// The number of pings sent.
-	Count int `json:"count,omitempty"`
-	// The packet size in bytes.
-	Size int `json:"size,omitempty"`
-	// The IP TTL value.
-	Ttl int `json:"ttl,omitempty"`
-	// The IP ToS value
-	Tos int `json:"tos,omitempty"`
+	// The requested prefix.
+	Prefix string `json:"prefix,omitempty"`
+	// The longest matching prefix for the request prefix.
+	CoveringPrefix string `json:"covering_prefix,omitempty"`
+	// The AS number.
+	Asn int `json:"asn,omitempty"`
 }

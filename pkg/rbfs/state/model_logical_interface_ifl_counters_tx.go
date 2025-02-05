@@ -13,10 +13,12 @@ package state
 type LogicalInterfaceIflCountersTx struct {
 	// Total number of packets sent.
 	PacketsSent int `json:"packets_sent,omitempty"`
-	// Total number packets dropped.
+	// Total number of packets dropped.
 	PacketsDropped int `json:"packets_dropped,omitempty"`
+	// Total number of erroneous packets.
+	PacketsError int `json:"packets_error,omitempty"`
 	// Total number of bytes sent.
 	BytesSent int `json:"bytes_sent,omitempty"`
-	// Total number bytes dropped.
+	// Total number of bytes dropped.
 	BytesDropped int `json:"bytes_dropped,omitempty"`
 }

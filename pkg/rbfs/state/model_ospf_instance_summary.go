@@ -10,7 +10,11 @@
 package state
 
 type OspfInstanceSummary struct {
-	Flags *OspfInstanceGlobalFlags `json:"flags,omitempty"`
+	InstanceName string `json:"instance_name,omitempty"`
+	// The OSPF router ID.
+	RouterId string                   `json:"router_id,omitempty"`
+	Areas    []OspfArea               `json:"areas,omitempty"`
+	Flags    *OspfInstanceGlobalFlags `json:"flags,omitempty"`
 	// The address family of the OSPF instance.
 	AddressFamily string `json:"address_family,omitempty"`
 	// The OSPF flood interval.

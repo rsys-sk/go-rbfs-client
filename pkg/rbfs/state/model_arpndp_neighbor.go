@@ -9,24 +9,23 @@
  */
 package state
 
-// The arguments of the executed ping command.
-type PingArguments struct {
-	// The pinged destination IP address.
-	DestinationIp string `json:"destination_ip,omitempty"`
-	// The source IP address.
-	SourceIp string `json:"source_ip,omitempty"`
-	// The egress interface name.
-	SourceIfl string `json:"source_ifl,omitempty"`
-	// The routing instance name.
-	InstanceName string `json:"instance_name,omitempty"`
-	// The interval between two pings.
-	Interval float32 `json:"interval,omitempty"`
-	// The number of pings sent.
-	Count int `json:"count,omitempty"`
-	// The packet size in bytes.
-	Size int `json:"size,omitempty"`
-	// The IP TTL value.
-	Ttl int `json:"ttl,omitempty"`
-	// The IP ToS value
-	Tos int `json:"tos,omitempty"`
+import (
+	"time"
+)
+
+// ARP / NDP neighbor
+type ArpndpNeighbor struct {
+	IflName string `json:"ifl_name,omitempty"`
+	// The neighbor MAC address
+	MacAddress string `json:"mac_address,omitempty"`
+	// The address family
+	Afi string `json:"afi,omitempty"`
+	// The neighbors IPv4 address
+	Ipv4Address string `json:"ipv4_address,omitempty"`
+	// The neighbors IPv6 address
+	Ipv6Address string `json:"ipv6_address,omitempty"`
+	// Flag to indicate whether the neighbor was discovered automatically
+	AutoDiscovered bool `json:"auto_discovered,omitempty"`
+	// The creation time of the neighbor record
+	DateCreated time.Time `json:"date_created,omitempty"`
 }

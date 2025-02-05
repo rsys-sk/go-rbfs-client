@@ -11,9 +11,9 @@ package state
 
 // PIM instance state.
 type PimInstance struct {
-	InstanceName string `json:"instance_name,omitempty"`
+	Neighbors    []PimInstanceNeighbor  `json:"neighbors,omitempty"`
+	Interfaces   []PimInstanceInterface `json:"interfaces,omitempty"`
+	InstanceName string                 `json:"instance_name,omitempty"`
 	// The address-family identifier.
-	Afi        string                 `json:"afi,omitempty"`
-	Neighbors  []PimInstanceNeighbor  `json:"neighbors,omitempty"`
-	Interfaces []PimInstanceInterface `json:"interfaces,omitempty"`
+	Afi string `json:"afi,omitempty"`
 }

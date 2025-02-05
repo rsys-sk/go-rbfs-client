@@ -11,10 +11,10 @@ package state
 
 // Segment routing settings.
 type AllOfIsisInstanceInterfacesSegmentRouting struct {
+	// SR indices.
+	SrIds []interface{} `json:"sr_ids,omitempty"`
 	// SRGB start value.
 	SrgbBase int `json:"srgb_base,omitempty"`
 	// SRGB length.
 	SrgbRange int `json:"srgb_range,omitempty"`
-	// SR indices.
-	SrIds []interface{} `json:"sr_ids,omitempty"`
 }

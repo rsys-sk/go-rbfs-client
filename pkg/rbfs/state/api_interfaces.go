@@ -292,6 +292,80 @@ func (a *InterfacesApiService) DisableInterface(ctx context.Context, ifName stri
 }
 
 /*
+InterfacesApiService Disables lawful interception for the specified logical interface.
+Disables lawful interception (LI) for the specified logical interface  with the specified mediation device, direction and LI identifier.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param iflName The logical-interface name.
+  - @param id The LI request ID.
+*/
+func (a *InterfacesApiService) DisableLawfulInterceptionIFL(ctx context.Context, iflName string, id int) (*http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/interfaces/logicals/{ifl_name}/disableLI"
+	localVarPath = strings.Replace(localVarPath, "{"+"ifl_name"+"}", fmt.Sprintf("%v", iflName), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if id < 1 {
+		return nil, reportError("id must be greater than 1")
+	}
+	if id > 4194303 {
+		return nil, reportError("id must be less than 4194303")
+	}
+
+	localVarQueryParams.Add("id", parameterToString(id, ""))
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		return localVarHttpResponse, newErr
+	}
+
+	return localVarHttpResponse, nil
+}
+
+/*
 InterfacesApiService Disables a logical interface.
 Disables a logical interface in the running-configuration. Disabling an interface fires events including deferred events which are processed asynchronously.  Disabling a logical interface is therefore considered an asynchronous operation.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -445,6 +519,94 @@ func (a *InterfacesApiService) EnableInterface(ctx context.Context, ifName strin
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		return localVarHttpResponse, newErr
+	}
+
+	return localVarHttpResponse, nil
+}
+
+/*
+InterfacesApiService Enables lawful interception for the specified logical interface.
+Enables lawful interception (LI) for the specified logical interface  with the specified mediation device, direction and LI identifier.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param iflName The logical-interface name.
+  - @param id The LI request ID.
+  - @param direction The direction of traffic being intercepted.
+  - @param medIp Mediation device IP address.
+  - @param medPort Meditation device port.
+  - @param medInstance Meditation device routing instance name.
+*/
+func (a *InterfacesApiService) EnableLawfulInterceptionIFL(ctx context.Context, iflName string, id int, direction string, medIp string, medPort int, medInstance string) (*http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/interfaces/logicals/{ifl_name}/enableLI"
+	localVarPath = strings.Replace(localVarPath, "{"+"ifl_name"+"}", fmt.Sprintf("%v", iflName), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if id < 1 {
+		return nil, reportError("id must be greater than 1")
+	}
+	if id > 4194303 {
+		return nil, reportError("id must be less than 4194303")
+	}
+	if medPort < 49152 {
+		return nil, reportError("medPort must be greater than 49152")
+	}
+	if medPort > 65535 {
+		return nil, reportError("medPort must be less than 65535")
+	}
+
+	localVarQueryParams.Add("id", parameterToString(id, ""))
+	localVarQueryParams.Add("direction", parameterToString(direction, ""))
+	localVarQueryParams.Add("med_ip", parameterToString(medIp, ""))
+	localVarQueryParams.Add("med_port", parameterToString(medPort, ""))
+	localVarQueryParams.Add("med_instance", parameterToString(medInstance, ""))
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -710,7 +872,7 @@ func (a *InterfacesApiService) GetInterface(ctx context.Context, ifpName string)
 
 /*
 InterfacesApiService Lists all physical interfaces and their logical interfaces.
-Lists all physical interfaces and their logical interfaces including their administrative state,  operational state, configured bandwidth, MAC address and neighbor information. Subscriber interfaces are not included in the response.
+Lists all physical interfaces and their logical interfaces including their administrative state,  operational state, configured bandwidth and MAC address. Subscriber interfaces are not included in the response.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return []PhysicalInterfaceSummaryRef
@@ -886,7 +1048,7 @@ Shows a physical interface including its operational state and administrative st
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param ifpName The physical interface name.
  * @param optional nil or *InterfacesApiGetPhysicalInterfaceOpts - Optional Parameters:
-     * @param "Optics" (optional.Bool) -  Include optic informations in the response.
+     * @param "Optics" (optional.Bool) -  Include optic informations in the response.  NOTE: Use the /optics endpoint to obtain optics information.
 @return PhysicalInterfaceDetail
 */
 

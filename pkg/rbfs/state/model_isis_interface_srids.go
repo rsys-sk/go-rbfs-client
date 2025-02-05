@@ -9,24 +9,14 @@
  */
 package state
 
-// The arguments of the executed ping command.
-type PingArguments struct {
-	// The pinged destination IP address.
-	DestinationIp string `json:"destination_ip,omitempty"`
-	// The source IP address.
-	SourceIp string `json:"source_ip,omitempty"`
-	// The egress interface name.
-	SourceIfl string `json:"source_ifl,omitempty"`
-	// The routing instance name.
-	InstanceName string `json:"instance_name,omitempty"`
-	// The interval between two pings.
-	Interval float32 `json:"interval,omitempty"`
-	// The number of pings sent.
-	Count int `json:"count,omitempty"`
-	// The packet size in bytes.
-	Size int `json:"size,omitempty"`
-	// The IP TTL value.
-	Ttl int `json:"ttl,omitempty"`
-	// The IP ToS value
-	Tos int `json:"tos,omitempty"`
+// Segment routing indexes of an ISIS interface.
+type IsisInterfaceSrids struct {
+	// IPv4 SR index
+	Ipv4Sid int `json:"ipv4_sid,omitempty"`
+	// IPv6 SR index
+	Ipv6Sid int `json:"ipv6_sid,omitempty"`
+	// IPv4 SR anycast index
+	Ipv4AnycastSid int `json:"ipv4_anycast_sid,omitempty"`
+	// IPv6 SR anycast index
+	Ipv6AnycastSid int `json:"ipv6_anycast_sid,omitempty"`
 }

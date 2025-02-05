@@ -32,4 +32,8 @@ type OpticModule struct {
 	PowerClassState string `json:"power_class_state,omitempty"`
 	// The optics manufacturing date.
 	DateManufactured string `json:"date_manufactured,omitempty"`
+	// The optics voltage supply in volts.
+	VoltageV float64 `json:"voltage_v,omitempty"`
+	// The optics temperature in degree celsius.
+	TemperatureC float64 `json:"temperature_c,omitempty"`
 }

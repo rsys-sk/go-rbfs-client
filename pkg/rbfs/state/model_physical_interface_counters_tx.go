@@ -23,4 +23,6 @@ type PhysicalInterfaceCountersTx struct {
 	BroadcastPacketsSent int `json:"broadcast_packets_sent,omitempty"`
 	// Total number of dropped packets.
 	PacketsDropped int `json:"packets_dropped,omitempty"`
+	// Total number of erroneous packets.
+	PacketsError int `json:"packets_error,omitempty"`
 }

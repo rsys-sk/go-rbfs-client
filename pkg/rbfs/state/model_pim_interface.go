@@ -11,8 +11,9 @@ package state
 
 // PIM interface settings.
 type PimInterface struct {
-	IflName     string `json:"ifl_name,omitempty"`
-	PimIflState string `json:"pim_ifl_state,omitempty"`
+	InstanceName string `json:"instance_name,omitempty"`
+	IflName      string `json:"ifl_name,omitempty"`
+	PimIflState  string `json:"pim_ifl_state,omitempty"`
 	// The primary IPv4 address of the PIM interface.
 	Ipv4Address string `json:"ipv4_address,omitempty"`
 	// The primary IPv6 address of the PIM interface.

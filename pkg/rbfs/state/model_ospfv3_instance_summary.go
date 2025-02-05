@@ -9,14 +9,14 @@
  */
 package state
 
-type OspfInstanceDetails struct {
+type Ospfv3InstanceSummary struct {
 	InstanceName string `json:"instance_name,omitempty"`
+	// The OSPFv3 instance ID.
+	InstanceId int `json:"instance_id,omitempty"`
 	// The OSPF router ID.
-	RouterId   string                   `json:"router_id,omitempty"`
-	Areas      []OspfArea               `json:"areas,omitempty"`
-	Interfaces []OspfInterface          `json:"interfaces,omitempty"`
-	Neighbors  []OspfNeighbor           `json:"neighbors,omitempty"`
-	Flags      *OspfInstanceGlobalFlags `json:"flags,omitempty"`
+	RouterId string                   `json:"router_id,omitempty"`
+	Areas    []OspfArea               `json:"areas,omitempty"`
+	Flags    *OspfInstanceGlobalFlags `json:"flags,omitempty"`
 	// The address family of the OSPF instance.
 	AddressFamily string `json:"address_family,omitempty"`
 	// The OSPF flood interval.

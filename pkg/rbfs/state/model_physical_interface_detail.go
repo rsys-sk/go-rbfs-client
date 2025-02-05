@@ -30,8 +30,12 @@ type PhysicalInterfaceDetail struct {
 	Bandwidth string `json:"bandwidth,omitempty"`
 	// The duplex mode.
 	DuplexMode string `json:"duplex_mode,omitempty"`
-	// The configured maximum transfer unit (MTU) size in bytes.
+	// The configured maximum transfer unit (MTU) size in bytes.  *NOTE:*Use l2_mtu instead.
 	MtuSize int `json:"mtu_size,omitempty"`
+	// The configured maximum transfer unit (MTU) size in bytes.
+	L2Mtu int `json:"l2_mtu,omitempty"`
+	// The maximum receive unit (MRU) size in bytes
+	L2Mru int `json:"l2_mru,omitempty"`
 	// The operational interface state.
 	OperationalState string `json:"operational_state,omitempty"`
 	// The administrative interface state.
@@ -39,8 +43,9 @@ type PhysicalInterfaceDetail struct {
 	// Carrier transitions count.
 	CarrierTransitions int `json:"carrier_transitions,omitempty"`
 	// Timestamp since when this interface is UP.
-	UpTime      time.Time                  `json:"up_time,omitempty"`
-	Optics      *Optic                     `json:"optics,omitempty"`
-	Lag         *LinkAggregationGroup      `json:"lag,omitempty"`
-	IfpCounters *PhysicalInterfaceCounters `json:"ifp_counters,omitempty"`
+	UpTime time.Time `json:"up_time,omitempty"`
+	// The optics informations  NOTE: This attribute never got populated. Use the /optics endpoint to obtain this information.
+	Optics      *AllOfPhysicalInterfaceDetailOptics `json:"optics,omitempty"`
+	Lag         *LinkAggregationGroup               `json:"lag,omitempty"`
+	IfpCounters *PhysicalInterfaceCounters          `json:"ifp_counters,omitempty"`
 }
