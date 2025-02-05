@@ -16,10 +16,13 @@ import (
 
 var client http.Client
 
-const endpointURL string = "http://10.200.134.26:19091"
-const elementName string = "ufi09.q2c.u19.r4.nbg.rtbrick.net"
-const accessToken string = ""
+const (
+	endpointURL string = "http://10.200.134.26:19091"
+	elementName string = "ufi09.q2c.u19.r4.nbg.rtbrick.net"
+	accessToken string = ""
+)
 
+//nolint:forbidigo  // this is an integration test
 func main() {
 	m := metrics.NewClient(&client)
 	endpoint, _ := url.Parse(endpointURL)
@@ -52,5 +55,4 @@ func main() {
 	fmt.Println(err)
 	b, _ = json.MarshalIndent(element, " ", " ")
 	fmt.Println(string(b))
-
 }

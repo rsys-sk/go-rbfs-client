@@ -108,7 +108,7 @@ func (r *rbfsContext) GetCtrldElementsEndpoint() (*url.URL, error) {
 func (r *rbfsContext) GetCtrldElementEndpoint(pathSegments ...string) (*url.URL, error) {
 	ctrldEndpoint := r.Value(ctrldURLKey).(*url.URL)
 	elementName := r.Value(elementNameKey).(string)
-	var endpoint = ""
+	endpoint := ""
 	if len(pathSegments) > 0 {
 		endpoint = fmt.Sprintf("%v/api/v1/ctrld/elements/%v/%v", ctrldEndpoint, elementName, strings.Join(pathSegments, "/"))
 	} else {

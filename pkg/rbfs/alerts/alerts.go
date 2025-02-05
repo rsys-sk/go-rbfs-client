@@ -43,7 +43,6 @@ func NewClient(c *http.Client) Client {
 }
 
 func (c *client) QueryAlerts(ctx rbfs.RbfsContext) ([]Alert, error) {
-
 	endpoint, err := ctx.GetServiceEndpoint(rbfs.PrometheusServiceName)
 	if err != nil {
 		return nil, err
@@ -53,7 +52,6 @@ func (c *client) QueryAlerts(ctx rbfs.RbfsContext) ([]Alert, error) {
 	queryURL := fmt.Sprintf("%s/api/v1/alerts", endpoint)
 
 	request, err := http.NewRequestWithContext(ctx, http.MethodGet, queryURL, nil)
-
 	if err != nil {
 		return nil, err
 	}
@@ -72,7 +70,9 @@ func (c *client) QueryAlerts(ctx rbfs.RbfsContext) ([]Alert, error) {
 	defer response.Body.Close()
 	decoder := json.NewDecoder(response.Body)
 
-	decoder.Decode(&responseJSON)
+	if err := decoder.Decode(&responseJSON); err != nil {
+		return nil, err
+	}
 
 	if response.StatusCode == http.StatusOK {
 		var aa []Alert

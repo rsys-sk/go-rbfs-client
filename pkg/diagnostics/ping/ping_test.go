@@ -13,7 +13,6 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-//nolint:funlen //it's a test
 func TestNewPing(t *testing.T) {
 	tests := []struct {
 		name    string

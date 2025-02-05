@@ -15,7 +15,7 @@ type (
 	Service struct {
 		// ServiceName holds the daemon name.
 		ServiceName string `json:"service_name"`
-		//AdministrativeState holds the administrative daemon state.
+		// AdministrativeState holds the administrative daemon state.
 		AdministrativeState string `json:"administrative_state"`
 		// OperationalState holds the operational daemon state.
 		OperationalState string `json:"operational_state"`
@@ -38,14 +38,12 @@ func NewClient(c *http.Client) Client {
 }
 
 func (c *client) ListServices(ctx rbfs.RbfsContext) ([]Service, error) {
-
 	endpoint, err := ctx.GetCtrldElementEndpoint("services")
 	if err != nil {
 		return nil, err
 	}
 
 	request, err := http.NewRequestWithContext(ctx, http.MethodGet, endpoint.String(), nil)
-
 	if err != nil {
 		return nil, err
 	}

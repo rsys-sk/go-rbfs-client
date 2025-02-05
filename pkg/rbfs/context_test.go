@@ -11,7 +11,6 @@ import (
 	"testing"
 
 	"github.com/rtbrick/go-rbfs-client/pkg/rbfs/state"
-
 	"github.com/stretchr/testify/require"
 )
 

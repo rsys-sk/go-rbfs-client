@@ -46,7 +46,6 @@ func NewClient(c *http.Client) Client {
 }
 
 func (c *client) QueryMetric(ctx rbfs.RbfsContext, metric string) (*Metric, error) {
-
 	endpoint, err := ctx.GetServiceEndpoint(rbfs.PrometheusServiceName)
 	if err != nil {
 		return nil, err
@@ -56,7 +55,6 @@ func (c *client) QueryMetric(ctx rbfs.RbfsContext, metric string) (*Metric, erro
 	queryURL := fmt.Sprintf("%s/api/v1/query?query=%s", endpoint, url.QueryEscape(metric))
 
 	request, err := http.NewRequestWithContext(ctx, http.MethodGet, queryURL, nil)
-
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +73,9 @@ func (c *client) QueryMetric(ctx rbfs.RbfsContext, metric string) (*Metric, erro
 	defer response.Body.Close()
 	decoder := json.NewDecoder(response.Body)
 
-	decoder.Decode(&responseJSON)
+	if err := decoder.Decode(&responseJSON); err != nil {
+		return nil, err
+	}
 
 	if response.StatusCode == http.StatusOK {
 		if data, ok := responseJSON["data"].(map[string]interface{}); ok {
@@ -84,7 +84,7 @@ func (c *client) QueryMetric(ctx rbfs.RbfsContext, metric string) (*Metric, erro
 				for _, i := range result {
 					item := i.(map[string]interface{})
 					var metricValue float64
-					var metricLabels = make(map[string]string)
+					metricLabels := make(map[string]string)
 					if metric, ok := item["metric"].(map[string]interface{}); ok {
 						for k, v := range metric {
 							metricLabels[k] = v.(string)

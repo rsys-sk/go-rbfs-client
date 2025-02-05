@@ -70,14 +70,12 @@ func NewClient(c *http.Client) Client {
 }
 
 func (c *client) ListElements(ctx rbfs.RbfsContext) ([]Element, error) {
-
 	endpoint, err := ctx.GetCtrldElementsEndpoint()
 	if err != nil {
 		return nil, err
 	}
 
 	request, err := http.NewRequestWithContext(ctx, http.MethodGet, endpoint.String(), nil)
-
 	if err != nil {
 		return nil, err
 	}
@@ -104,14 +102,12 @@ func (c *client) ListElements(ctx rbfs.RbfsContext) ([]Element, error) {
 }
 
 func (c *client) GetElement(ctx rbfs.RbfsContext, elementName string) (*Element, error) {
-
 	endpoint, err := ctx.GetCtrldElementEndpoint()
 	if err != nil {
 		return nil, err
 	}
 
 	request, err := http.NewRequestWithContext(ctx, http.MethodGet, endpoint.String(), nil)
-
 	if err != nil {
 		return nil, err
 	}

@@ -13,15 +13,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/mock"
-
 	"github.com/rtbrick/go-rbfs-client/pkg/rbfs"
 	"github.com/rtbrick/go-rbfs-client/pkg/rbfs/state"
+	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 )
 
 func expectedPing(hostname string) *state.ActionsApiPingOpts {
-
 	return &state.ActionsApiPingOpts{
 		DestinationIp:   rbfs.OptionalIP(nil),
 		DestinationAaaa: rbfs.OptionalString(""),
@@ -34,10 +32,8 @@ func expectedPing(hostname string) *state.ActionsApiPingOpts {
 		Size:            rbfs.OptionalInt(56),
 		Ttl:             rbfs.OptionalInt(64),
 	}
-
 }
 
-//nolint:dupl //it's a unit test
 func Test_defaultService_Run(t *testing.T) {
 	endpoint, err := url.Parse("http://localhost:8080")
 	require.NoError(t, err)
@@ -101,7 +97,6 @@ func Test_defaultService_Run(t *testing.T) {
 	}
 }
 
-//nolint:dupl //it's a unit test
 func Test_defaultService_RunAll(t *testing.T) {
 	endpoint, err := url.Parse("http://localhost:8080")
 	require.NoError(t, err)

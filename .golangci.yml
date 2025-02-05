@@ -1,80 +1,61 @@
+#nolint:(?!gosec)(?!dupl)(?!funlen)(?!staticcheck)(?!forbidigo)(?!cyclop)
 linters-settings:
-  dupl:
-    threshold: 100
   funlen:
     lines: 100
     statements: 50
+  cyclop:
+    max-complexity: 15
+  dupl:
+    threshold: 100
   goconst:
     min-len: 2
     min-occurrences: 2
-  gocritic:
-    enabled-tags:
-      - diagnostic
-      - experimental
-      - opinionated
-      - performance
-      - style
-  gocyclo:
-    min-complexity: 15
-  gomnd:
-    settings:
-      mnd:
-        # don't include the "operation" and "assign"
-        checks: [argument,case,condition,return]
-  govet:
-    check-shadowing: false
-  lll:
-    line-length: 140
+  gci:
+    sections:
+      - standard
+      - default
+      - prefix(gitlab.rtbrick.net)
+  nolintlint:
+    allow-unused: false
+    allow-no-explanation: []
+issues:
+  exclude-rules:
+    - linters:
+        - funlen
+        - cyclop
+        - goerr113
+        - dupl
+        - forbidigo
+        - gochecknoinits
+        - gosec
+        - staticcheck
+        - goconst
+        - goimports
+      path: _test.go
 
+  exclude-use-default: false
+  exclude:
+    - 'declaration of "(err|ctx)" shadows declaration at'
 
 linters:
   disable-all: true
   enable:
-    #- golint
-    - bodyclose
-    - deadcode
-    - depguard
-    - dogsled
     - dupl
-    - errcheck
-    - exportloopref
-    - exhaustive
-    - funlen
-    - gochecknoinits
-    - goconst
-    - gocritic
-    - gocyclo
-    - gofmt
+    - gofumpt
     - goimports
-    - gomnd
-    - goprintffuncname
-    - gosec
     - gosimple
     - govet
     - ineffassign
-    - lll
     - misspell
     - nakedret
-    - noctx
-    - nolintlint
-    - rowserrcheck
+    # - revive
     - staticcheck
-    - structcheck
-    - stylecheck
-    - typecheck
-    - unconvert
-    - unparam
     - unused
-    - varcheck
-    - whitespace
-
-issues:
-  exclude-rules:
-    - linters: [stylecheck]
-      text: 'ST1000: at least one file in a package should have a package comment'
-
-  exclude-use-default: false
-
-run:
-  skip-dirs:
-    - pkg/rbfs/state
+    - nolintlint
+    - funlen
+    - cyclop
+    # - goerr113
+    - forbidigo
+    - gosec
+    - staticcheck
+    - goconst

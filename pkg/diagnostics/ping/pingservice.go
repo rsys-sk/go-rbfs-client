@@ -12,14 +12,11 @@ import (
 	"net/url"
 
 	"github.com/rtbrick/go-rbfs-client/pkg/rbfs"
-
 	"github.com/rtbrick/go-rbfs-client/pkg/rbfs/state"
 )
 
-var (
-	// This function variable we need to be able to mock the API Service
-	getActionsAPIFunc = getActionsAPI
-)
+// This function variable we need to be able to mock the API Service
+var getActionsAPIFunc = getActionsAPI
 
 type (
 	defaultService struct {
