@@ -12,6 +12,8 @@ package state
 // Contains the metric and statistics of an ISIS level.
 type IsisInterfaceLevel struct {
 	// The interface metric value.
-	Metric     int                           `json:"metric,omitempty"`
-	Statistics *IsisInterfaceLevelStatistics `json:"statistics,omitempty"`
+	Metric int `json:"metric,omitempty"`
+	// Whether the adjacency level is disabled (true) or not (false).
+	AdjacencyDisabled bool                          `json:"adjacency_disabled,omitempty"`
+	Statistics        *IsisInterfaceLevelStatistics `json:"statistics,omitempty"`
 }

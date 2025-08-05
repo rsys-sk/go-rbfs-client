@@ -28,8 +28,10 @@ type Optic struct {
 	ConnectorType string `json:"connector_type,omitempty"`
 	// The optics power class.
 	PowerClass string `json:"power_class,omitempty"`
-	// The optics power state class.
+	// The optics power state class. This attribute has been marked deprecated and will be removed in a future release. Please use the power_class_mode attribute instead.
 	PowerClassState string `json:"power_class_state,omitempty"`
+	// The optics power class mode.
+	PowerClassMode string `json:"power_class_mode,omitempty"`
 	// The optics manufacturing date.
 	DateManufactured string `json:"date_manufactured,omitempty"`
 	// The optics voltage supply in volts.

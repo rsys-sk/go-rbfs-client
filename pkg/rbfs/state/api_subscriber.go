@@ -1097,10 +1097,10 @@ Lists the subscriber history to examine why subscribers got disconnected in the 
      * @param "OuterVlan" (optional.Int) -  Filter for subscribers terminated with the specified outer VLAN.
      * @param "SubscriberId" (optional.Float64) -  Filter for subscriber with the specified subscriber ID.
      * @param "AccessType" (optional.String) -  Filter for subscribers with the specified access type.
-     * @param "AccessRemoteId" (optional.String) -  Filter for subscribers with the specified agent remote ID.
-     * @param "AccessRemoteIdMatches" (optional.String) -  Filter for subscribers with agent remote IDs matching the given pattern.
-     * @param "AccessCircuitId" (optional.String) -  Filter for subscribers with the specified agent circuit ID.
-     * @param "AccessCircuitIdMatches" (optional.String) -  Filter for subscribers with agent circuit IDs matching the given pattern.
+     * @param "AgentRemoteId" (optional.String) -  Filter for subscribers with the specified agent remote ID.
+     * @param "AgentRemoteIdMatches" (optional.String) -  Filter for subscribers with agent remote IDs matching the given pattern.
+     * @param "AgentCircuitId" (optional.String) -  Filter for subscribers with the specified agent circuit ID.
+     * @param "AgentCircuitIdMatches" (optional.String) -  Filter for subscribers with agent circuit IDs matching the given pattern.
 @return []SubscriberHistory
 */
 
@@ -1112,10 +1112,10 @@ type SubscriberApiGetSubscriberHistoryOpts struct {
 	OuterVlan                 optional.Int
 	SubscriberId              optional.Float64
 	AccessType                optional.String
-	AccessRemoteId            optional.String
-	AccessRemoteIdMatches     optional.String
-	AccessCircuitId           optional.String
-	AccessCircuitIdMatches    optional.String
+	AgentRemoteId             optional.String
+	AgentRemoteIdMatches      optional.String
+	AgentCircuitId            optional.String
+	AgentCircuitIdMatches     optional.String
 }
 
 func (a *SubscriberApiService) GetSubscriberHistory(ctx context.Context, localVarOptionals *SubscriberApiGetSubscriberHistoryOpts) ([]SubscriberHistory, *http.Response, error) {
@@ -1155,17 +1155,17 @@ func (a *SubscriberApiService) GetSubscriberHistory(ctx context.Context, localVa
 	if localVarOptionals != nil && localVarOptionals.AccessType.IsSet() {
 		localVarQueryParams.Add("access_type", parameterToString(localVarOptionals.AccessType.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.AccessRemoteId.IsSet() {
-		localVarQueryParams.Add("access_remote_id", parameterToString(localVarOptionals.AccessRemoteId.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.AgentRemoteId.IsSet() {
+		localVarQueryParams.Add("agent_remote_id", parameterToString(localVarOptionals.AgentRemoteId.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.AccessRemoteIdMatches.IsSet() {
-		localVarQueryParams.Add("access_remote_id_matches", parameterToString(localVarOptionals.AccessRemoteIdMatches.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.AgentRemoteIdMatches.IsSet() {
+		localVarQueryParams.Add("agent_remote_id_matches", parameterToString(localVarOptionals.AgentRemoteIdMatches.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.AccessCircuitId.IsSet() {
-		localVarQueryParams.Add("access_circuit_id", parameterToString(localVarOptionals.AccessCircuitId.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.AgentCircuitId.IsSet() {
+		localVarQueryParams.Add("agent_circuit_id", parameterToString(localVarOptionals.AgentCircuitId.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.AccessCircuitIdMatches.IsSet() {
-		localVarQueryParams.Add("access_circuit_id_matches", parameterToString(localVarOptionals.AccessCircuitIdMatches.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.AgentCircuitIdMatches.IsSet() {
+		localVarQueryParams.Add("agent_circuit_id_matches", parameterToString(localVarOptionals.AgentCircuitIdMatches.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -1743,6 +1743,86 @@ func (a *SubscriberApiService) StoreTestSubscribers(ctx context.Context, body []
 	}
 	// body params
 	localVarPostBody = &body
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		return localVarHttpResponse, newErr
+	}
+
+	return localVarHttpResponse, nil
+}
+
+/*
+SubscriberApiService Dynamically update the specified subscriber.
+Dynamically update the specified subscriber with settings such as  service profiles, QoS parameters, IGMP, and more. This API behaves  similarly to a RADIUS CoA request, where all attributes in a single  API call are processed together, just like in a single CoA message.  The behavior matches that of the corresponding CLI command.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param subscriberId The subscriber ID.
+ * @param optional nil or *SubscriberApiUpdateSubscriberOpts - Optional Parameters:
+     * @param "Body" (optional.Interface of SubscriberUpdate) -  Subscriber attributes.
+
+*/
+
+type SubscriberApiUpdateSubscriberOpts struct {
+	Body optional.Interface
+}
+
+func (a *SubscriberApiService) UpdateSubscriber(ctx context.Context, subscriberId int, localVarOptionals *SubscriberApiUpdateSubscriberOpts) (*http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/subscribers/{subscriber_id}/update"
+	localVarPath = strings.Replace(localVarPath, "{"+"subscriber_id"+"}", fmt.Sprintf("%v", subscriberId), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+
+		localVarOptionalBody := localVarOptionals.Body.Value()
+		localVarPostBody = &localVarOptionalBody
+	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return nil, err

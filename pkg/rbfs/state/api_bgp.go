@@ -16,6 +16,8 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -94,11 +96,19 @@ func (a *BGPApiService) ClearBGPInstancePeerings(ctx context.Context, instanceNa
 /*
 BGPApiService Clears a BGP peering.
 Clears a BGP peerings. The management API confirms that the clear request has been accepted and delegates the clear request to RBFS. This is an asynchronous operation.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param instanceName BGP routing instance name.
-  - @param peerIp Peer IPv4 or peer IPv6 address.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param instanceName BGP routing instance name.
+ * @param peerIp Peer IPv4 or peer IPv6 address.
+ * @param optional nil or *BGPApiClearBGPPeeringOpts - Optional Parameters:
+     * @param "SourceIp" (optional.String) -  Optional filter for source IP address.
+
 */
-func (a *BGPApiService) ClearBGPPeering(ctx context.Context, instanceName string, peerIp string) (*http.Response, error) {
+
+type BGPApiClearBGPPeeringOpts struct {
+	SourceIp optional.String
+}
+
+func (a *BGPApiService) ClearBGPPeering(ctx context.Context, instanceName string, peerIp string, localVarOptionals *BGPApiClearBGPPeeringOpts) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
@@ -115,6 +125,9 @@ func (a *BGPApiService) ClearBGPPeering(ctx context.Context, instanceName string
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.SourceIp.IsSet() {
+		localVarQueryParams.Add("source_ip", parameterToString(localVarOptionals.SourceIp.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -247,6 +260,104 @@ func (a *BGPApiService) GetBGPInstance(ctx context.Context, instanceName string)
 }
 
 /*
+BGPApiService Provides BGP peering details
+Returns BGP peering details including summary statistics  of received and sent prefixes per AFI/SAFI.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param instanceName BGP routing instance name.
+ * @param peerIp Peer IPv4 or IPv6 address.
+ * @param optional nil or *BGPApiGetBGPInstancePeeringsOpts - Optional Parameters:
+     * @param "SourceIp" (optional.String) -  Optional filter for source IP address.
+@return []BgpPeering
+*/
+
+type BGPApiGetBGPInstancePeeringsOpts struct {
+	SourceIp optional.String
+}
+
+func (a *BGPApiService) GetBGPInstancePeerings(ctx context.Context, instanceName string, peerIp string, localVarOptionals *BGPApiGetBGPInstancePeeringsOpts) ([]BgpPeering, *http.Response, error) {
+	var (
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
+		localVarReturnValue []BgpPeering
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/bgp/instances/{instance_name}/peerings"
+	localVarPath = strings.Replace(localVarPath, "{"+"instance_name"+"}", fmt.Sprintf("%v", instanceName), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	localVarQueryParams.Add("peer_ip", parameterToString(peerIp, ""))
+	if localVarOptionals != nil && localVarOptionals.SourceIp.IsSet() {
+		localVarQueryParams.Add("source_ip", parameterToString(localVarOptionals.SourceIp.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v []BgpPeering
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
 BGPApiService Lists all BGP instances.
 Lists all BGP instances, including  auto-discovered fabric peerings.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -334,13 +445,19 @@ func (a *BGPApiService) GetBGPInstances(ctx context.Context) ([]BgpInstanceRef, 
 /*
 BGPApiService Provides BGP peering details
 Returns BGP peering details including summary statistics  of received and sent prefixes per AFI/SAFI.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param instanceName BGP routing instance name.
-  - @param peerIp The BGP peering details.
-
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param instanceName BGP routing instance name.
+ * @param peerIp Peer IPv4 or IPv6 address.
+ * @param optional nil or *BGPApiGetBGPPeeringOpts - Optional Parameters:
+     * @param "SourceIp" (optional.String) -  Optional filter for source IP address.
 @return BgpPeering
 */
-func (a *BGPApiService) GetBGPPeering(ctx context.Context, instanceName string, peerIp string) (BgpPeering, *http.Response, error) {
+
+type BGPApiGetBGPPeeringOpts struct {
+	SourceIp optional.String
+}
+
+func (a *BGPApiService) GetBGPPeering(ctx context.Context, instanceName string, peerIp string, localVarOptionals *BGPApiGetBGPPeeringOpts) (BgpPeering, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -358,6 +475,9 @@ func (a *BGPApiService) GetBGPPeering(ctx context.Context, instanceName string, 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.SourceIp.IsSet() {
+		localVarQueryParams.Add("source_ip", parameterToString(localVarOptionals.SourceIp.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 

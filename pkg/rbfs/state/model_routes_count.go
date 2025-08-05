@@ -9,10 +9,8 @@
  */
 package state
 
-// Contains the number of routes in the RIB grouped by originating protocol for both, self-originated and imported routes.
-type RoutesSummary struct {
-	SelfOriginatedRoutes *RoutesCount `json:"self_originated_routes,omitempty"`
-	ImportedRoutes       *RoutesCount `json:"imported_routes,omitempty"`
+// The number of routes grouped by origination protocol.
+type RoutesCount struct {
 	// ARP ND routes count
 	ArpNd int `json:"arp_nd,omitempty"`
 	// direct routes count

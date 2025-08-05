@@ -9,18 +9,18 @@
  */
 package state
 
-// Round-trip time statistics.
-type PingStatisticsRtt struct {
-	// Minumum round-trip time.
-	Min float64 `json:"min,omitempty"`
-	// Average round-trip time.
-	Avg float64 `json:"avg,omitempty"`
-	// Maximum round-trip time.
-	Max float64 `json:"max,omitempty"`
-	// Round-trip time standard deviation.  This property has been marked deprecated.  Please use the mdev property instead.
-	Stddev float64 `json:"stddev,omitempty"`
-	// Round-trip time standard deviation.
-	Mdev float64 `json:"mdev,omitempty"`
-	// Total round-trip times to fire all pings.
-	Total float64 `json:"total,omitempty"`
+// The match constraints to select traffic applicable to this rule.
+type FlowspecRuleMatch struct {
+	// The IPv4 destination prefix.
+	DestinationIpv4Prefix string `json:"destination_ipv4_prefix,omitempty"`
+	// The IPv6 destination prefix.
+	DestinationIpv6Prefix string `json:"destination_ipv6_prefix,omitempty"`
+	// The IPv4 source prefix.
+	SourceIpv4Prefix string `json:"source_ipv4_prefix,omitempty"`
+	// The IPv6 source prefix.
+	SourceIpv6Prefix string `json:"source_ipv6_prefix,omitempty"`
+	// The destination port filter expression.
+	DestinationPortFilter string `json:"destination_port_filter,omitempty"`
+	// The protocol filter expression.
+	ProtocolFilter string `json:"protocol_filter,omitempty"`
 }

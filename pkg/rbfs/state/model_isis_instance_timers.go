@@ -13,6 +13,4 @@ package state
 type IsisInstanceTimers struct {
 	// The hold time in seconds. A neighbor is considered down if no hello message is received from the neighbor before the hold time expires. The keep-alive interval for sending hello messages is derived from the hold time (keep-alive = hold / 3).
 	HoldTime int `json:"hold_time,omitempty"`
-	// The overload interval in seconds. A router in overload state resets the overload flag when the overload time is expired.
-	OverloadTime int `json:"overload_time,omitempty"`
 }

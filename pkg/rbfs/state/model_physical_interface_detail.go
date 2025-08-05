@@ -40,7 +40,9 @@ type PhysicalInterfaceDetail struct {
 	OperationalState string `json:"operational_state,omitempty"`
 	// The administrative interface state.
 	AdministrativeState string `json:"administrative_state,omitempty"`
-	// Carrier transitions count.
+	// The flap count.
+	FlapCount int `json:"flap_count,omitempty"`
+	// Carrier transitions count. This attribute is deprecated and has been replaced by the flap_count attribute.
 	CarrierTransitions int `json:"carrier_transitions,omitempty"`
 	// Timestamp since when this interface is UP.
 	UpTime time.Time `json:"up_time,omitempty"`

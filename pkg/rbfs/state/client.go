@@ -53,11 +53,17 @@ type APIClient struct {
 
 	BGPApi *BGPApiService
 
+	CgNATApi *CgNATApiService
+
+	FlowspecApi *FlowspecApiService
+
 	ISISApi *ISISApiService
 
 	InterfacesApi *InterfacesApiService
 
 	L2BSAApi *L2BSAApiService
+
+	L2VPNApi *L2VPNApiService
 
 	LDPApi *LDPApiService
 
@@ -80,6 +86,8 @@ type APIClient struct {
 	SubscriberApi *SubscriberApiService
 
 	SystemApi *SystemApiService
+
+	TransceiversApi *TransceiversApiService
 }
 
 type service struct {
@@ -102,9 +110,12 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AccessApi = (*AccessApiService)(&c.common)
 	c.ActionsApi = (*ActionsApiService)(&c.common)
 	c.BGPApi = (*BGPApiService)(&c.common)
+	c.CgNATApi = (*CgNATApiService)(&c.common)
+	c.FlowspecApi = (*FlowspecApiService)(&c.common)
 	c.ISISApi = (*ISISApiService)(&c.common)
 	c.InterfacesApi = (*InterfacesApiService)(&c.common)
 	c.L2BSAApi = (*L2BSAApiService)(&c.common)
+	c.L2VPNApi = (*L2VPNApiService)(&c.common)
 	c.LDPApi = (*LDPApiService)(&c.common)
 	c.LLDPApi = (*LLDPApiService)(&c.common)
 	c.NeighborsApi = (*NeighborsApiService)(&c.common)
@@ -116,6 +127,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.StreamsApi = (*StreamsApiService)(&c.common)
 	c.SubscriberApi = (*SubscriberApiService)(&c.common)
 	c.SystemApi = (*SystemApiService)(&c.common)
+	c.TransceiversApi = (*TransceiversApiService)(&c.common)
 
 	return c
 }

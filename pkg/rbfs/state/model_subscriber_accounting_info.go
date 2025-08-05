@@ -19,5 +19,6 @@ type SubscriberAccountingInfo struct {
 	// Timestamp when the accounting session has started.
 	AccountingStartTime time.Time `json:"accounting_start_time,omitempty"`
 	// Timestamp when the accounting session has stopped.
-	AccountingStopTime time.Time `json:"accounting_stop_time,omitempty"`
+	AccountingStopTime time.Time                     `json:"accounting_stop_time,omitempty"`
+	AdjustedCounters   *SubscriberAdjustedAccounting `json:"adjusted_counters,omitempty"`
 }

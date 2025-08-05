@@ -9,18 +9,20 @@
  */
 package state
 
-// Round-trip time statistics.
-type PingStatisticsRtt struct {
-	// Minumum round-trip time.
-	Min float64 `json:"min,omitempty"`
-	// Average round-trip time.
-	Avg float64 `json:"avg,omitempty"`
-	// Maximum round-trip time.
-	Max float64 `json:"max,omitempty"`
-	// Round-trip time standard deviation.  This property has been marked deprecated.  Please use the mdev property instead.
-	Stddev float64 `json:"stddev,omitempty"`
-	// Round-trip time standard deviation.
-	Mdev float64 `json:"mdev,omitempty"`
-	// Total round-trip times to fire all pings.
-	Total float64 `json:"total,omitempty"`
+// RX-related state.
+type TransceiverLaneRx struct {
+	// The status of the Loss-of-Signal (LoS) alert flag.
+	LosAlert bool `json:"los_alert,omitempty"`
+	// The laser power in milliwatts.
+	PowerMw float64 `json:"power_mw,omitempty"`
+	// The laser power in dbm.
+	PowerDbm float64 `json:"power_dbm,omitempty"`
+	// The power high alarm flag.
+	PowerHighAlarm bool `json:"power_high_alarm,omitempty"`
+	// The power high warning flag.
+	PowerHighWarning bool `json:"power_high_warning,omitempty"`
+	// The power low alarm flag.
+	PowerLowAlarm bool `json:"power_low_alarm,omitempty"`
+	// The power low warning flag.
+	PowerLowWarning bool `json:"power_low_warning,omitempty"`
 }

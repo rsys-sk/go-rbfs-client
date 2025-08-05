@@ -9,18 +9,10 @@
  */
 package state
 
-// Round-trip time statistics.
-type PingStatisticsRtt struct {
-	// Minumum round-trip time.
-	Min float64 `json:"min,omitempty"`
-	// Average round-trip time.
-	Avg float64 `json:"avg,omitempty"`
-	// Maximum round-trip time.
-	Max float64 `json:"max,omitempty"`
-	// Round-trip time standard deviation.  This property has been marked deprecated.  Please use the mdev property instead.
-	Stddev float64 `json:"stddev,omitempty"`
-	// Round-trip time standard deviation.
-	Mdev float64 `json:"mdev,omitempty"`
-	// Total round-trip times to fire all pings.
-	Total float64 `json:"total,omitempty"`
+// The transceiver lane information.
+type TransceiverLane struct {
+	// The lane ID.
+	LaneId int                `json:"lane_id,omitempty"`
+	Tx     *TransceiverLaneTx `json:"tx,omitempty"`
+	Rx     *TransceiverLaneRx `json:"rx,omitempty"`
 }

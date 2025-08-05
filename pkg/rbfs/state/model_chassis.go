@@ -9,10 +9,6 @@
  */
 package state
 
-import (
-	"time"
-)
-
 // The hardware chassis.
 type Chassis struct {
 	// The product name.
@@ -21,8 +17,6 @@ type Chassis struct {
 	VendorName string `json:"vendor_name,omitempty"`
 	// The system MAC address.
 	Mac string `json:"mac,omitempty"`
-	// The date when the system has been manufactured.  Please use date_manufactured instead.
-	ManufactureDate time.Time `json:"manufacture_date,omitempty"`
 	// The date when the system was manufactured.
 	DateManufactured string `json:"date_manufactured,omitempty"`
 	// The manufacturer name.

@@ -177,7 +177,7 @@ Clears all sessions with the given RPKI cache IP. The source_ip parameter allows
  * @param instanceName The instance name
  * @param cacheIp The RPKI cache IP.
  * @param optional nil or *RPKIRTRApiClearRPKIRTRSessionOpts - Optional Parameters:
-     * @param "SourceIp" (optional.Interface of SourceIp1) -  The session source IP address.
+     * @param "SourceIp" (optional.Interface of SourceIp2) -  The session source IP address.
      * @param "Soft" (optional.Bool) -  Whether to run a soft reset.
 
 */
@@ -187,7 +187,7 @@ type RPKIRTRApiClearRPKIRTRSessionOpts struct {
 	Soft     optional.Bool
 }
 
-func (a *RPKIRTRApiService) ClearRPKIRTRSession(ctx context.Context, instanceName string, cacheIp CacheIp1, localVarOptionals *RPKIRTRApiClearRPKIRTRSessionOpts) (*http.Response, error) {
+func (a *RPKIRTRApiService) ClearRPKIRTRSession(ctx context.Context, instanceName string, cacheIp CacheIp2, localVarOptionals *RPKIRTRApiClearRPKIRTRSessionOpts) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
@@ -437,7 +437,7 @@ Searches the covering prefix for the given prefix and returns the AS number asso
 */
 func (a *RPKIRTRApiService) GetRPKIRTRRecord(ctx context.Context, instanceName string, prefix Prefix) (RpkirtrRecord, *http.Response, error) {
 	var (
-		localVarHttpMethod  = strings.ToUpper("Post")
+		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
@@ -522,7 +522,7 @@ Returns the sessions with the given RPKI cache IP. The source_ip parameter selec
  * @param instanceName The instance name
  * @param cacheIp The RPKI cache IP.
  * @param optional nil or *RPKIRTRApiGetRPKIRTRSessionOpts - Optional Parameters:
-     * @param "SourceIp" (optional.Interface of SourceIp) -  The session source IP address.
+     * @param "SourceIp" (optional.Interface of SourceIp1) -  The session source IP address. This parameter needs to be specified if multiple sessions to the same cache IP from different source IPs exist.
 @return RpkirtrSession
 */
 
@@ -530,9 +530,9 @@ type RPKIRTRApiGetRPKIRTRSessionOpts struct {
 	SourceIp optional.Interface
 }
 
-func (a *RPKIRTRApiService) GetRPKIRTRSession(ctx context.Context, instanceName string, cacheIp CacheIp, localVarOptionals *RPKIRTRApiGetRPKIRTRSessionOpts) (RpkirtrSession, *http.Response, error) {
+func (a *RPKIRTRApiService) GetRPKIRTRSession(ctx context.Context, instanceName string, cacheIp CacheIp1, localVarOptionals *RPKIRTRApiGetRPKIRTRSessionOpts) (RpkirtrSession, *http.Response, error) {
 	var (
-		localVarHttpMethod  = strings.ToUpper("Post")
+		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
@@ -599,6 +599,104 @@ func (a *RPKIRTRApiService) GetRPKIRTRSession(ctx context.Context, instanceName 
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v RpkirtrSession
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
+RPKIRTRApiService Returns a RPKI-RTR session.
+Returns the sessions with the given RPKI cache IP. The source_ip parameter selects the specific session, if multiple session with the cache exist.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param instanceName The instance name
+ * @param cacheIp The RPKI cache IP.
+ * @param optional nil or *RPKIRTRApiGetRPKIRTRSessionsOpts - Optional Parameters:
+     * @param "SourceIp" (optional.Interface of SourceIp) -  The session source IP address.
+@return []RpkirtrSession
+*/
+
+type RPKIRTRApiGetRPKIRTRSessionsOpts struct {
+	SourceIp optional.Interface
+}
+
+func (a *RPKIRTRApiService) GetRPKIRTRSessions(ctx context.Context, instanceName string, cacheIp CacheIp, localVarOptionals *RPKIRTRApiGetRPKIRTRSessionsOpts) ([]RpkirtrSession, *http.Response, error) {
+	var (
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
+		localVarReturnValue []RpkirtrSession
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/rpki-rtr/instances/{instance_name}/sessions"
+	localVarPath = strings.Replace(localVarPath, "{"+"instance_name"+"}", fmt.Sprintf("%v", instanceName), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	localVarQueryParams.Add("cache_ip", parameterToString(cacheIp, ""))
+	if localVarOptionals != nil && localVarOptionals.SourceIp.IsSet() {
+		localVarQueryParams.Add("source_ip", parameterToString(localVarOptionals.SourceIp.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v []RpkirtrSession
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

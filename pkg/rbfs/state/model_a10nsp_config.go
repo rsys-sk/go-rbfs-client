@@ -14,9 +14,15 @@ type A10nspConfig struct {
 	LagInterfaceName string `json:"lag_interface_name,omitempty"`
 	// The S-VLAN ID.
 	SVlan int `json:"s_vlan,omitempty"`
+	// The total number of S-VLANs allocated by this endpoint.
+	SVlanRange int `json:"s_vlan_range,omitempty"`
+	// The low boundary of the configured S-VLAN range.
+	SVlanRangeLow int `json:"s_vlan_range_low,omitempty"`
+	// The high boundary of the configured S-VLAN range.
+	SVlanRangeHigh int `json:"s_vlan_range_high,omitempty"`
 	// The S-VLAN ethertype, which is either 802.1q (0x8100) or 802.1ad (0x88A8).
 	SVlanEthertype string `json:"s_vlan_ethertype,omitempty"`
-	// The ANP-VLAN ID.
+	// The ANP-VLAN ID. The ANP-VLAN defaults to the S-VLAN if not specified. ANP-VLANs must not be used in combination with S-VLAN ranges.
 	AnpVlan int        `json:"anp_vlan,omitempty"`
 	L2x     *L2xConfig `json:"l2x,omitempty"`
 }

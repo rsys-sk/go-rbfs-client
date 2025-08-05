@@ -16,6 +16,8 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -287,6 +289,97 @@ func (a *A10NSPApiService) GetA10NSPL2XEndpointsOfLAGInterface(ctx context.Conte
 }
 
 /*
+A10NSPApiService Shows an L2X endpoint.
+Shows the configuration of the L2X endpoint configured on the specified LAG interface with the specified S-VLAN range.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param lagInterfaceName The link aggregation (LAG) interface name.
+  - @param sVlanLow The S-VLAN range low boundary.
+  - @param sVlanHigh The S-VLAN range high boundary.
+
+@return []A10nspConfig
+*/
+func (a *A10NSPApiService) GetA10NSPL2XRangeEndpoint(ctx context.Context, lagInterfaceName string, sVlanLow int, sVlanHigh int) ([]A10nspConfig, *http.Response, error) {
+	var (
+		localVarHttpMethod  = strings.ToUpper("Get")
+		localVarPostBody    interface{}
+		localVarFileName    string
+		localVarFileBytes   []byte
+		localVarReturnValue []A10nspConfig
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/a10nsp/l2x/{lag_interface_name}/{s_vlan_low}-{s_vlan_high}"
+	localVarPath = strings.Replace(localVarPath, "{"+"lag_interface_name"+"}", fmt.Sprintf("%v", lagInterfaceName), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"s_vlan_low"+"}", fmt.Sprintf("%v", sVlanLow), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"s_vlan_high"+"}", fmt.Sprintf("%v", sVlanHigh), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v []A10nspConfig
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
 A10NSPApiService Runs a A10NSP L2X configuration batch job.
 Adds and removes A10NSP L2X endpoints as specified in the batch job.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -422,8 +515,174 @@ func (a *A10NSPApiService) RemoveA10NSPL2XEndpoint(ctx context.Context, lagInter
 }
 
 /*
-A10NSPApiService Stores a L2X endpoint.
-Stores a L2X endpoints by either  creating a new L2X endpoint on the specified LAG interface with the specified S-VLAN or  updating an existing L2X endpoint configuration.
+A10NSPApiService Removes the L2X endpoint.
+Removes the L2X endpoint with the specified S-VLAN range from the specified LAG interface.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param lagInterfaceName The link aggregation (LAG) interface name.
+  - @param sVlanLow The S-VLAN range low boundary.
+  - @param sVlanHigh The S-VLAN range high boundary.
+*/
+func (a *A10NSPApiService) RemoveA10NSPL2XRangeEndpoint(ctx context.Context, lagInterfaceName string, sVlanLow int, sVlanHigh int) (*http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Delete")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/a10nsp/l2x/{lag_interface_name}/{s_vlan_low}-{s_vlan_high}"
+	localVarPath = strings.Replace(localVarPath, "{"+"lag_interface_name"+"}", fmt.Sprintf("%v", lagInterfaceName), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"s_vlan_low"+"}", fmt.Sprintf("%v", sVlanLow), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"s_vlan_high"+"}", fmt.Sprintf("%v", sVlanHigh), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		return localVarHttpResponse, newErr
+	}
+
+	return localVarHttpResponse, nil
+}
+
+/*
+A10NSPApiService Resizes a configured S-VLAN range.
+Changes a configured S-VLAN range by removing the existing S-VLAN range endpoint and creating a new S-VLAN range endpoint. This method is a convenience method to conduct the necessary DELETE and PUT operations to change the S-VLAN range in one go. The operation performs no change if the current range and the requested new range are the same.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param lagInterfaceName The link aggregation (LAG) interface name.
+ * @param sVlanLow The S-VLAN range low boundary.
+ * @param sVlanHigh The S-VLAN range high boundary.
+ * @param optional nil or *A10NSPApiResizeA10NSPL2XRangeEndpointOpts - Optional Parameters:
+     * @param "SVlanLow" (optional.Int) -  The new S-VLAN range low boundary.
+     * @param "SVlanHigh" (optional.Int) -  The new S-VLAN range high boundary.
+     * @param "SVlanRange" (optional.Int) -  The new S-VLAN range.
+     * @param "AnpVlan" (optional.Int) -  The ANP-VLAN if the range size changes to 1 (single S-VLAN).
+
+*/
+
+type A10NSPApiResizeA10NSPL2XRangeEndpointOpts struct {
+	SVlanLow   optional.Int
+	SVlanHigh  optional.Int
+	SVlanRange optional.Int
+	AnpVlan    optional.Int
+}
+
+func (a *A10NSPApiService) ResizeA10NSPL2XRangeEndpoint(ctx context.Context, lagInterfaceName string, sVlanLow int, sVlanHigh int, localVarOptionals *A10NSPApiResizeA10NSPL2XRangeEndpointOpts) (*http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/a10nsp/l2x/{lag_interface_name}/{s_vlan_low}-{s_vlan_high}/resize"
+	localVarPath = strings.Replace(localVarPath, "{"+"lag_interface_name"+"}", fmt.Sprintf("%v", lagInterfaceName), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"s_vlan_low"+"}", fmt.Sprintf("%v", sVlanLow), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"s_vlan_high"+"}", fmt.Sprintf("%v", sVlanHigh), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.SVlanLow.IsSet() {
+		localVarQueryParams.Add("s_vlan_low", parameterToString(localVarOptionals.SVlanLow.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SVlanHigh.IsSet() {
+		localVarQueryParams.Add("s_vlan_high", parameterToString(localVarOptionals.SVlanHigh.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SVlanRange.IsSet() {
+		localVarQueryParams.Add("s_vlan_range", parameterToString(localVarOptionals.SVlanRange.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.AnpVlan.IsSet() {
+		localVarQueryParams.Add("anp_vlan", parameterToString(localVarOptionals.AnpVlan.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		return localVarHttpResponse, newErr
+	}
+
+	return localVarHttpResponse, nil
+}
+
+/*
+A10NSPApiService Stores an L2X endpoint.
+Stores an L2X endpoints by either  creating a new L2X endpoint on the specified LAG interface with the specified S-VLAN or  updating an existing L2X endpoint configuration.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param body
   - @param lagInterfaceName The link aggregation (LAG) interface name.
@@ -577,6 +836,79 @@ func (a *A10NSPApiService) StoreA10NSPL2XEndpointsForLAGInterface(ctx context.Co
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/a10nsp/l2x/{lag_interface_name}"
 	localVarPath = strings.Replace(localVarPath, "{"+"lag_interface_name"+"}", fmt.Sprintf("%v", lagInterfaceName), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	// body params
+	localVarPostBody = &body
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		return localVarHttpResponse, newErr
+	}
+
+	return localVarHttpResponse, nil
+}
+
+/*
+A10NSPApiService Stores an L2X endpoint.
+Stores an L2X endpoints by either  creating a new L2X endpoint on the specified LAG interface with the specified S-VLAN range or  updating an existing L2X endpoint configuration.  S-VLAN ranges cannot be combined with ANP-VLANs.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param body
+  - @param lagInterfaceName The link aggregation (LAG) interface name.
+  - @param sVlanLow The S-VLAN range low boundary.
+  - @param sVlanHigh The S-VLAN range high boundary.
+*/
+func (a *A10NSPApiService) StoreA10NSPL2XRangeEndpoint(ctx context.Context, body A10nspConfig, lagInterfaceName string, sVlanLow int, sVlanHigh int) (*http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Put")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/a10nsp/l2x/{lag_interface_name}/{s_vlan_low}-{s_vlan_high}"
+	localVarPath = strings.Replace(localVarPath, "{"+"lag_interface_name"+"}", fmt.Sprintf("%v", lagInterfaceName), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"s_vlan_low"+"}", fmt.Sprintf("%v", sVlanLow), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"s_vlan_high"+"}", fmt.Sprintf("%v", sVlanHigh), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

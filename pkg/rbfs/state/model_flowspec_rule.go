@@ -9,18 +9,19 @@
  */
 package state
 
-// Round-trip time statistics.
-type PingStatisticsRtt struct {
-	// Minumum round-trip time.
-	Min float64 `json:"min,omitempty"`
-	// Average round-trip time.
-	Avg float64 `json:"avg,omitempty"`
-	// Maximum round-trip time.
-	Max float64 `json:"max,omitempty"`
-	// Round-trip time standard deviation.  This property has been marked deprecated.  Please use the mdev property instead.
-	Stddev float64 `json:"stddev,omitempty"`
-	// Round-trip time standard deviation.
-	Mdev float64 `json:"mdev,omitempty"`
-	// Total round-trip times to fire all pings.
-	Total float64 `json:"total,omitempty"`
+// A flowspec rule and its implementation status.
+type FlowspecRule struct {
+	// The unique rule hash value.
+	RuleHash string `json:"rule_hash,omitempty"`
+	// The rule priority.
+	RulePriority int `json:"rule_priority,omitempty"`
+	// Whether this rule is applied or not. A rule might not be applicable due to hardware restrictions. These rules are still advertised to all other BGP peers with negotiated flowspec address family.
+	Applied bool `json:"applied,omitempty"`
+	// The number of implemented ACLs.
+	AclCount int `json:"acl_count,omitempty"`
+	// Detailed status of this flowspec rule.
+	FlowspecStatus string             `json:"flowspec_status,omitempty"`
+	Match          *FlowspecRuleMatch `json:"match,omitempty"`
+	// The actions executed by this rule.
+	Actions []string `json:"actions,omitempty"`
 }

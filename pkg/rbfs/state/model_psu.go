@@ -13,10 +13,14 @@ package state
 type Psu struct {
 	// The name of the PSU.
 	PsuName string `json:"psu_name,omitempty"`
-	// The PSU model.
+	// The PSU manufacturer.
+	Manufacturer string `json:"manufacturer,omitempty"`
+	// The PSU model.  This attribute has been deprecated. Use the part_number attribute instead.
 	Model string `json:"model,omitempty"`
 	// The PSU serial number.
 	SerialNumber string `json:"serial_number,omitempty"`
+	// The PSU part number.
+	PartNumber string `json:"part_number,omitempty"`
 	// The presense and operational state of the PSU.
 	Status []string `json:"status,omitempty"`
 }

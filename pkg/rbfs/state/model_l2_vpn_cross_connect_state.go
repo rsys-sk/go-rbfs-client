@@ -9,18 +9,16 @@
  */
 package state
 
-// Round-trip time statistics.
-type PingStatisticsRtt struct {
-	// Minumum round-trip time.
-	Min float64 `json:"min,omitempty"`
-	// Average round-trip time.
-	Avg float64 `json:"avg,omitempty"`
-	// Maximum round-trip time.
-	Max float64 `json:"max,omitempty"`
-	// Round-trip time standard deviation.  This property has been marked deprecated.  Please use the mdev property instead.
-	Stddev float64 `json:"stddev,omitempty"`
-	// Round-trip time standard deviation.
-	Mdev float64 `json:"mdev,omitempty"`
-	// Total round-trip times to fire all pings.
-	Total float64 `json:"total,omitempty"`
+// The ingress/egress L2VPN cross-connect state.
+type L2VpnCrossConnectState struct {
+	// The cross connect type.
+	Type_ string `json:"type,omitempty"`
+	// The MPLS label.
+	Label string `json:"label,omitempty"`
+	// The source port.
+	SourcePort int `json:"source_port,omitempty"`
+	// The destination port.
+	DestinationPort int `json:"destination_port,omitempty"`
+	// The cross-connect status.
+	Status string `json:"status,omitempty"`
 }

@@ -9,18 +9,18 @@
  */
 package state
 
-// Round-trip time statistics.
-type PingStatisticsRtt struct {
-	// Minumum round-trip time.
-	Min float64 `json:"min,omitempty"`
-	// Average round-trip time.
-	Avg float64 `json:"avg,omitempty"`
-	// Maximum round-trip time.
-	Max float64 `json:"max,omitempty"`
-	// Round-trip time standard deviation.  This property has been marked deprecated.  Please use the mdev property instead.
-	Stddev float64 `json:"stddev,omitempty"`
-	// Round-trip time standard deviation.
-	Mdev float64 `json:"mdev,omitempty"`
-	// Total round-trip times to fire all pings.
-	Total float64 `json:"total,omitempty"`
+// A single address translation.
+type AddressTranslation struct {
+	// The internal IPv4 address
+	InternalIpv4Address string `json:"internal_ipv4_address,omitempty"`
+	// The internal port.
+	InternalPort int `json:"internal_port,omitempty"`
+	// The external IPv4 address.
+	ExternalIpv4Address string `json:"external_ipv4_address,omitempty"`
+	// The external port.
+	ExernalPort int `json:"exernal_port,omitempty"`
+	// The direction of traffic.
+	Direction string `json:"direction,omitempty"`
+	// The network protocol.
+	Protocol string `json:"protocol,omitempty"`
 }

@@ -40,10 +40,10 @@ type LogicalInterface struct {
 	MplsMtu int `json:"mpls_mtu,omitempty"`
 	// Whether MPLS is enabled or disabled on this logical interface.
 	MplsState string `json:"mpls_state,omitempty"`
-	// ISO maximum transfer unit (MTU) size.
-	IsoMtu int `json:"iso_mtu,omitempty"`
-	// Whether ISO is enabled or disabled on this logical interface.
-	IsoState string `json:"iso_state,omitempty"`
+	// The outer VLAN ID or null for untagged interfaces.
+	OuterVlan int `json:"outer_vlan,omitempty"`
+	// The inner VLAN ID of double-tagged interfaces. Null for single-tagged or untagged interfaces.
+	InnerVlan int `json:"inner_vlan,omitempty"`
 	// The assigned VLANs.  The array is filled beginning with the outermost VLANS:  - The array is _empty_ or _omitted_ for untagged interfaces.  - The array contains the VLAN-ID for single tagged interfaces.  - The array contains the outer VLAN-ID followed by the inner VLAN-ID for double tagged interfaces.
 	Vlans       []int                        `json:"vlans,omitempty"`
 	IflCounters *LogicalInterfaceIflCounters `json:"ifl_counters,omitempty"`

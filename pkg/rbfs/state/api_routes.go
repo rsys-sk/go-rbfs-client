@@ -231,7 +231,7 @@ func (a *RoutesApiService) GetInstanceRoutesSummary(ctx context.Context, instanc
 
 /*
 RoutesApiService List route information for a prefix
-List route table entries in an instance for a AFI/SAFI, and prefix or label. - prefix4 query parameter mandatory for AFI IPv4 - prefix6 query parameter mandatory for AFI IPv6 - label query parameter mandatory for AFI MPLS  Bear in mind that the SAFI needs to be unicast for querying MPLS label route entries.
+List route table entries in an instance for a AFI/SAFI, and prefix or label. - prefix4 query parameter mandatory for AFI IPv4 - prefix6 query parameter mandatory for AFI IPv6 - label query parameter mandatory for AFI MPLS or L2VPN - l2_prefix the L2 prefix for AFI L2VPN  Bear in mind that the SAFI needs to be unicast for querying MPLS label route entries.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param instanceName The routing instance name.
  * @param afi The address family.
@@ -240,13 +240,15 @@ List route table entries in an instance for a AFI/SAFI, and prefix or label. - p
      * @param "Prefix4" (optional.String) -  IPv4 prefix (address/mask)
      * @param "Prefix6" (optional.String) -  IPv6 prefix (address/mask)
      * @param "Label" (optional.String) -  MPLS label value
+     * @param "L2Prefix" (optional.String) -  L2 prefix value
 @return InstanceUnicastRoutes
 */
 
 type RoutesApiGetInstanceUnicastRoutesOpts struct {
-	Prefix4 optional.String
-	Prefix6 optional.String
-	Label   optional.String
+	Prefix4  optional.String
+	Prefix6  optional.String
+	Label    optional.String
+	L2Prefix optional.String
 }
 
 func (a *RoutesApiService) GetInstanceUnicastRoutes(ctx context.Context, instanceName string, afi string, safi string, localVarOptionals *RoutesApiGetInstanceUnicastRoutesOpts) (InstanceUnicastRoutes, *http.Response, error) {
@@ -276,6 +278,9 @@ func (a *RoutesApiService) GetInstanceUnicastRoutes(ctx context.Context, instanc
 	}
 	if localVarOptionals != nil && localVarOptionals.Label.IsSet() {
 		localVarQueryParams.Add("label", parameterToString(localVarOptionals.Label.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.L2Prefix.IsSet() {
+		localVarQueryParams.Add("l2_prefix", parameterToString(localVarOptionals.L2Prefix.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}

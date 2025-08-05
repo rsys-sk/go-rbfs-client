@@ -9,8 +9,8 @@
  */
 package state
 
-// Optical module details.
-type OpticModule struct {
+// Transceiver module details.
+type TransceiverModuleInfo struct {
 	IfpName string `json:"ifp_name,omitempty"`
 	// The optics serial number.
 	SerialNumber string `json:"serial_number,omitempty"`
@@ -18,24 +18,22 @@ type OpticModule struct {
 	PartNumber string `json:"part_number,omitempty"`
 	// The optics material number. The material number is a unique identifier for the materials management system.
 	MaterialNumber string `json:"material_number,omitempty"`
-	// The optics vendor name.
+	// The transceiver vendor name.
 	VendorName string `json:"vendor_name,omitempty"`
-	// The optics wave length.
+	// The transceiver wavelength.
 	Wavelength float64 `json:"wavelength,omitempty"`
-	// The optics type.
-	OpticsType string `json:"optics_type,omitempty"`
+	// The transceiver type.
+	TransceiverType string `json:"transceiver_type,omitempty"`
+	// The transceiver capabilities.
+	TransceiverCapabilities string `json:"transceiver_capabilities,omitempty"`
 	// The optics connector type.
 	ConnectorType string `json:"connector_type,omitempty"`
 	// The optics power class.
-	PowerClass string `json:"power_class,omitempty"`
-	// The optics power state class. This attribute has been marked deprecated and will be removed in a future release. Please use the power_class_mode attribute instead.
-	PowerClassState string `json:"power_class_state,omitempty"`
-	// The optics power class mode.
-	PowerClassMode string `json:"power_class_mode,omitempty"`
-	// The optics manufacturing date.
+	PowerClass int `json:"power_class,omitempty"`
+	// The power class rating.
+	PowerClassRating string `json:"power_class_rating,omitempty"`
+	// The power mode.
+	PowerMode string `json:"power_mode,omitempty"`
+	// The manufacturing date.
 	DateManufactured string `json:"date_manufactured,omitempty"`
-	// The optics voltage supply in volts.
-	VoltageV float64 `json:"voltage_v,omitempty"`
-	// The optics temperature in degree celsius.
-	TemperatureC float64 `json:"temperature_c,omitempty"`
 }

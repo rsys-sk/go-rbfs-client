@@ -11,11 +11,15 @@ package state
 
 // The arguments of the executed ping command.
 type PingArguments struct {
-	// The pinged destination IP address.
+	// The pinged destination IP address (ICMP ping).
 	DestinationIp string `json:"destination_ip,omitempty"`
+	// The pinged destination IP FEC (LSPING).
+	DestincationIpFec string `json:"destincation_ip_fec,omitempty"`
+	// The FEC type (LSPING).
+	FecType string `json:"fec_type,omitempty"`
 	// The source IP address.
 	SourceIp string `json:"source_ip,omitempty"`
-	// The egress interface name.
+	// The egress interface name (ICMP ping).
 	SourceIfl string `json:"source_ifl,omitempty"`
 	// The routing instance name.
 	InstanceName string `json:"instance_name,omitempty"`
@@ -25,8 +29,8 @@ type PingArguments struct {
 	Count int `json:"count,omitempty"`
 	// The packet size in bytes.
 	Size int `json:"size,omitempty"`
-	// The IP TTL value.
+	// The IP TTL value (ICMP ping).
 	Ttl int `json:"ttl,omitempty"`
-	// The IP ToS value
+	// The IP ToS value (ICMP ping).
 	Tos int `json:"tos,omitempty"`
 }

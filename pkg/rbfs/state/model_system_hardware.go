@@ -11,8 +11,9 @@ package state
 
 // System hardware inventory.
 type SystemHardware struct {
-	Chassis *Chassis      `json:"chassis,omitempty"`
-	Psus    []Psu         `json:"psus,omitempty"`
-	Fans    []Fan         `json:"fans,omitempty"`
-	Optics  []OpticModule `json:"optics,omitempty"`
+	Chassis     *Chassis                `json:"chassis,omitempty"`
+	Psus        []Psu                   `json:"psus,omitempty"`
+	Fans        []Fan                   `json:"fans,omitempty"`
+	Optics      []OpticModule           `json:"optics,omitempty"`
+	Transceiver []TransceiverModuleInfo `json:"transceiver,omitempty"`
 }
