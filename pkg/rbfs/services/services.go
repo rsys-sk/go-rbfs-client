@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/rtbrick/go-rbfs-client/pkg/rbfs"
-	"github.com/rtbrick/go-rbfs-client/pkg/rbfs/state"
+	"github.com/sk/go-rbfs-client/pkg/rbfs"
+	"github.com/sk/go-rbfs-client/pkg/rbfs/state"
 )
 
 type (

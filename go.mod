@@ -1,4 +1,4 @@
-module github.com/rtbrick/go-rbfs-client
+module github.com/sk/go-rbfs-client
 
 go 1.21
 
