@@ -11,8 +11,8 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/rtbrick/go-rbfs-client/pkg/rbfs"
-	"github.com/rtbrick/go-rbfs-client/pkg/rbfs/state"
+	"github.com/sk/go-rbfs-client/pkg/rbfs"
+	"github.com/sk/go-rbfs-client/pkg/rbfs/state"
 )
 
 // This function variable we need to be able to mock the API Service

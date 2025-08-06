@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/rtbrick/go-rbfs-client/pkg/rbfs/state"
+	"github.com/sk/go-rbfs-client/pkg/rbfs/state"
 )
 
 type Option func(*state.Configuration)
