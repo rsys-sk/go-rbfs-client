@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/sk/go-rbfs-client/pkg/rbfs/state"
+	"github.com/rsys-sk/go-rbfs-client/pkg/rbfs/state"
 )
 
 type Option func(*state.Configuration)

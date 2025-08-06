@@ -7,11 +7,11 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/sk/go-rbfs-client/pkg/rbfs"
-	"github.com/sk/go-rbfs-client/pkg/rbfs/alerts"
-	"github.com/sk/go-rbfs-client/pkg/rbfs/elements"
-	"github.com/sk/go-rbfs-client/pkg/rbfs/metrics"
-	"github.com/sk/go-rbfs-client/pkg/rbfs/services"
+	"github.com/rsys-sk/go-rbfs-client/pkg/rbfs"
+	"github.com/rsys-sk/go-rbfs-client/pkg/rbfs/alerts"
+	"github.com/rsys-sk/go-rbfs-client/pkg/rbfs/elements"
+	"github.com/rsys-sk/go-rbfs-client/pkg/rbfs/metrics"
+	"github.com/rsys-sk/go-rbfs-client/pkg/rbfs/services"
 )
 
 var client http.Client

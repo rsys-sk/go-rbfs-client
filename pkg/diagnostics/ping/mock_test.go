@@ -9,7 +9,7 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/sk/go-rbfs-client/pkg/rbfs/state"
+	"github.com/rsys-sk/go-rbfs-client/pkg/rbfs/state"
 	"github.com/stretchr/testify/mock"
 )
 
